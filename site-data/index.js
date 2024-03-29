@@ -19,7 +19,9 @@ const __directories = [
 // Read raw html data
 function load_page(path) {
     const data = fs.readFileSync(path, 'utf-8')
-    return { page: data }
+    var index = [path.lastIndexOf('/'), path.lastIndexOf('.')]    
+    const name = path.substring(index[0] + 1, index[1])
+    return { page: data, page_name: name }
 }
 
 // Apply templating

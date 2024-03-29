@@ -460,6 +460,7 @@ a:focus {
 .professional_section {
   // background-color: $primary1;
   // color: $white;
+  
   background-color: #d1e3ff;
 
   .row {
@@ -804,6 +805,12 @@ a:focus {
 
 .footer_section a {
   color: inherit;
+}
+
+.secondary_color {
+  background-image: linear-gradient(
+    45, #94a7ff, #809ef3, #4e77ff
+  );
 }
 
 /* end footer section*/
