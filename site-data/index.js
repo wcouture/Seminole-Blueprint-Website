@@ -4,7 +4,11 @@ const path = require('path');
 const combyne = require('combyne');
 
 const app = express();
+app.use(express.json())
+
 const port = "3000"
+
+const success = JSON.stringify({status: "success"})
 
 const page_template = fs.readFileSync("pages/templates/layout.html", "utf-8")
 
@@ -59,6 +63,23 @@ app.get("/tax-forms", (req, res) => {
     res.send("{'status':'success'}")
 })
 
+app.post("/post-request", (req, res) => {
+    let data = req.body
+    let file_message = `${data.name}\n${data.email}\n${data.number}\n\n${data.message}`
+
+    fs.writeFile(`data/${data.email}-message.text`, file_message, (err) => {
+        if (err) {
+            console.error('Error writing file:', err);
+        }
+        else {
+            console.log('File saved successfully!');
+        }
+    })
+
+    res.send(success)
+
+})
+
 /*
 Post example
 app.post("/", (req, res) => {
@@ -69,3 +90,9 @@ app.post("/", (req, res) => {
 app.listen(port, () => {
     console.log(`Semblueinc listening on port ${port}`)
 });
+
+// Ensure the data directory exists
+if (fs.existsSync("data") == false) {
+    console.log("Creating data directory...")
+    fs.mkdirSync("data")
+}
