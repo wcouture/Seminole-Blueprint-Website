@@ -313,6 +313,7 @@ a:focus {
   background-color: rgba(0, 0, 0, 0);
 }
 
+
 .panel {
   background-color: #0a0f43;
   border-radius:  40px 40px 0px 0px;
@@ -477,6 +478,50 @@ a:focus {
 
 .about_section .img-box img {
   width: 100%;
+  box-shadow: 2px 2px 10px 1px rgba(0,0,0,0.4);
+}
+
+.custom-select {
+  min-width: 350px;
+  position: relative;
+}
+
+select {
+  appearance: none;
+  /*  safari  */
+  -webkit-appearance: none;
+  /*  other styles for aesthetics */
+  width: 100%;
+  font-size: 1.15rem;
+  padding: 0.675em 6em 0.675em 1em;
+  background-color: #fff;
+  border: 1px solid #caced1;
+  border-radius: 0.25rem;
+  color: #000;
+  cursor: pointer;
+}
+
+.custom-select::before,
+.custom-select::after {
+  --size: 0.3rem;
+  content: "";
+  position: absolute;
+  right: 1rem;
+  pointer-events: none;
+}
+
+.custom-select::before {
+  border-left: var(--size) solid transparent;
+  border-right: var(--size) solid transparent;
+  border-bottom: var(--size) solid black;
+  top: 40%;
+}
+
+.custom-select::after {
+  border-left: var(--size) solid transparent;
+  border-right: var(--size) solid transparent;
+  border-top: var(--size) solid black;
+  top: 55%;
 }
 
 .professional_section {
@@ -595,6 +640,14 @@ a:focus {
       -ms-flex-pack: center;
           justify-content: center;
   margin-top: 45px;
+}
+
+.service-item{
+  margin: 5px;
+}
+
+.owl-nav-button {
+  max-width: 50%;
 }
 
 .service_section .btn-box a {
@@ -720,6 +773,22 @@ a:focus {
   color: #000000;
   -webkit-box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.2);
           box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.2);
+}
+
+.contact_section .checkbox {
+  width: 20px;
+  height: 20px;
+  margin: 5px;
+}
+
+.contact_section .supply-count {
+  margin-top: 10px;
+  width: 60px;
+  height: 40px;
+}
+
+.contact_section .order-input {
+  padding-top: 20px;
 }
 
 .contact_section input::-webkit-input-placeholder {

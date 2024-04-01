@@ -1,0 +1,95 @@
+  <!-- contact section -->
+  <section class="contact_section layout_padding">
+    <div class="container">
+      <div class="heading_container">
+        <h2>
+          Order Supplies
+        </h2>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <form name="order" id="order-form" action="">
+            <div>
+              <input type="text" id="name" name="name" placeholder="Name" />
+            </div>
+            <div>
+              <input type="text" id="number" name="number" placeholder="Phone Number" />
+            </div>
+            <div>
+              <input type="email" id="email" name="email" placeholder="Email" />
+            </div>
+
+            <div>
+              <div class="row order-input">
+                <input name="paper" id="paper-check" class="checkbox" type="checkbox"/>
+                <h4>Paper:</h4>
+              </div>
+              <div id="paper-form" hidden="true">
+                <select id="paper-select" class="custom-select">
+                  <option value='option1'>option 1</option>
+                  <option value='option2'>option 2</option>
+                  <option value='option3'>option 3</option>
+                </select>
+                <input id="paper-count" type="number" class="supply-count" value="0"/>
+              </div>
+            </div>
+
+            <div>
+              <div class="row order-input">
+                <input name="ink" id="ink-check" class="checkbox" type="checkbox"/>
+                <h4>Inks and Toner:</h4>
+              </div>
+              <div id="ink-form" hidden="true">
+                <select id="ink-select" class="custom-select">
+                  <option value='option1'>option 1</option>
+                  <option value='option2'>option 2</option>
+                  <option value='option3'>option 3</option>
+                </select>
+                <input id="ink-count" type="number" class="supply-count" value="0"/>
+              </div>
+            </div>
+
+            <div>
+              <div class="row order-input">
+                <input name="bag" id="bag-check" class="checkbox" type="checkbox"/>
+                <h4>Bags:</h4>
+              </div>
+              <div id="bag-form" hidden="true">
+                <select id="bag-select" class="custom-select">
+                  <option value='option1'>option 1</option>
+                  <option value='option2'>option 2</option>
+                  <option value='option3'>option 3</option>
+                </select>
+                <input id="bag-count" type="number" class="supply-count" value="0"/>
+              </div>
+            </div>
+
+            <div>
+              <div class="row order-input">
+                <input name="board" id="board-check" class="checkbox" type="checkbox"/>
+                <h4>Boards:</h4>
+              </div>
+              <div id="board-form" hidden="true">
+                <select id="board-select" class="custom-select">
+                  <option value='option1'>option 1</option>
+                  <option value='option2'>option 2</option>
+                  <option value='option3'>option 3</option>
+                </select>
+                <input id="board-count" type="number" class="supply-count" value="0"/>
+              </div>
+            </div>
+            <div class="d-flex">
+              <button>
+                SEND
+              </button>
+            </div>
+          </form>
+          <script src="js/form-handler.js"></script>
+        </div>
+        <div class="col-md-6">
+          <img src="images/supplies.jpg" class="map-img">
+          </img>
+        </div>
+      </div>
+    </div>
+  </section>

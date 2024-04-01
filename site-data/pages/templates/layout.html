@@ -68,11 +68,11 @@
                 <li class="nav-item {%if page_name == 'index' %} active {%endif%}">
                   <a class="nav-link" href="/">Home</a>
                 </li>
-                <li class="nav-item {%if page_name == 'service' %} active {%endif%}">
-                  <a class="nav-link" href="/services">Services</a>
-                </li>
                 <li class="nav-item {%if page_name == 'contact' %} active {%endif%}">
                   <a class="nav-link" href="/contact">Contact Us</a>
+                </li>
+                <li class="nav-item {%if page_name == 'upload' %} active {%endif%}">
+                  <a class="nav-link" href="/upload">Upload</a>
                 </li>
                 <li class="nav-item {%if page_name == 'forms' %} active {%endif%}">
                     <a class="nav-link" href="/tax-forms">Forms</a>
@@ -86,6 +86,61 @@
     <!-- end header section -->
     {{{page}}}
     
+
+  <!-- info section -->
+  <section class="info_section ">
+    <div class="container">
+      <h4>
+        Get In Touch
+      </h4>
+      <div class="row">
+        <div class="col-lg-10 mx-auto">
+          <div class="info_items">
+            <div class="row">
+              <div class="col-md-4">
+                <a href="">
+                  <div class="item ">
+                    <div class="img-box ">
+                      <i class="fa fa-map-marker" aria-hidden="true"></i>
+                    </div>
+                    <p>
+                      2915-1 E Park Ave <br>
+                      Tallahassee, FL 32304
+                    </p>
+                  </div>
+                </a>
+              </div>
+              <div class="col-md-4">
+                <a href="">
+                  <div class="item ">
+                    <div class="img-box ">
+                      <i class="fa fa-phone" aria-hidden="true"></i>
+                    </div>
+                    <p>
+                      +1 (850) 671-2714
+                    </p>
+                  </div>
+                </a>
+              </div>
+              <div class="col-md-4">
+                <a href="">
+                  <div class="item ">
+                    <div class="img-box">
+                      <i class="fa fa-envelope" aria-hidden="true"></i>
+                    </div>
+                    <p>
+                      eaststore@semblueinc.com
+                    </p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
   <!-- footer section -->
   <footer class="footer_section">
     <div class="container">
@@ -102,9 +157,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
   </script>
   <script src="js/custom.js"></script>
-  <!-- Google Map -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
-  <!-- End Google Map -->
 
 
 </body>

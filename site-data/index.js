@@ -17,8 +17,20 @@ const __directories = [
     "fonts",
     "images",
     "js",
-    "pages"
+    "pages",
+    "assets"
 ];
+
+function save_file(dir, data){
+    fs.writeFile(dir, data, (err) => {
+        if (err) {
+            console.error('Error writing file:', err);
+        }
+        else {
+            console.log('File saved successfully!');
+        }
+    })
+}
 
 // Read raw html data
 function load_page(path) {
@@ -35,14 +47,6 @@ function render_page(path) {
     return page.render(page_data)
 }
 
-// Resource routing
-app.get("/:dir/:rsrc", (req, res) => {
-    if(__directories.includes(req.params.dir) == false)
-        res.send("{'result': 'Failed to retrieve resource'")
-    else
-        res.sendFile(`${req.params.dir}/${req.params.rsrc}`, { root: __dirname })
-})
-
 app.get("/", (req, res) => {
     res.send(render_page("pages/index.html"))
 });
@@ -52,32 +56,47 @@ app.get("/about", (req, res) => {
 })
 
 app.get("/services", (req, res) => {
-    res.send(render_page("pages/service.html"))
+    res.send(render_page(`pages/services/${req.query.page}.html`))
 })
 
 app.get("/contact", (req, res) => {
     res.send(render_page("pages/contact.html"))
 })
 
-app.get("/tax-forms", (req, res) => {
-    res.send("{'status':'success'}")
+app.get("/upload", (req, res) => {
+    res.send(success)
 })
 
-app.post("/post-request", (req, res) => {
+app.get("/tax-forms", (req, res) => {
+    res.send(success)
+})
+
+app.post("/contact-request", (req, res) => {
     let data = req.body
     let file_message = `${data.name}\n${data.email}\n${data.number}\n\n${data.message}`
 
-    fs.writeFile(`data/${data.email}-message.text`, file_message, (err) => {
-        if (err) {
-            console.error('Error writing file:', err);
-        }
-        else {
-            console.log('File saved successfully!');
-        }
-    })
+    save_file(`data/${data.email}-message.text`, file_message)
 
     res.send(success)
 
+})
+
+app.post("/order-request", (req, res) => {
+    let data = req.body
+    let file_message = JSON.stringify(data)
+
+    save_file("data/supply-order.txt", file_message);
+
+    res.send(success)
+})
+
+
+// Resource routing
+app.get("/:dir/:rsrc", (req, res) => {
+    if(__directories.includes(req.params.dir) == false)
+        res.send("{'result': 'Failed to retrieve resource'")
+    else
+        res.sendFile(`${req.params.dir}/${req.params.rsrc}`, { root: __dirname })
 })
 
 /*
