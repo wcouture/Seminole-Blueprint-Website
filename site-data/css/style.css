@@ -671,17 +671,19 @@ select {
       -ms-flex-align: center;
           align-items: center;
   text-align: center;
+  color: #782f40;
+  background-color: rgba(255,255,255,0.5);
 }
 
 .client_container {
-  margin-bottom: -20%;
-  -webkit-transform: translateY(30%);
-          transform: translateY(30%);
+  margin-bottom: -35%;
+  -webkit-transform: translateY(35%);
+          transform: translateY(35%);
 }
-
+/*
 .client_section {
   background-image: linear-gradient(#ffb671,#ff8a1d);
-}
+}*/
 
 .client_section .box {
   margin: 15px;
@@ -752,6 +754,10 @@ select {
   outline: none;
   margin: 0 20px;
   color: #ffffff;
+}
+
+.client_section .img-banner {
+  width: 100%;
 }
 
 .heading_container {
