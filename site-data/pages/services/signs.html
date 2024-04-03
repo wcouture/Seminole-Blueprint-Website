@@ -4,12 +4,46 @@
         <div class="col-lg-5 col-md-6">
           <div class="detail-box">
             <h2>
-              Signs
+              Custom Signs
             </h2>
-            <p>
-                Our dedicated team takes pride in producing high-quality, durable signage tailored to your needs. From vibrant traffic signs to eye-catching directional markers, we specialize in creating signage that not only stands the test of time but also enhances the aesthetics of its surroundings. Utilizing state-of-the-art technology and premium materials, we ensure each sign meets industry standards for visibility and longevity. Whether you're a municipality, business, or organization, we're committed to delivering signage solutions that exceed your expectations, guiding communities and enhancing safety with every sign we create.
-            </p>
           </div>
+          <br>
+          <form id="sign-form" enctype="multipart/form-data">
+            <div class="contact_section">
+              <input type="text" id="name" name="name" placeholder="Name" />
+            </div>
+            <div class="contact_section">
+              <input type="text" id="number" name="number" placeholder="Phone Number" />
+            </div>
+            <div class="contact_section">
+              <input type="email" id="email" name="email" placeholder="Email" />
+            </div>
+            <div class="contact_section">
+              <h4>Format:</h4>
+              <select id="size-select">
+                <option disabled="true" value="">------ Yard Signs ------</option>
+                <option value="18x24ss">18 x 24 single-side yard sign</option>
+                <option value="18x24ds">18 x 24 double-side yard sign</option>
+                <option disabled="true" value="">------ Permit Signs ------</option>
+                <option value="22x28p">22 x 28 permit sign</option>
+                <option value="24x36p">24 x 36 permit sign</option>
+                <option value="24x36m">24 x 36 metal frame</option>
+                <option disabled="true" value="">------ Custom Banner ------</option>
+                <option value="banner">custom sized banner</option>
+              </select>  
+            </div>
+            <div>
+              <br>
+              <h4>Design upload:</h4>
+              <input type="file" name="design" accept=".pdf,.jpg,.jpeg,.png,.svg,.webp,.psd" id="design-upload"/>
+            </div>
+            <div class="contact_section d-flex">
+              <button>
+                SEND
+              </button>
+            </div>
+          </form>
+          <p hidden="true" class="banner-info" id="banner-info">Banner sizes are highly dependent on the design and specific use cases for the banners. Sizes for banner orders will be discussed in further communications.</p>
         </div>
         <div class="col-lg-7 col-md-6">
           <div class="img-box">
@@ -18,4 +52,5 @@
         </div>
       </div>
     </div>
+    <script src="js/form-handler.js"></script>
   </section>

@@ -2,9 +2,13 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const combyne = require('combyne');
+const multer = require("multer");
+const upload = multer({dest: "data/signs"})
 
+const bodyParser = require('body-parser');
 const app = express();
-app.use(express.json())
+app.use(bodyParser.json({limit: '100mb'}));
+app.use(bodyParser.urlencoded({limit: '100mb', extended: true}));
 
 const port = "3000"
 
@@ -75,7 +79,7 @@ app.post("/contact-request", (req, res) => {
     let data = req.body
     let file_message = `${data.name}\n${data.email}\n${data.number}\n\n${data.message}`
 
-    save_file(`data/${data.email}-message.text`, file_message)
+    save_file(`data/contact/${data.email}-message.text`, file_message)
 
     res.send(success)
 
@@ -85,8 +89,29 @@ app.post("/order-request", (req, res) => {
     let data = req.body
     let file_message = JSON.stringify(data)
 
-    save_file("data/supply-order.txt", file_message);
+    save_file("data/supplies/supply-order.txt", file_message);
 
+    res.send(success)
+})
+
+app.post("/design-upload", upload.single("file"), (req, res) => {
+    let order_name = req.body.name.replaceAll(' ', '_');
+    let dir_name = "data/signs/order-" + order_name + "/";
+
+    // Make new directory for order
+    fs.mkdirSync(dir_name);
+
+    let file_path = dir_name + req.file.originalname;
+    fs.rename(req.file.path, file_path, (err) => {
+        if (err) {
+          console.error('Error moving the file:', err);
+          res.status(500).send('Error saving the file');
+          return;
+        }
+    });
+    let order_details = `Name : ${req.body.name}\nEmail : ${req.body.email}\nNumber : ${req.body.number}\nSign format : ${req.body.format}`;
+
+    save_file(dir_name + "order-details.txt", order_details);
     res.send(success)
 })
 
@@ -114,4 +139,15 @@ app.listen(port, () => {
 if (fs.existsSync("data") == false) {
     console.log("Creating data directory...")
     fs.mkdirSync("data")
+}
+
+// Ensure request directories exist
+if (fs.existsSync("data/signs") == false) {
+    fs.mkdirSync("data/signs")
+}
+if (fs.existsSync("data/contact") == false) {
+    fs.mkdirSync("data/contact")
+}
+if (fs.existsSync("data/supplies") == false) {
+    fs.mkdirSync("data/supplies")
 }
