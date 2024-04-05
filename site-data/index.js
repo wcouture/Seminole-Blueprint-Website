@@ -72,7 +72,7 @@ app.get("/upload", (req, res) => {
 })
 
 app.get("/tax-forms", (req, res) => {
-    res.send(success)
+    res.send(render_page("pages/forms.html"))
 })
 
 app.post("/contact-request", (req, res) => {

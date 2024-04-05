@@ -684,16 +684,18 @@ select {
   background-color: rgba(162, 163, 164, 0.5)
 }
 
-.client_container {
-  margin-bottom: -35%;
-
-  -webkit-transform: translateY(20%);
-          transform: translateY(20%);
-}
 /*
+.client_container {
+  padding-top: 40px;
+  padding-top: 40px;
+}
+*/
 .client_section {
-  background-image: linear-gradient(#ffb671,#29367e);
-}*/
+  padding: 40px;
+  background-image: url("../images/wescott-editted.jpg");
+  background-position: center;
+  background-size: cover;
+}
 
 .client_section .box {
   margin: 15px;
