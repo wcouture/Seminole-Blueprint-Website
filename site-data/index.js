@@ -15,6 +15,7 @@ const port = "3000"
 const success = JSON.stringify({status: "success"})
 
 const page_template = fs.readFileSync("pages/templates/layout.html", "utf-8")
+const form_path = "assets/tax-forms/";
 
 const __directories = [
     "css",
@@ -22,7 +23,9 @@ const __directories = [
     "images",
     "js",
     "pages",
-    "assets"
+    "assets",
+    "tax-forms",
+    "printing-info"
 ];
 
 function save_file(dir, data){
@@ -115,6 +118,23 @@ app.post("/design-upload", upload.single("file"), (req, res) => {
     res.send(success)
 })
 
+app.get("/forms-data", (req, res) => {
+    fs.readdir(form_path, (err, files) => {
+        if (err) {
+            console.error(err);
+            res.send("{ 'status' : 'error' }")
+        }
+        else {
+            let response = {paths: files}
+            res.send(JSON.stringify(response));
+        }
+    })
+})
+
+app.get("/form-data", (req, res) => {
+    let path = form_path + req.query.path;
+    res.sendFile(path, { root: __dirname });
+})
 
 // Resource routing
 app.get("/:dir/:rsrc", (req, res) => {
@@ -123,6 +143,8 @@ app.get("/:dir/:rsrc", (req, res) => {
     else
         res.sendFile(`${req.params.dir}/${req.params.rsrc}`, { root: __dirname })
 })
+
+
 
 /*
 Post example
