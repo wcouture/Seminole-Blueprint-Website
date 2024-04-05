@@ -11,7 +11,7 @@ $(".owl-carousel").owlCarousel({
     loop: true,
     margin: 10,
     nav: true,
-    dots: false,
+    dots: true,
     navText: [
         '<img src="images/left-arrow-white.png" class="owl-nav-button"/>',
         '<img src="images/right-arrow-white.png" class="owl-nav-button"/>'
@@ -29,4 +29,10 @@ $(".owl-carousel").owlCarousel({
             items: 3
         }
     }
+});
+
+$('.bgSwitch').bgswitcher({
+        images: ["images/capitol.jpg", "images/wescott-editted.jpg","images/downtown.jpg"],
+        effect: "fade",
+        interval: 10000
 });

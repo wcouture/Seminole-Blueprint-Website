@@ -377,6 +377,7 @@ a:focus {
 
 .feature_section {
   background-color: #a2a3a4;
+  background-image: url("../images/rough-texture.png");
 }
 
 .feature_section .feature_container {
@@ -406,7 +407,7 @@ a:focus {
   margin: 0 10px;
   padding: 45px 15px;
   background-color: #ffffff;
-  color: #555089;
+  color: #000;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   -webkit-box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
@@ -422,13 +423,13 @@ a:focus {
   width: 100%;
   height: auto;
   max-height: 100%;
-  fill: #726dae;
+  fill: #FFF;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
 }
 
 .feature_section .feature_container .box .img-box svg path {
-  fill: #726dae;
+  fill: #000;
 }
 
 .feature_section .feature_container .box .name {
@@ -455,6 +456,53 @@ a:focus {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.about_section h6 {
+  color: rgb(177, 42, 42);
+  margin: 0;
+  transform: translateY(20px);
+  text-align: center;
+}
+
+.about_section .centered-row {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  align-self: center;
+  text-align: center;
+}
+
+.about_section input {
+  width: 30%;
+  border: none;
+  height: 50px;
+  margin-bottom: 25px;
+  padding-left: 25px;
+  background-color: #ffffff;
+  outline: none;
+  color: #000000;
+  -webkit-box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.2);
+}
+
+.about_section input[type="file"] {
+  width: auto;
+  background-color: rgba(0,0,0,0);
+  box-shadow: none;
+}
+
+.about_section button {
+  border: none;
+  display: inline-block;
+  font-family: 'Merriweather Sans', sans-serif;
+  text-transform: uppercase;
+  padding: 10px 55px;
+  background-color: #0355cc;
+  border: 1px solid #0355cc;
+  border-radius: 0;
+  color: #ffffff;
+  margin-top: 15px;
 }
 
 .about_section .detail-box h2 {
@@ -575,6 +623,8 @@ select {
 .service_section {
   position: relative;
   background-color: #a2a3a4;
+  background-image: url("../images/rough-texture.png");
+  background-repeat: repeat;
 }
 
 .service_section .box {
@@ -680,8 +730,13 @@ select {
       -ms-flex-align: center;
           align-items: center;
   text-align: center;
+}
+
+.client_section h2 {
+  background-color: rgba(255, 255, 255, 0.9);
   color: #29367e;
-  background-color: rgba(162, 163, 164, 0.5)
+  border-radius: 10px;
+  padding: 10px;
 }
 
 /*
@@ -690,9 +745,29 @@ select {
   padding-top: 40px;
 }
 */
+
+@keyframes fadeIn {
+  0% { background: #737272; }
+  100% { }
+}
+
+@keyframes fadeOut {
+  0% { }
+  100% { background: #737272; }
+}
+
+.fade-in {
+  animation: fadeIn 5s;
+}
+
+.fade-out {
+  animation: fadeOut 5s;
+}
+
 .client_section {
-  padding: 40px;
-  background-image: url("../images/wescott-editted.jpg");
+  padding: 80px;
+  background-color: #737272;
+  background: url("../images/capitol.jpg");
   background-position: center;
   background-size: cover;
 }
@@ -702,6 +777,8 @@ select {
   -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
           box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
   padding: 25px;
+  height: 300pt;
+  border-radius: 5px;
 }
 
 .client_section .box .client_id {

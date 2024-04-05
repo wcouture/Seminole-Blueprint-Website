@@ -13,6 +13,7 @@ app.use(bodyParser.urlencoded({limit: '100mb', extended: true}));
 const port = "3000"
 
 const success = JSON.stringify({status: "success"})
+const admin_pass = "$emBlue1nc";
 
 const page_template = fs.readFileSync("pages/templates/layout.html", "utf-8")
 const form_path = "assets/tax-forms/";
@@ -25,7 +26,8 @@ const __directories = [
     "pages",
     "assets",
     "tax-forms",
-    "printing-info"
+    "printing-info",
+    "bgswitch"
 ];
 
 function save_file(dir, data){
@@ -78,6 +80,22 @@ app.get("/tax-forms", (req, res) => {
     res.send(render_page("pages/forms.html"))
 })
 
+app.get("/admin", (req,res) => {
+    res.send(render_page("pages/admin.html"))
+})
+
+app.post("/authenticate", (req, res) => {
+    let pass = req.body.key;
+    let result = { result: "failed" }
+
+    if (pass == admin_pass) {
+        result.result = "success"
+        result.data = load_page("pages/admin-secure.html").page
+    }
+
+    res.send(JSON.stringify(result))
+})
+
 app.post("/contact-request", (req, res) => {
     let data = req.body
     let file_message = `${data.name}\n${data.email}\n${data.number}\n\n${data.message}`
@@ -118,6 +136,20 @@ app.post("/design-upload", upload.single("file"), (req, res) => {
     res.send(success)
 })
 
+app.post("/upload-tax-form", upload.single("file"), (req, res) => {
+    let file_path = "assets/tax-forms/" + req.file.originalname;
+    console.log("uploading form")
+    fs.rename(req.file.path, file_path, (err) => {
+        if (err) {
+            console.error('Error saving tax form: ', err);
+            res.status(500).send('Error saving the file');
+            return;
+        }
+    })
+
+    res.send(success);
+})
+
 app.get("/forms-data", (req, res) => {
     fs.readdir(form_path, (err, files) => {
         if (err) {
@@ -139,9 +171,18 @@ app.get("/form-data", (req, res) => {
 // Resource routing
 app.get("/:dir/:rsrc", (req, res) => {
     if(__directories.includes(req.params.dir) == false)
-        res.send("{'result': 'Failed to retrieve resource'")
+        res.send("{'result': 'Failed to retrieve resource'}")
     else
         res.sendFile(`${req.params.dir}/${req.params.rsrc}`, { root: __dirname })
+})
+
+app.get("/:dir1/:dir2/:rsrc", (req, res) => {
+    if (__directories.includes(req.params.dir1) == false || __directories.includes(req.params.dir2) == false){
+        res.send("{'result': 'Failed to retrieve resource'}")
+    }
+    else{
+        res.sendFile(`${req.params.dir1}/${req.params.dir2}/${req.params.rsrc}`, { root: __dirname })
+    }
 })
 
 

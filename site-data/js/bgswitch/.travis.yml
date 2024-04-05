@@ -1,0 +1,1 @@
+script: phantomjs lib/mocha-phantomjs/lib/mocha-phantomjs.coffee test/index.html
