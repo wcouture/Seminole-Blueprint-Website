@@ -80,6 +80,10 @@ app.get("/tax-forms", (req, res) => {
     res.send(render_page("pages/forms.html"))
 })
 
+app.get("/plans", (req, res) => {
+    res.send(render_page("pages/plans.html"))
+})
+
 app.get("/admin", (req,res) => {
     res.send(render_page("pages/admin.html"))
 })
