@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather+Sans:wght@400;700&display=swap");
 html {
-  background-color: #727272;
+  /*background-color: #727272;*/
 }
 
 body {
@@ -770,8 +770,6 @@ select {
 
 .client_section {
   padding: 80px;
-  background-color: #737272;
-  background: url("../images/capitol.jpg");
   background-position: center;
   background-size: cover;
 }

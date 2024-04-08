@@ -198,7 +198,7 @@
 
   <!-- client section -->
 
-  <section class="client_section bgSwitch" id="client-section">
+  <section class="client_section bgSwitch">
     <div class="container client_container">
       <div class="heading_container heading_center">
         <h2>
@@ -346,37 +346,6 @@
       </div>
     </div>
   </section>
-
-  <!--
-  <script>
-    const images = [
-      "images/capitol.jpg",
-      "images/wescott-editted.jpg",
-    ]
-    var index = 0
-    let client_section = document.getElementById("client-section")
-
-    function change_background() {
-      index += 1
-      index %= images.length
-
-      
-      client_section.className = "client_section fade-out"
-      let num = setInterval( () => {
-        client_section.style.background ;
-        client_section.style.background = `url(${images[index]})`
-        clearInterval(num);
-        client_section.className = "client_section fade-in"
-      }, 5000)
-      
-    }
-
-    setInterval(() => { 
-      console.log("tick");
-      change_background();
-    }, 10000);
-  </script>
--->
   <!-- end client section -->
 
   <!-- contact section -->
