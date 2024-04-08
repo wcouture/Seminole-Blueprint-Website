@@ -1,4 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather+Sans:wght@400;700&display=swap");
+html {
+  background-color: #727272;
+}
+
 body {
   font-family: 'Lato', sans-serif;
   color: #040000;
@@ -747,8 +751,8 @@ select {
 */
 
 @keyframes fadeIn {
-  0% { background: #737272; }
-  100% { }
+  0% { opacity: 0%; }
+  100% { opacity: 100%; }
 }
 
 @keyframes fadeOut {
@@ -757,7 +761,7 @@ select {
 }
 
 .fade-in {
-  animation: fadeIn 5s;
+  animation: fadeIn 3s;
 }
 
 .fade-out {
