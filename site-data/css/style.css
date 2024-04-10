@@ -1111,6 +1111,20 @@ input[type="file"]::file-selector-button:active {
   color: inherit;
 }
 
+.plan-item {
+  border-radius: 5px;
+  padding: 20px;
+  margin: 30px;
+}
+
+.plan-item p {
+  margin-top: 5px;
+}
+
+.plan-item h4{
+  margin: 5px;
+}
+
 .solid-card {
   background-color: rgba(255,255,255,1);
 }

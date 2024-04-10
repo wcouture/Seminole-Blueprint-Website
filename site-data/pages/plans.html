@@ -1,7 +1,47 @@
-<section class="contact_section">
-    <li class="box">planset 1</li>
-    <li class="box">planset 2</li>
-    <li class="box">planset 3</li>
-    <li class="box">planset 4</li>
+<section class="contact_section layout_padding">
+    <div id="plans-board" class="plan-board">
+        <div class="box solid-card plan-item">
+            <div class="row">
+                <h4>Plan Set 1:</h4>
+                <p>Other details related to the plan set to be shown here.</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let board = document.getElementById("plans-board");
+
+        function populate_list(data) {
+            for (let i = 0; i < data.plans.length; i++) {
+                let plan = data.plans[i];
+
+                let item = document.createElement("div");
+                item.className = "box solid-card plan-item";
+                board.appendChild(item);
+
+                let row_div = document.createElement("div");
+                row_div.className = "row";
+                item.appendChild(row_div);
+
+                let header = document.createElement("h4");
+                header.innerText = plan.title;
+                row_div.appendChild(header);
+
+                
+            }
+        }
+
+        let configs = {
+            mode: "same-origin",
+            method: "GET",
+        }
+
+        fetch("/retrieve-plans", config)
+        .then((response) => response.json())
+        .then((data) => {
+            populate_list(data);
+        })
+
+    </script>
 
 </section>

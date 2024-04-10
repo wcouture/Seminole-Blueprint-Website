@@ -27,7 +27,8 @@ const __directories = [
     "assets",
     "tax-forms",
     "printing-info",
-    "bgswitch"
+    "bgswitch",
+    "plan-data"
 ];
 
 function save_file(dir, data){
