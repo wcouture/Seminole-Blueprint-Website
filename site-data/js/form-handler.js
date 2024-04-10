@@ -40,7 +40,10 @@ if (contact_form){
     //request = `{ "name":"${name}", "number":"${number}", "email":"${email}", "message":"${message}" }`
   
     http_request("POST", "/contact-request", request, (res) => {
-      console.log(res)
+      if (res.status == 'success') {
+        contact_form.remove();
+        document.getElementById("contact-column").innerText = "Response recorded."
+      }
     })
       
   });
