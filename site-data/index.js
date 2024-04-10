@@ -58,7 +58,10 @@ function render_page(path) {
 }
 
 app.get("/", (req, res) => {
-    res.send(render_page("pages/index.html"))
+    res.setHeader("Access-Control-Allow-Origin", "*");
+	res.setHeader("Access-Control-Allow-Headers", "*");
+	res.setHeader("Access-Control-Allow-Methods", "*");
+	res.send(render_page("pages/index.html"))
 });
 
 app.get("/about", (req, res) => {
