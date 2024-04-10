@@ -915,6 +915,10 @@ input[type="file"]::file-selector-button:active {
   background-color: #0355cc;
 }
 
+.contact_section {
+  background-image: linear-gradient(#fff, #eee, #a2a3a4);
+}
+
 .contact_section input {
   width: 100%;
   border: none;
