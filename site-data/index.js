@@ -10,7 +10,7 @@ const app = express();
 app.use(bodyParser.json({limit: '100mb'}));
 app.use(bodyParser.urlencoded({limit: '100mb', extended: true}));
 
-const port = "3000"
+const port = "3001"
 
 const success = JSON.stringify({status: "success"})
 const admin_pass = "$emBlue1nc";
