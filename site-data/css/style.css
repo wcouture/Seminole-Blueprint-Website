@@ -662,8 +662,8 @@ select {
 }
 
 .service_section .box .img-box {
-  width: 65px;
-  height: 65px;
+  width: 60pt;
+  height: 60pt;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
