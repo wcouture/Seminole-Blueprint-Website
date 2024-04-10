@@ -16,6 +16,17 @@ function http_request(method, route, data, callback) {
     });
 }
 
+function display_success() {
+  let col = document.getElementById("form-column")
+  let old_className = col.className
+  col.className = old_className + " fade-out-quick";
+        
+  setTimeout( () => {
+    col.innerHTML = "<p>Response recorded.</p>"
+    col.className = old_className + " fade-in-quick"
+  }, 500);
+}
+
 // Contact form ---------------------------------------------------------------------------
 let contact_form = document.getElementById("contact-form")
 
@@ -41,8 +52,7 @@ if (contact_form){
   
     http_request("POST", "/contact-request", request, (res) => {
       if (res.status == 'success') {
-        contact_form.remove();
-        document.getElementById("contact-column").innerText = "Response recorded."
+        display_success();
       }
     })
       
@@ -151,7 +161,9 @@ if (order_form) {
     }
   
     http_request("POST", "/order-request", order_request, (res) => {
-      console.log(res)
+      if (res.status == 'success'){
+        display_success();
+      }
     })
   });
 }
@@ -221,7 +233,13 @@ if (sign_form) {
 
     config.body = data;
 
-    fetch("/design-upload", config);
+    fetch("/design-upload", config)
+    .then((response) => response.json())
+    .then((res) => {
+      if (res.status == 'success'){
+        display_success()
+      }
+    });
     
   });
 

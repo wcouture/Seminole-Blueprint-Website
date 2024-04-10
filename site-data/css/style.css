@@ -779,16 +779,20 @@ select {
 }
 
 @keyframes fadeOut {
-  0% { }
-  100% { background: #737272; }
+  0% { opacity: 100%;}
+  100% { opacity: 0%; }
 }
 
 .fade-in {
   animation: fadeIn 3s;
 }
 
-.fade-out {
-  animation: fadeOut 5s;
+.fade-in-quick {
+  animation: fadeIn 0.5s;
+}
+
+.fade-out-quick {
+  animation: fadeOut 0.5s;
 }
 
 .client_section {
