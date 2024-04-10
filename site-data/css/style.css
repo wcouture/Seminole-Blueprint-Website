@@ -694,10 +694,12 @@ select {
   margin: 0;
 }
 
+/*
 .service_section .box:hover {
   background-color: #29367e;
   color: #ffffff;
 }
+*/
 
 .service_section .box:hover .img-box img {
   -webkit-filter: brightness(0) invert(1);
