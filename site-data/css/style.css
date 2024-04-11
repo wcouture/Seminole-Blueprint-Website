@@ -786,7 +786,7 @@ select {
 }
 
 .fade-in {
-  animation: fadeIn 3s;
+  animation: fadeIn 1s;
 }
 
 .fade-in-quick {
