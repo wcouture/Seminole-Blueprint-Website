@@ -315,8 +315,18 @@
           <script src="js/form-handler.js"></script>
         </div>
         <div class="col-md-6">
+          <script>
+            function on_hover(element) {
+              element.setAttribute('src', '../images/location-zoomed.png')
+            }
+
+            function on_out(element) {
+              element.setAttribute('src', '../images/location.png')
+            }
+
+          </script>
           <a href="https://maps.app.goo.gl/bhVnHiiYKRf5tpSM8">
-            <img src="images/location.png" class="map-img">
+            <img src="../images/location.png" class="map-img" title="Click to open maps" onmouseover="on_hover(this)" onmouseout="on_out(this)">
             </img>
           </a>
         </div>
