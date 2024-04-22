@@ -1,3 +1,4 @@
+const nodemailer = require('nodemailer');
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
@@ -15,6 +16,8 @@ const port = "3001"
 const success = JSON.stringify({status: "success"})
 const admin_pass = "$emBlue1nc";
 
+const message_recipient = "eaststore@semblueinc.com";
+
 const page_template = fs.readFileSync("pages/templates/layout.html", "utf-8")
 const form_path = "assets/tax-forms/";
 
@@ -28,8 +31,16 @@ const __directories = [
     "tax-forms",
     "printing-info",
     "bgswitch",
-    "plan-data"
+    "plan-data",
 ];
+
+const transporter = nodemailer.createTransport({
+	"service": 'gmail',
+	"auth": {
+		"user": 'noreply.semblueinc@gmail.com',
+		"pass": 'zosb bsqw fyci vhkb',
+	}
+})
 
 function save_file(dir, data){
     fs.writeFile(dir, data, (err) => {
@@ -55,6 +66,23 @@ function render_page(path) {
     let page_data = load_page(path)
     let page = combyne(page_template)
     return page.render(page_data)
+}
+
+function send_message(recipient, subject, message) {
+	let mailOptions = {
+		"from": 'noreply.semblueinc@gmail.com',
+		"to": recipient,
+		"subject": subject,
+		"html": message,
+	};
+
+	transporter.sendMail(mailOptions, (error, info) => {
+		if (error) {
+			console.error('Error:', error);
+		} else {
+			console.log('Email sent:', info.response);
+		}	
+	})
 }
 
 app.get("/", (req, res) => {
@@ -106,29 +134,37 @@ app.post("/authenticate", (req, res) => {
 
 app.post("/contact-request", (req, res) => {
     let data = req.body
-    let file_message = `${data.name}\n${data.email}\n${data.number}\n\n${data.message}`
+    let file_message = `Name: ${data.name}<br>Email: ${data.email}<br>Number: ${data.number}<br>Message: ${data.message}`
 
     save_file(`data/contact/${data.email}-message.text`, file_message)
 
     res.send(success)
-
+	
+	let html = `<body><p>${file_message}</p></body>`
+	send_message(message_recipient, "Contact Request", html);
 })
 
 app.post("/order-request", (req, res) => {
     let data = req.body
-    let file_message = JSON.stringify(data)
+    let message = `Name: ${data.name}<br>Email: ${data.email}<br>Number: ${data.number}<br>`;
 
-    save_file("data/supplies/supply-order.txt", file_message);
+	let supplies = data.supplies;
+	for (let i = 0; i < supplies.length; i++) {
+		message += `<br>Item ${i + 1}:<br>Type: ${supplies[i].type}<br>Count: ${supplies[i].count}<br>`;
+	}
+
+	let html = `<body><p>${message}</p></body>`
+
+    send_message(message_recipient, "Order Request", html);
+	save_file("data/supplies/supply-order.txt", message);
+		
 
     res.send(success)
 })
 
 app.post("/design-upload", upload.single("file"), (req, res) => {
     let order_name = req.body.name.replaceAll(' ', '_');
-    let dir_name = "data/signs/order-" + order_name + "/";
-
-    // Make new directory for order
-    fs.mkdirSync(dir_name);
+    let dir_name = "data/signs/designs/";
 
     let file_path = dir_name + req.file.originalname;
     fs.rename(req.file.path, file_path, (err) => {
@@ -138,9 +174,12 @@ app.post("/design-upload", upload.single("file"), (req, res) => {
           return;
         }
     });
-    let order_details = `Name : ${req.body.name}\nEmail : ${req.body.email}\nNumber : ${req.body.number}\nSign format : ${req.body.format}`;
+	let data = req.body;	
 
-    save_file(dir_name + "order-details.txt", order_details);
+	let message = `Name: ${data.name}<br>Email: ${data.email}<br>Number: ${data.number}<br>Format: ${data.format}`;
+	let html = `<body><p>${message}</p><img src="https://www.semblueinc.com/retrieve-design/${req.file.originalname}"></img></body>`;
+	send_message(message_recipient, "Sign Design Request", html);
+
     res.send(success)
 })
 
@@ -174,6 +213,11 @@ app.get("/forms-data", (req, res) => {
 app.get("/form-data", (req, res) => {
     let path = form_path + req.query.path;
     res.sendFile(path, { root: __dirname });
+})
+
+app.get("/retrieve-design/:filename", (req, res) => {
+	let file_path = "data/signs/designs/" + req.params.filename;
+	res.sendFile(file_path, { root: __dirname });
 })
 
 // Resource routing
