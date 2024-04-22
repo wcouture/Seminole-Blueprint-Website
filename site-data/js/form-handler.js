@@ -42,6 +42,10 @@ if (contact_form){
       alert("Must enter all contact information.");
       return;
     }
+	if (number.length > 11 || number.length < 10) {
+		alert("Enter a valid phone number.\nex. (123) 456-7890 - 1234567890");
+		return;
+	}
 
     let request = {}
     request.name = name;
