@@ -1,0 +1,34 @@
+BKWorks Multi-User File Uploader
+Version 1.00
+!! license.txt !!
+!! PLEASE READ THIS DOCUMENT BEFORE INSTALLING !!
+Last Updated 17 Mar 2008
+
+I. INTRODUCTION
+
+The software title you have in your hands is titled as the "BKWorks Multi-User File Uploader" (the Software). It is designed to give students, teachers, or business professionals a method of uploading and storing files in a secure fashion.
+
+II. REQUIREMENTS
+
+The Software requires the following to operate successfully:
+PHP 4.3 (5 or higher is *strongly* recommended)
+MySQL 4 +
+You may need to perform a CHMOD 666 on the 'uploads' directory (if you are using *nix system)
+
+III. YOUR RIGHTS AND RESPONSIBILITIES
+
+The product is free, I do not charge for it (although dontaions are greatly appreciated).
+You are allowed to install *unlimited* copies of the Software on your computer system (network or local server).
+You are *NOT* allowed to sell copies of the Software, but you are allowed to make changes to it as you see fit, and give those copies away.
+If you make a major change and feel like the rest of the World would love to see it, please shoot me an email! bk@bkworksproducts.info - you might become famous :-)
+The "Powered By" section - I ask that you please leave it there. If you like the Software, then please give me credit! As of writing this document, I have spent just over 3 months trying to perfect it, and have been working on earlier copies since October 2006.
+
+IV. OTHER LEGAL INFORMATION
+
+BKWorks Products can not, and will not, be held liable for your use of the Software.
+
+V. TECHNICAL SUPPORT
+
+Technical Support for *ANY* BKWorks Products product is AS IS. We do have a support forum for you to use (located at http://forum.bkworksproducts.info). You may also contact us via email in case there is a question that you can not find yourself.
+
+PLEASE NOTE THAT BKWORKS PRODUCTS WILL NOT CLAIM RESPONSIBILITY FOR YOUR LACK OF KNOWLEDGE. IF SOMETHING DOESN'T WORK, AND IT ISN'T A FLAW IN THE SOFTWARE, IT'S NOT MY PROBLEM TO FIX.

@@ -1,0 +1,7 @@
+upload_max_filesize = 250M
+post_max_size = 500M
+max_execution_time =  600
+memory_limit  = 64M
+max_input_time = 600
+
+register_globals = off
