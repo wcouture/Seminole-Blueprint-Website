@@ -1,17 +1,35 @@
 <section class="contact_section layout_padding">
+    <div class="title-bar">
+        Current Projects
+    </div>
     <div id="plans-board" class="plan-board">
-        <div class="box solid-card plan-item">
+        <div class="box solid-card plan-item" id="no-plans-card" hidden="true">
             <div class="row">
-                <h4>Plan Set 1:</h4>
-                <p>Contractor: </p>
-                <p>Bid date: </p>
-                <a><p>link to preview</p></a>
+                <h3>No plans to present.</h3>
             </div>
         </div>
     </div>
     
     <script>
+        function http_request(method, route, data, callback) {
+            let config = {
+            method: method,
+            mode: "same-origin",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            };
+            if (method == "POST") config.body = JSON.stringify(data);
+        
+            const response = fetch(route, config)
+            .then((response) => response.json())
+            .then((data) => {
+                callback(data);
+                return data;
+            });
+        }
         let board = document.getElementById("plans-board");
+        let no_plans_card = document.getElementById("no-plans-card");
 
         function populate_list(data) {
             for (let i = 0; i < data.plans.length; i++) {
@@ -21,6 +39,7 @@
                 item.className = "box solid-card plan-item";
                 board.appendChild(item);
   
+                /*
                 let row_div = document.createElement("div");
                 row_div.className = "row";
                 item.appendChild(row_div);
@@ -29,7 +48,32 @@
                 header.innerText = plan.title;
                 row_div.appendChild(header);
 
-                
+                let contractor = document.createElement("p");
+                contractor.innerText = plan.contractor;
+                row_div.appendChild(contractor);
+
+                let bid_date = document.createElement("p");
+                bid_date.innerText = plan.bid_date;
+                row_div.appendChild(bid_date);
+
+                let preview_link = document.createElement("a");
+                preview_link.innerHTML = `<p>${plan.path}</p>`;
+                row_div.appendChild(preview_link);
+
+                */
+                let table = document.createElement("table");
+                item.appendChild(table)
+
+                let header_row = document.createElement("tr");
+                header_row.innerHTML = `<th>Project Title</th><th>Contractor</th><th>Bid Date</th><th>Current Set</th><th>Original Set</th>`;
+                table.appendChild(header_row)
+
+                let data_row = document.createElement("tr");
+                data_row.innerHTML = `<td>${plan.title}</td><td>${plan.contractor}</td><td>${plan.bid_date}</td><td>${plan.current_set}</td><td><a href="${plan.path}">preview</a></td>`;
+                table.appendChild(data_row)
+            }
+            if (data.plans.length == 0) {
+                no_plans_card.hidden = false;
             }
         }
 
@@ -38,11 +82,11 @@
             method: "GET",
         }
 
-        fetch("/retrieve-plans", config)
-        .then((response) => response.json())
-        .then((data) => {
+        http_request("GET", "/retrieve-plans", null, (data) => {
+            console.log("Result: " + data)
             populate_list(data);
-        })
+        });
+        
 
     </script>
 

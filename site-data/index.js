@@ -34,6 +34,8 @@ const __directories = [
     "plan-data",
 ];
 
+let stored_plan_data = {};
+
 const transporter = nodemailer.createTransport({
 	"service": 'gmail',
 	"auth": {
@@ -51,6 +53,12 @@ function save_file(dir, data){
             console.log('File saved successfully!');
         }
     })
+}
+
+function load_stored_plans() {
+    const data = fs.readFileSync("assets/plan-data/data_table.json", 'utf-8');
+    plans = JSON.parse(data);
+    stored_plan_data.plans = plans.plans;
 }
 
 // Read raw html data
@@ -215,6 +223,11 @@ app.get("/form-data", (req, res) => {
     res.sendFile(path, { root: __dirname });
 })
 
+app.get("/retrieve-plans", (req, res) => {
+    let data = JSON.stringify(stored_plan_data);
+    res.send(data);
+})
+
 app.get("/retrieve-design/:filename", (req, res) => {
 	let file_path = "data/signs/designs/" + req.params.filename;
 	res.sendFile(file_path, { root: __dirname });
@@ -248,6 +261,7 @@ app.post("/", (req, res) => {
 
 app.listen(port, () => {
     console.log(`Semblueinc listening on port ${port}`)
+    load_stored_plans();
 });
 
 // Ensure the data directory exists

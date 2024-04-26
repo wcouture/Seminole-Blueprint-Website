@@ -1153,17 +1153,49 @@ input[type="file"]::file-selector-button:active {
 }
 
 .plan-item {
-  border-radius: 5px;
+  border-radius: 0px;
   padding: 20px;
-  margin: 30px;
+  margin-top: 30px;
+  margin-left: 20%;
+  margin-right: 20%;
+  box-shadow: 1px 1px 10px 1px rgba(0,0,0,0.4);
+}
+
+.title-bar {
+  width: auto;
+  font-family: 'Merriweather Sans', sans-serif;
+  text-transform: uppercase;
+  font-weight: bolder;
+  color:#4b4b4b;
+  margin-top: -2%;
+  margin-left: 10%;
+  margin-right: 10%;
+  border-bottom: #a0a0a0 2px solid;
+  text-align: center;
+  font-size: xx-large;
+}
+
+.plan-item h3 {
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+  color: #4b4b4b;
+  font-family: 'Merriweather Sans', sans-serif;
+  font-size: medium;
+}
+
+.plan-item table {
+  width: 100%;
 }
 
 .plan-item p {
   margin-top: 5px;
+  padding-left: 50px;
 }
 
 .plan-item h4{
-  margin: 5px;
+  margin-top: 5px;
+  margin-left: 20px;
 }
 
 .solid-card {
