@@ -3,10 +3,6 @@
         Current Projects
     </div>
     <div class="category-tabs">
-        <a href="" class="tab active">Residential</a>
-        <a href="" class="tab">Educational</a>
-        <a href="" class="tab">Industrial</a>
-        <a href="" class="tab">Commercial</a>
     </div>
     <div id="plans-board" class="plan-board">
         <div class="box solid-card plan-item" id="no-plans-card" hidden="true">
@@ -52,17 +48,23 @@
 
             // Hide plan cards
             board.className = "plan-board hidden";
+            setTimeout(() => {
+                // remove old cards
+                let cards = document.getElementsByClassName("dynamic");
+                
+                while (cards.length > 0) {
+                    cards[0].remove();
+                }
+
+                // determine new category
+                let new_cat = e.target.id;
+
+
+                // retrieve new cards, populate, and redisplay
+                http_request("GET", `/retrieve-plans?id=${new_cat}`, null, populate_list);
+            }, 500);
+
             
-            // remove old cards
-            // determine new category
-            // retrieve new cards
-            // populate and redisplay
-
-        }
-
-        for (let i = 0; i < tabs.length; i++){
-            tabs[i].addEventListener("click", handle_tab_click);
-            tabs[i].id=i;
         }
 
         function populate_list(data) {
@@ -70,7 +72,7 @@
                 let plan = data.plans[i];
 
                 let item = document.createElement("div");
-                item.className = "box solid-card plan-item";
+                item.className = "box solid-card plan-item dynamic";
                 board.appendChild(item);
   
                 let table = document.createElement("table");
@@ -87,16 +89,28 @@
             if (data.plans.length == 0) {
                 no_plans_card.hidden = false;
             }
+            board.className = "plan-board";
         }
 
-        let configs = {
-            mode: "same-origin",
-            method: "GET",
-        }
+        // retrieve categories and select first category
+        http_request("GET", "/plan-categories", null, (data) => {
+            let categories = data.cats;
+            let tab_region = document.getElementsByClassName("category-tabs");
+            for (let i = 0; i < categories.length; i++){
+                let tab = document.createElement("a");
+                tab_region[0].appendChild(tab);
 
-        http_request("GET", "/retrieve-plans", null, (data) => {
-            console.log("Result: " + data)
-            populate_list(data);
+                tab.className = (i == 0) ? "tab active" : "tab";
+                tab.href="";
+
+                tab.id = categories[i].id;
+                tab.innerText = categories[i].name
+                
+                tab.addEventListener("click", handle_tab_click);
+                
+            }
+            
+            http_request("GET", `/retrieve-plans?id=${categories[0].id}`, null, populate_list);
         });
         
 

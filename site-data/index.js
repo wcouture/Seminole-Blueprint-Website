@@ -21,6 +21,7 @@ const message_recipient = "eaststore@semblueinc.com";
 const page_template = fs.readFileSync("pages/templates/layout.html", "utf-8")
 const form_path = "assets/tax-forms/";
 
+// File transfer permitted directories
 const __directories = [
     "css",
     "fonts",
@@ -34,8 +35,16 @@ const __directories = [
     "plan-data",
 ];
 
+// Plan display data
 let stored_plan_data = {};
+let plan_categories = {cats: [
+    {id: 1, name: "Florida State"},
+    {id: 2, name: "Florida A&M"},
+    {id: 3, name: "Commercial"},
+    {id: 4, name: "Residential"},
+]};
 
+// Email sending
 const transporter = nodemailer.createTransport({
 	"service": 'gmail',
 	"auth": {
@@ -58,7 +67,7 @@ function save_file(dir, data){
 function load_stored_plans() {
     const data = fs.readFileSync("assets/plan-data/data_table.json", 'utf-8');
     plans = JSON.parse(data);
-    stored_plan_data.plans = plans.plans;
+    stored_plan_data = plans;
 }
 
 // Read raw html data
@@ -223,11 +232,14 @@ app.get("/form-data", (req, res) => {
     res.sendFile(path, { root: __dirname });
 })
 
-app.get("/retrieve-plans", (req, res) => {
-    let data = JSON.stringify(stored_plan_data);
-
+app.get("/plan-categories", (req, res) => {
+    let data = JSON.stringify(plan_categories);
     res.send(data);
 })
+
+app.get("/retrieve-plans", (req, res) => {
+    res.send(JSON.stringify(stored_plan_data.categories[`${req.query.id}`]));
+});
 
 app.get("/retrieve-design/:filename", (req, res) => {
 	let file_path = "data/signs/designs/" + req.params.filename;

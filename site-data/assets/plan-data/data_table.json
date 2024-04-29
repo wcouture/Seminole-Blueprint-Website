@@ -1,32 +1,104 @@
 {
-    "plans":  [
-        { 
-            "title": "Single Family Residence",
-            "contractor": "Builders LLC",
-            "bid_date": "06/17/2024",
-            "current_set": "ASI 1",
-            "path": "assets/plan-data/planset1.pdf"            
+    "categories": {
+        "1": {
+            "plans": 
+                [
+                    { 
+                        "title": "Single Family Residence",
+                        "contractor": "Builders LLC",
+                        "bid_date": "06/17/2024",
+                        "current_set": "ASI 1",
+                        "path": "assets/plan-data/planset1.pdf"            
+                    },
+                    { 
+                        "title": "Single Family Residence",
+                        "contractor": "Builders LLC",
+                        "bid_date": "06/17/2024",
+                        "current_set": "ASI 1",
+                        "path": "assets/plan-data/planset1.pdf"            
+                    },
+                    { 
+                        "title": "Single Family Residence",
+                        "contractor": "Builders LLC",
+                        "bid_date": "06/17/2024",
+                        "current_set": "ASI 1",
+                        "path": "assets/plan-data/planset1.pdf"            
+                    },
+                    { 
+                        "title": "Single Family Residence",
+                        "contractor": "Builders LLC",
+                        "bid_date": "06/17/2024",
+                        "current_set": "ASI 1",
+                        "path": "assets/plan-data/planset1.pdf"            
+                    }
+                ]
         },
-        { 
-            "title": "Single Family Residence",
-            "contractor": "Builders LLC",
-            "bid_date": "06/17/2024",
-            "current_set": "ASI 1",
-            "path": "assets/plan-data/planset1.pdf"            
+        "2": {
+            "plans": 
+                [
+                    { 
+                        "title": "plan set 2",
+                        "contractor": "Builders LLC",
+                        "bid_date": "06/17/2024",
+                        "current_set": "ASI 1",
+                        "path": "assets/plan-data/planset1.pdf"            
+                    },
+                    { 
+                        "title": "Single Family Residence",
+                        "contractor": "Builders LLC",
+                        "bid_date": "06/17/2024",
+                        "current_set": "ASI 1",
+                        "path": "assets/plan-data/planset1.pdf"            
+                    },
+                    { 
+                        "title": "Single Family Residence",
+                        "contractor": "Builders LLC",
+                        "bid_date": "06/17/2024",
+                        "current_set": "ASI 1",
+                        "path": "assets/plan-data/planset1.pdf"            
+                    },
+                    { 
+                        "title": "Single Family Residence",
+                        "contractor": "Builders LLC",
+                        "bid_date": "06/17/2024",
+                        "current_set": "ASI 1",
+                        "path": "assets/plan-data/planset1.pdf"            
+                    }
+                ]
         },
-        { 
-            "title": "Single Family Residence",
-            "contractor": "Builders LLC",
-            "bid_date": "06/17/2024",
-            "current_set": "ASI 1",
-            "path": "assets/plan-data/planset1.pdf"            
-        },
-        { 
-            "title": "Single Family Residence",
-            "contractor": "Builders LLC",
-            "bid_date": "06/17/2024",
-            "current_set": "ASI 1",
-            "path": "assets/plan-data/planset1.pdf"            
+        "3": {
+            "plans": 
+                [
+                    { 
+                        "title": "plan set 3",
+                        "contractor": "Builders LLC",
+                        "bid_date": "06/17/2024",
+                        "current_set": "ASI 1",
+                        "path": "assets/plan-data/planset1.pdf"            
+                    },
+                    { 
+                        "title": "Single Family Residence",
+                        "contractor": "Builders LLC",
+                        "bid_date": "06/17/2024",
+                        "current_set": "ASI 1",
+                        "path": "assets/plan-data/planset1.pdf"            
+                    },
+                    { 
+                        "title": "Single Family Residence",
+                        "contractor": "Builders LLC",
+                        "bid_date": "06/17/2024",
+                        "current_set": "ASI 1",
+                        "path": "assets/plan-data/planset1.pdf"            
+                    },
+                    { 
+                        "title": "Single Family Residence",
+                        "contractor": "Builders LLC",
+                        "bid_date": "06/17/2024",
+                        "current_set": "ASI 1",
+                        "path": "assets/plan-data/planset1.pdf"            
+                    }
+                ]
         }
-    ]
+
+    }
 }
