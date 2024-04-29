@@ -1152,23 +1152,106 @@ input[type="file"]::file-selector-button:active {
   color: inherit;
 }
 
+.plan-board {
+  min-height: 400pt;
+  opacity: 100%;
+  transition: linear 0.3s;
+}
+
+.plan-board.hidden {
+  opacity: 0%;
+}
+
 .plan-item {
-  border-radius: 5px;
+  border-radius: 0px;
   padding: 20px;
-  margin: 30px;
+  margin-top: 30px;
+  margin-left: 20%;
+  margin-right: 20%;
+  box-shadow: 1px 1px 10px 1px rgba(0,0,0,0.4);
+}
+
+.title-bar {
+  width: auto;
+  font-family: 'Merriweather Sans', sans-serif;
+  text-transform: uppercase;
+  font-weight: bolder;
+  color:#4b4b4b;
+  margin-top: -2%;
+  margin-left: 10%;
+  margin-right: 10%;
+  border-bottom: #a0a0a0 2px solid;
+  text-align: center;
+  font-size: xx-large;
+}
+
+.plan-item h3 {
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+  color: #4b4b4b;
+  font-family: 'Merriweather Sans', sans-serif;
+  font-size: medium;
+}
+
+.plan-item table {
+  width: 100%;
 }
 
 .plan-item p {
   margin-top: 5px;
+  padding-left: 50px;
 }
 
 .plan-item h4{
-  margin: 5px;
+  margin-top: 5px;
+  margin-left: 20px;
 }
 
 .solid-card {
   background-color: rgba(255,255,255,1);
 }
 
+.category-tabs {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  background-color: hsl(0, 1%, 72%);
+  margin-left: 20%;
+  margin-right: 20%;
+  border-radius: 0px 0px 5px 5px;
+  border-bottom: 2px solid #a0a0a0;
+  border-left: 2px solid #a0a0a0;
+  border-right: 2px solid #a0a0a0;
+}
+
+.tab {
+  text-transform: uppercase;
+  font-weight: bold;
+  color:#4b4b4b;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 5px;
+  min-height: 30pt;
+  vertical-align: middle;
+  border-left: 2px solid #a0a0a0;
+  border-right: 2px solid #a0a0a0;
+  width: 100%;
+  height: 100%;
+  font-size: 12pt;
+  border-radius: 0px 0px 5px 5px;
+  transition: ease-in 0.15s;
+}
+
+.tab:hover {
+  color:#838383;
+  font-size: 14pt;
+  background-color: hsl(0, 0%, 79%);
+}
+
+.tab.active {
+  background-color: #cfcfcf;
+}
 /* end footer section*/
 /*# sourceMappingURL=style.css.map */
