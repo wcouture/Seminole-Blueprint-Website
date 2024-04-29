@@ -2,6 +2,12 @@
     <div class="title-bar">
         Current Projects
     </div>
+    <div class="category-tabs">
+        <a href="" class="tab active">Residential</a>
+        <a href="" class="tab">Educational</a>
+        <a href="" class="tab">Industrial</a>
+        <a href="" class="tab">Commercial</a>
+    </div>
     <div id="plans-board" class="plan-board">
         <div class="box solid-card plan-item" id="no-plans-card" hidden="true">
             <div class="row">
@@ -11,6 +17,10 @@
     </div>
     
     <script>
+        let tabs = document.getElementsByClassName("tab")
+        let board = document.getElementById("plans-board");
+        let no_plans_card = document.getElementById("no-plans-card");
+
         function http_request(method, route, data, callback) {
             let config = {
             method: method,
@@ -28,8 +38,32 @@
                 return data;
             });
         }
-        let board = document.getElementById("plans-board");
-        let no_plans_card = document.getElementById("no-plans-card");
+
+        function handle_tab_click(e) {
+            e.preventDefault();
+
+            e.target.className = "tab active";
+            
+            for (let i = 0; i < tabs.length; i++) {
+                if (tabs[i].id == e.target.id)
+                    continue;
+                tabs[i].className = "tab";
+            }
+
+            // Hide plan cards
+            board.className = "plan-board hidden";
+            
+            // remove old cards
+            // determine new category
+            // retrieve new cards
+            // populate and redisplay
+
+        }
+
+        for (let i = 0; i < tabs.length; i++){
+            tabs[i].addEventListener("click", handle_tab_click);
+            tabs[i].id=i;
+        }
 
         function populate_list(data) {
             for (let i = 0; i < data.plans.length; i++) {
@@ -39,28 +73,6 @@
                 item.className = "box solid-card plan-item";
                 board.appendChild(item);
   
-                /*
-                let row_div = document.createElement("div");
-                row_div.className = "row";
-                item.appendChild(row_div);
-
-                let header = document.createElement("h4");
-                header.innerText = plan.title;
-                row_div.appendChild(header);
-
-                let contractor = document.createElement("p");
-                contractor.innerText = plan.contractor;
-                row_div.appendChild(contractor);
-
-                let bid_date = document.createElement("p");
-                bid_date.innerText = plan.bid_date;
-                row_div.appendChild(bid_date);
-
-                let preview_link = document.createElement("a");
-                preview_link.innerHTML = `<p>${plan.path}</p>`;
-                row_div.appendChild(preview_link);
-
-                */
                 let table = document.createElement("table");
                 item.appendChild(table)
 

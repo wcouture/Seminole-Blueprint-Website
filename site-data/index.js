@@ -225,6 +225,7 @@ app.get("/form-data", (req, res) => {
 
 app.get("/retrieve-plans", (req, res) => {
     let data = JSON.stringify(stored_plan_data);
+
     res.send(data);
 })
 
