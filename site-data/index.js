@@ -200,6 +200,30 @@ app.post("/design-upload", upload.single("file"), (req, res) => {
     res.send(success)
 })
 
+app.post("/plan-upload", upload.single("file"), (req, res) => {
+    let plan_set = {};
+    plan_set.name = req.body.name;
+    plan_set.contractor = req.body.contractor;
+    plan_set.bid_date = req.body.bid_date;
+    plan_set.current_set = req.body.current_set;
+
+    let file_path = "assets/plan-data/" + req.file.originalname;
+    fs.rename(req.file.path, file_path, (err) => {
+        if (err) {
+            console.error("Error moving plan pdf: ", err);
+            res.status(500).send('Error saving plan pdf');
+            return;
+        }
+    });
+
+    plan_set.path = file_path;
+    let plan_cat = req.body.category;
+
+    stored_plan_data.categories[`${plan_cat}`].push(plan_set);
+
+    res.send(success);
+})
+
 app.post("/upload-tax-form", upload.single("file"), (req, res) => {
     let file_path = "assets/tax-forms/" + req.file.originalname;
     console.log("uploading form")
