@@ -40,10 +40,16 @@ const __directories = [
 // Plan display data
 let stored_plan_data = {};
 let plan_categories = {cats: [
-    {id: 1, name: "Florida State"},
-    {id: 2, name: "Florida A&M"},
-    {id: 3, name: "Commercial"},
-    {id: 4, name: "Residential"},
+    {id: 1, name: "Commercial"},
+	{id: 2, name: "School - Universities"},
+	{id: 3, name: "City County"},
+	{id: 4, name: "State of Florida"},
+	{id: 5, name: "Church"},
+	{id: 6, name: "Residential"},
+	{id: 7, name: "Airport"},
+	{id: 8, name: "Medical"},
+	{id: 9, name: "Library"},
+	{id: 10, name: "Military"}
 ]};
 
 // Email sending
