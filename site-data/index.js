@@ -221,6 +221,8 @@ app.post("/plan-upload", upload.single("file"), (req, res) => {
 
     stored_plan_data.categories[`${plan_cat}`].push(plan_set);
 
+    save_file("/assets/plan-data/data_table.json", stored_plan_data);
+
     res.send(success);
 })
 
