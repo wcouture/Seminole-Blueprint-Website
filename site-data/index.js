@@ -32,6 +32,8 @@ const __directories = [
     "printing-info",
     "bgswitch",
     "plan-data",
+	"storage",
+	"include",
 ];
 
 const transporter = nodemailer.createTransport({
@@ -105,7 +107,13 @@ app.get("/contact", (req, res) => {
 })
 
 app.get("/upload", (req, res) => {
-    res.send(success)
+    res.send(success);
+})
+
+app.get("/storage", (req, res) => {
+	const data = fs.readFileSync("storage/index.php", 'utf-8')
+	res.send(data);
+//	res.sendFile("storage/index.php", { root: __dirname });
 })
 
 app.get("/tax-forms", (req, res) => {
