@@ -1,6 +1,6 @@
 {
     "categories": {
-        "1": { "plans": [{"title":"Plan set 1", "contractor": "Contractor1", "bid_date":"06/12/2024", "current_set": "ASi1", "path": "preview/path/here"}] },
+        "1": { "plans": [{"title":"Plan set 1", "contractor": "Contractor1", "bid_date":"06/12/2024", "current_set": "ASi1", "path": "assets/plan-data/planset1.pdf"}] },
         "2": { "plans": [] },
         "3": { "plans": [] },
         "4": { "plans": [] },
