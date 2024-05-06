@@ -1,14 +1,1 @@
-{
-    "categories": {
-        "1": { "plans": [] },
-        "2": { "plans": [] },
-        "3": { "plans": [] },
-        "4": { "plans": [] },
-        "5": { "plans": [] },
-        "6": { "plans": [] },
-        "7": { "plans": [] },
-        "8": { "plans": [] },
-        "9": { "plans": [] },
-        "10": { "plans": [] }
-    }
-}
+{"categories":{"1":{"plans":[{"title":"JVP Mixed-Use","contractor":"RPCC","bid_date":"2/21/2024","current_set":"100% Construction","id":"1003","path":"assets/plan-data/Camp Helen New Admin Building Full Set Online Plans.pdf"},{"title":"Wellpack Pharmacy Interior Buildout","contractor":"Shaffield Contstruction","bid_date":"unknown","current_set":"100% Construction","id":1007,"path":"#"},{"title":"Hamilton Reality","contractor":"Shaffield Contstruction","bid_date":"unknown","current_set":"100% Construction","id":1008,"path":"#"},{"title":"Cubesmart at Capitol Hill Plaza","contractor":"Sperry & Associates","bid_date":"unknown","current_set":"Fire Marshall Approved Set","id":1009,"path":"#"},{"title":"Carrabelle Marina Bldg","contractor":"Barton Construction","bid_date":"unknown","current_set":"100% Construction","id":1010,"path":"#"},{"title":"Hotel Indigo Addition","contractor":"Hooper Co","bid_date":"2/26/2024","current_set":"100% Construction","id":1011,"path":"#"},{"title":"Governors Club Lounge","contractor":"Childers","bid_date":"unknown","current_set":"Add03","id":1013,"path":"#"},{"title":"Wawa Blairstone","contractor":"nan","bid_date":"unknown","current_set":"100% Construction","id":1014,"path":"#"},{"title":"Wawa Woodville Highway Civil","contractor":"nan","bid_date":"unknown","current_set":"100% Construction","id":1015,"path":"#"},{"title":"Tesla Dalership","contractor":"nan","bid_date":"unknown","current_set":"100% Construction","id":1016,"path":"#"}]},"2":{"plans":[]},"3":{"plans":[]},"4":{"plans":[]},"5":{"plans":[]},"6":{"plans":[]},"7":{"plans":[]},"8":{"plans":[]},"9":{"plans":[]},"10":{"plans":[]}}}

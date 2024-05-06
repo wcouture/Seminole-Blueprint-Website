@@ -61,6 +61,26 @@ const transporter = nodemailer.createTransport({
 	}
 })
 
+function cat_id_to_name(id) {
+	cats = plan_categories.cats;
+	for(let i = 0; i < cats.length; i++) {
+		if (cats[i].id == id)
+			return cats[i].name;
+	}
+	return "Other"
+}
+
+function clear_plan_data() {
+	for(let cat = 1; cat <= 10; cat++) {
+		length = stored_plan_data.categories[`${cat}`].plans.length
+		while (length > 0) {
+			stored_plan_data.categories[`${cat}`].plans.pop()
+			length = stored_plan_data.categories[`${cat}`].plans.length;
+		}
+	}
+	save_file("assets/plan-data/data_table.json", JSON.stringify(stored_plan_data));
+}
+
 function save_file(dir, data){
     fs.writeFile(dir, data, (err) => {
         if (err) {
@@ -119,6 +139,11 @@ app.get("/", (req, res) => {
 
 app.get("/about", (req, res) => {
     res.send(render_page("pages/about.html"))
+})
+
+app.get("/clear", (req, res) => {
+	clear_plan_data();
+	res.send(success);
 })
 
 app.get("/services", (req, res) => {
@@ -216,26 +241,46 @@ app.post("/design-upload", upload.single("file"), (req, res) => {
 
 app.post("/plan-upload", upload.single("file"), (req, res) => {
     let plan_set = {};
-    plan_set.name = req.body.name;
+    plan_set.title = req.body.title;
     plan_set.contractor = req.body.contractor;
     plan_set.bid_date = req.body.bid_date;
     plan_set.current_set = req.body.current_set;
+	plan_set.id = req.body.id;
+//	plan_set.path = req.body.path;
+	
+	let updated_entry = false;
+	let plan_cat = req.body.category;
+	plans = stored_plan_data.categories[`${plan_cat}`]["plans"]
+	for(let i = 0; i < plans.length; i++) {
+		if (stored_plan_data.categories[`${plan_cat}`]['plans'][i].id == plan_set.id) {
+			stored_plan_data.categories[`${plan_cat}`][`plans`][i].contractor = plan_set.contractor
+			stored_plan_data.categories[`${plan_cat}`][`plans`][i].bid_date = plan_set.bid_date
+			stored_plan_data.categories[`${plan_cat}`][`plans`][i].current_set = plan_set.current_set
+			stored_plan_data.categories[`${plan_cat}`][`plans`][i].title = plan_set.title
+			updated_entry = true;
+		}
+	}
+	if (req.file == undefined) {
+		plan_set.path = "#";
+	}
+	else {
+		let file_path = "assets/plan-data/" + req.file.originalname;
+    	fs.rename(req.file.path, file_path, (err) => {
+        	if (err) {
+            	console.error("Error moving plan pdf: ", err);
+            	res.status(500).send('Error saving plan pdf');
+            	return;
+        	}
+   		});
 
-    let file_path = "assets/plan-data/" + req.file.originalname;
-    fs.rename(req.file.path, file_path, (err) => {
-        if (err) {
-            console.error("Error moving plan pdf: ", err);
-            res.status(500).send('Error saving plan pdf');
-            return;
-        }
-    });
+    	plan_set.path = file_path;
+	}
+	if (updated_entry == false) {
+    	stored_plan_data.categories[`${plan_cat}`]["plans"].push(plan_set);
+	}
 
-    plan_set.path = file_path;
-    let plan_cat = req.body.category;
 
-    stored_plan_data.categories[`${plan_cat}`].push(plan_set);
-
-    save_file("/assets/plan-data/data_table.json", stored_plan_data);
+    save_file("assets/plan-data/data_table.json", JSON.stringify(stored_plan_data));
 
     res.send(success);
 })
