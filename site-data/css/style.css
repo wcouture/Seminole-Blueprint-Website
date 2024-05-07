@@ -996,11 +996,11 @@ input[type="file"]::file-selector-button:active {
 }
 
 .contact_section .add-button, .minus-button {
-  width: 20px;
-  height: 20px;
-  margin: 5px;
+  width: 15px;
+  height: 15px;
+  margin: 7px;
   border: 1px solid #000000;
-  border-radius: 10px;
+  border-radius: 5px;
   background-color: #e5e7eb;
 }
 
