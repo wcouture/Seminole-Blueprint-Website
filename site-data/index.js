@@ -260,7 +260,7 @@ app.post("/upload", upload.single('file'), (req, res) => {
     });
 
     let message = `<h1>Plan Set Upload</h1><h5>${email}<br>${title}<br>${bid_date}<br>https://semblueinc.com/${file_path}</h5>`
-    send_message("wcouture17@gmail.com", "Plan Set Upload", message);
+    send_message(message_recipient, "Plan Set Upload", message);
     res.send(success);
 })
 
