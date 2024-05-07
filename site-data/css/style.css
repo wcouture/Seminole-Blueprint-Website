@@ -1080,6 +1080,7 @@ input[type="file"]::file-selector-button:active {
 }
 
 .info_section {
+  min-height: 500px;
   padding: 75px 0;
   background-color: #0a0f43;
   text-align: center;
@@ -1188,6 +1189,10 @@ input[type="file"]::file-selector-button:active {
 
 /* footer section*/
 .footer_section {
+  background-color: #0a0f43;
+}
+
+html {
   background-color: #0a0f43;
 }
 
