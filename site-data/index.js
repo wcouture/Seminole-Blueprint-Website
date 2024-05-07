@@ -244,7 +244,12 @@ app.post("/upload", upload.single('file'), (req, res) => {
     let email = req.body.email;
     let bid_date = req.body.bid_date;
 
-    let file_name = req.file.originalname.replaceAll(' ', '_');
+    var file_name = req.file.originalname;
+    while(file_name.indexOf(' ') >= 0) {
+        file_name = file_name.replace(' ', '_');
+    }
+
+
     let file_path = "assets/plan-data/" + file_name;
     fs.rename(req.file.path, file_path, (err) => {
         if (err) {
@@ -285,7 +290,10 @@ app.post("/plan-upload", upload.single("file"), (req, res) => {
 		plan_set.path = "#";
 	}
 	else {
-        let file_name = req.file.originalname.replaceAll(' ', '_');
+        var file_name = req.file.originalname;
+        while(file_name.indexOf(' ') >= 0) {
+            file_name = file_name.replace(' ', '_');
+        }
 		let file_path = "assets/plan-data/" + file_name;
     	fs.rename(req.file.path, file_path, (err) => {
         	if (err) {
