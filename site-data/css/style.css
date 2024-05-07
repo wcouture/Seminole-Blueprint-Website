@@ -1059,6 +1059,10 @@ input[type="file"]::file-selector-button:active {
   margin-top: 15px;
 }
 
+.contact_section p {
+  text-align: center;
+}
+
 .contact_section button:hover {
   background-color: transparent;
   color: #0355cc;
