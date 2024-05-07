@@ -945,6 +945,7 @@ input[type="file"]::file-selector-button:active {
 }
 
 .contact_section .centered-region {
+  min-height: 500px;
   margin-left: 40%;
   margin-right: 40%;
   display: flex;
