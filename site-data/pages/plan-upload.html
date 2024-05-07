@@ -1,7 +1,7 @@
 <section class="contact_section layout_padding">
     <div class="title-bar">Planset Upload</div>
 
-    <div class="centered-region">
+    <div class="centered-region" id="center">
         <form id="plan-form" class="plan-form">
             <label>Email</label>
             <input type="email" id="f_email" placeholder="user@mail.com" reqiured>
@@ -20,7 +20,13 @@
         let plan_form = document.getElementById("plan-form");
         
         function display_success() {
-            console.log("Upload sent")
+            let center = document.getElementById("center");
+            center.className = "centered-region fade-out-quick";
+
+            setTimeout( () => {
+                center.innerHTML = "<p>Plans submitted</p>"
+                col.className = "centered-region fade-in-quick"; 
+            }, 500)
         }
 
         plan_form.addEventListener("submit", (e) => {
