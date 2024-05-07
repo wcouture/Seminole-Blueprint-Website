@@ -154,10 +154,6 @@ app.get("/contact", (req, res) => {
     res.send(render_page("pages/contact.html"))
 })
 
-app.get("/upload", (req, res) => {
-    res.send(success);
-})
-
 app.get("/storage", (req, res) => {
 	const data = fs.readFileSync("storage/index.php", 'utf-8')
 	res.send(data);
@@ -170,6 +166,10 @@ app.get("/tax-forms", (req, res) => {
 
 app.get("/plans", (req, res) => {
     res.send(render_page("pages/plans.html"))
+})
+
+app.get("/plan-upload", (req, res) => {
+    res.send(render_page("pages/plan-upload.html"))
 })
 
 app.get("/admin", (req,res) => {
@@ -239,6 +239,26 @@ app.post("/design-upload", upload.single("file"), (req, res) => {
     res.send(success)
 })
 
+app.post("/upload", upload.single('file'), (req, res) => {
+    let title = req.body.title;
+    let email = req.body.email;
+    let bid_date = req.body.bid_date;
+
+    let file_name = req.file.originalname.replaceAll(' ', '_');
+    let file_path = "assets/plan-data/" + file_name;
+    fs.rename(req.file.path, file_path, (err) => {
+        if (err) {
+            console.error("Error moving plan pdf: ", err);
+            res.status(500).send('Error saving plan pdf');
+            return;
+        }
+    });
+
+    let message = `<h1>Plan Set Upload</h1><h5>${email}<br>${title}<br>${bid_date}<br>https://semblueinc.com/${file_path}</h5>`
+    send_message("wcouture17@gmail.com", "Plan Set Upload", message);
+    res.send(success);
+})
+
 app.post("/plan-upload", upload.single("file"), (req, res) => {
     let plan_set = {};
     plan_set.title = req.body.title;
@@ -258,13 +278,15 @@ app.post("/plan-upload", upload.single("file"), (req, res) => {
 			stored_plan_data.categories[`${plan_cat}`][`plans`][i].current_set = plan_set.current_set
 			stored_plan_data.categories[`${plan_cat}`][`plans`][i].title = plan_set.title
 			updated_entry = true;
+            break;
 		}
 	}
 	if (req.file == undefined) {
 		plan_set.path = "#";
 	}
 	else {
-		let file_path = "assets/plan-data/" + req.file.originalname;
+        let file_name = req.file.originalname.replaceAll(' ', '_');
+		let file_path = "assets/plan-data/" + file_name;
     	fs.rename(req.file.path, file_path, (err) => {
         	if (err) {
             	console.error("Error moving plan pdf: ", err);

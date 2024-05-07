@@ -944,6 +944,20 @@ input[type="file"]::file-selector-button:active {
   background-image: linear-gradient(#fff, #eee, #a2a3a4);
 }
 
+.contact_section .centered-region {
+  margin-left: 40%;
+  margin-right: 40%;
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
+
+.contact_section .plan-form {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2%;
+}
+
 .contact_section input {
   width: 100%;
   border: none;
@@ -955,6 +969,23 @@ input[type="file"]::file-selector-button:active {
   color: #000000;
   -webkit-box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.2);
           box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.2);
+}
+
+.contact_section input[type="file"] {
+  width: auto;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  background-color: rgba(255, 255, 255, 0);
+  box-shadow: none;
+}
+
+.contact_section button {
+  width: 60%;
+  margin-left: 20%;
+  text-align: center;
+  padding-left: 10px;
+  font-size: 10pt;
+  background-color: #0355cc;
 }
 
 .contact_section .checkbox {

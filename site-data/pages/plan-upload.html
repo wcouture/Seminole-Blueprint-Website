@@ -1,0 +1,59 @@
+<section class="contact_section layout_padding">
+    <div class="title-bar">Planset Upload</div>
+
+    <div class="centered-region">
+        <form id="plan-form" class="plan-form">
+            <label>Email</label>
+            <input type="email" id="f_email" placeholder="user@mail.com" reqiured>
+            <label>Project Name</label>
+            <input type="text" id="f_title" placeholder="planset1" required>
+            <label>Bid Date</label>
+            <input type="date" id="f_date" placeholder="01/01/1900">
+            <label>Plans Set</label>
+            <input type="file" id="f_plans" required>
+
+            <button>Submit Plans</button> 
+        </form>
+    </div>
+
+    <script>
+        let plan_form = document.getElementById("plan-form");
+        
+        function display_success() {
+            console.log("Upload sent")
+        }
+
+        plan_form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            
+            let email = document.getElementById("f_email").value;
+            let title = document.getElementById("f_title").value;
+            let bid_date = document.getElementById("f_date").value;
+            let plans = document.getElementById("f_plans").files[0];
+
+            let config = {
+                method: "POST",
+                mode: "same-origin",
+                headers: {}
+            };
+
+            let data = new FormData();
+
+            data.append("file", plans);
+            data.append("title", title);
+            data.append("email", email);
+            data.append("bid_date", bid_date);
+
+            config.body = data;
+
+            fetch("/upload", config)
+            .then((response) => response.json())
+            .then((res) => {
+                if (res.status == 'success'){
+                    display_success()
+                }
+            })
+        })
+        
+    </script>
+</section>
