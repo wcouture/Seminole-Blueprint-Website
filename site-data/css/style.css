@@ -1061,6 +1061,8 @@ input[type="file"]::file-selector-button:active {
 
 .contact_section p {
   text-align: center;
+  width: 100%;
+  margin-top: 2%;
 }
 
 .contact_section button:hover {
