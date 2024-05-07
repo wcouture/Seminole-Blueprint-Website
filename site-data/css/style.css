@@ -1194,6 +1194,7 @@ input[type="file"]::file-selector-button:active {
 
 html {
   background-color: #0a0f43;
+  scroll-behavior: smooth;
 }
 
 .footer_section p {
