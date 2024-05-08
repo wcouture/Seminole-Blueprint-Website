@@ -20,10 +20,10 @@
         function http_request(method, route, data, callback) {
             let config = {
             method: method,
-            mode: "same-origin",
             headers: {
                 "Content-Type": "application/json",
-            },
+				"mode": "same-origin",
+			},
             };
             if (method == "POST") config.body = JSON.stringify(data);
         
