@@ -155,12 +155,6 @@ app.get("/contact", (req, res) => {
     res.send(render_page("pages/contact.html"))
 })
 
-app.get("/storage", (req, res) => {
-	const data = fs.readFileSync("storage/index.php", 'utf-8')
-	res.send(data);
-//	res.sendFile("storage/index.php", { root: __dirname });
-})
-
 app.get("/tax-forms", (req, res) => {
     res.send(render_page("pages/forms.html"))
 })
