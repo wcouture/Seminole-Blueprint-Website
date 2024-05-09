@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "bcat.bgswitcher": "^2.2.1",
     "combyne": "^2.0.0",
     "express": "^4.19.2",
     "formidable": "^3.5.1",

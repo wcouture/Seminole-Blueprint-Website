@@ -31,8 +31,14 @@ $(".owl-carousel").owlCarousel({
     }
 });
 
+var bg_images = [
+    "/images/capitol.jpg",
+    "/images/wescott-editted.jpg",
+    "/images/downtown.jpg",
+];
+
 $('.bgSwitch').bgswitcher({
-        images: ["images/capitol.jpg", "images/wescott-editted.jpg","images/downtown.jpg"],
+        images: bg_images,
         effect: "fade",
         interval: 10000
 });
