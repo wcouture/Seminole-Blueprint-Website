@@ -37,6 +37,12 @@ var bg_images = [
     "/images/downtown.jpg",
 ];
 
+let banner = document.getElementById("client-banner");
+if (banner) {
+    let index = Math.floor(Math.random() * 3)
+    banner.style = `background: url(${bg_images[index]});background-position: center; background-size: cover;padding: 80px 0px 80px 0px;`
+}
+
 $('.bgSwitch').bgswitcher({
         images: bg_images,
         effect: "fade",

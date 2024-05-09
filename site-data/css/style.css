@@ -819,7 +819,7 @@ select {
   padding: 80px 0px 80px 0px;
 
   background-position: center;
-  background-size: cover;
+  background-size: 50%;
 }
 
 .client_section .box {
