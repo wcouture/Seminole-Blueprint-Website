@@ -39,8 +39,16 @@ var bg_images = [
 
 let banner = document.getElementById("client-banner");
 if (banner) {
-    let index = Math.floor(Math.random() * 3)
+    var index = Math.floor(Math.random() * 3)
     banner.style = `background: url(${bg_images[index]});background-position: center; background-size: cover;padding: 80px 0px 80px 0px;`
+    /*
+    setInterval(() => {
+        console.log("Changing background")
+        index++;
+        index %= bg_images.length;
+        banner.style = `background: url(${bg_images[index]});background-position: center; background-size: cover;padding: 80px 0px 80px 0px;` 
+    }, 10000);
+    */
 }
 
 $('.bgSwitch').bgswitcher({
