@@ -573,9 +573,7 @@ a:focus {
 }
 
 select {
-  appearance: none;
   /*  safari  */
-  -webkit-appearance: none;
   /*  other styles for aesthetics */
   width: 100%;
   font-size: 1.15rem;
