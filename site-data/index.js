@@ -6,6 +6,7 @@ const path = require('path');
 const combyne = require('combyne');
 const multer = require("multer");
 const upload = multer({dest: "data/signs"})
+const exec = require('child_process').exec;
 
 const bodyParser = require('body-parser');
 const app = express();
@@ -80,6 +81,13 @@ function clear_plan_data() {
 		}
 	}
 	save_file("assets/plan-data/data_table.json", JSON.stringify(stored_plan_data));
+	exec('rm assets/plan-data/*.pdf', (err, s_out, s_err) => {
+		console.log('stdout: ' + s_out);
+		console.log('stderr: ' + s_err);
+		if (err !== null) {
+			console.log('exec error: ' + err);
+		}
+	});
 }
 
 function save_file(dir, data){
@@ -259,49 +267,62 @@ app.post("/upload", upload.single('file'), (req, res) => {
     res.send(success);
 })
 
+function find_plan(plan, plan_cat) {
+	let plans = stored_plan_data.categories[`${plan_cat}`]["plans"]
+	for (let i = 0; i > plans.length; i++) {
+		if (stored_plan_data.categories[`${plan_cat}`]['plans'][i].id == plan_set.id) {
+			return i;
+		}
+	}
+	return -1;
+}
+
 app.post("/plan-upload", upload.single("file"), (req, res) => {
-    let plan_set = {};
-    plan_set.title = req.body.title;
-    plan_set.contractor = req.body.contractor;
-    plan_set.bid_date = req.body.bid_date;
-    plan_set.current_set = req.body.current_set;
+    	let plan_set = {};
+    	plan_set.title = req.body.title;
+    	plan_set.contractor = req.body.contractor;
+    	plan_set.bid_date = req.body.bid_date;
+    	plan_set.current_set = req.body.current_set;
+	plan_set.tracking = req.body.tracking;
 	plan_set.id = req.body.id;
 //	plan_set.path = req.body.path;
 	
-	let updated_entry = false;
 	let plan_cat = req.body.category;
-	plans = stored_plan_data.categories[`${plan_cat}`]["plans"]
-	for(let i = 0; i < plans.length; i++) {
-		if (stored_plan_data.categories[`${plan_cat}`]['plans'][i].id == plan_set.id) {
-			stored_plan_data.categories[`${plan_cat}`][`plans`][i].contractor = plan_set.contractor
-			stored_plan_data.categories[`${plan_cat}`][`plans`][i].bid_date = plan_set.bid_date
-			stored_plan_data.categories[`${plan_cat}`][`plans`][i].current_set = plan_set.current_set
-			stored_plan_data.categories[`${plan_cat}`][`plans`][i].title = plan_set.title
-			updated_entry = true;
-            break;
-		}
-	}
+
 	if (req.file == undefined) {
 		plan_set.path = "#";
 	}
 	else {
-        var file_name = req.file.originalname;
-        while(file_name.indexOf(' ') >= 0) {
-            file_name = file_name.replace(' ', '_');
-        }
-		let file_path = "assets/plan-data/" + file_name;
-    	fs.rename(req.file.path, file_path, (err) => {
-        	if (err) {
-            	console.error("Error moving plan pdf: ", err);
-            	res.status(500).send('Error saving plan pdf');
-            	return;
+        	var file_name = req.file.originalname;
+        	while(file_name.indexOf(' ') >= 0) {
+            		file_name = file_name.replace(' ', '_');
         	}
+		let file_path = "assets/plan-data/" + file_name;
+    		fs.rename(req.file.path, file_path, (err) => {
+        		if (err) {
+        	    		console.error("Error moving plan pdf: ", err);
+            			res.status(500).send('Error saving plan pdf');
+            			return;
+        		}
    		});
 
-    	plan_set.path = file_path;
+    		plan_set.path = file_path;
 	}
-	if (updated_entry == false) {
-    	stored_plan_data.categories[`${plan_cat}`]["plans"].push(plan_set);
+	let plan_index = find_plan(plan_set, plan_cat);
+	if (plan_index >= 0 ) {
+		if (plan_set.tracking != "Yes") {
+			stored_plan_data.categories[`${plan_cat}`]["plans"].splice(plan_index, 1);
+			
+		}else{
+			stored_plan_data.categories[`${plan_cat}`]["plans"][plan_index].title = plan_set.title;
+			stored_plan_data.categories[`${plan_cat}`]["plans"][plan_index].contractor = plan_set.contractor;
+			stored_plan_data.categories[`${plan_cat}`]["plans"][plan_index].bid_date = plan_set.bid_date;
+			stored_plan_data.categories[`${plan_cat}`]["plans"][plan_index].current_set = plan_set.current_set;
+			stored_plan_data.categories[`${plan_cat}`]["plans"][plan_index].path = plan_set.path;
+		}
+	}
+	else if(plan_set.tracking == "Yes") {
+    		stored_plan_data.categories[`${plan_cat}`]["plans"].push(plan_set);
 	}
 
 
