@@ -80,12 +80,12 @@
 
 
                 let header_row = document.createElement("tr");
-                header_row.innerHTML = `<th style="width: 30%">Project Title</th><th style="width: 20%">Contractor</th><th style="width: 10%">Bid Date</th><th style="width: 25%">Current Set</th><th>Original Set</th>`;
+                header_row.innerHTML = `<th style="width: 30%">Project Title</th><th style="width: 20%">Contractor</th><th style="width: 10%">Bid Date</th><th style="width: 25%">Current Set</th><th>Full Plans</th>`;
                 table.appendChild(header_row)
 
                 var link = `<a href="${plan.path}">preview</a>`
                 if (plan.path == "#")
-                    link = "<a>no preview</a>"
+                    link = "<a href='/contact'>Contact Us</a>"
                 
                 let data_row = document.createElement("tr");
                 data_row.innerHTML = `<td>${plan.title}</td><td>${plan.contractor}</td><td>${plan.bid_date}</td><td>${plan.current_set}</td><td>${link}</td>`;
