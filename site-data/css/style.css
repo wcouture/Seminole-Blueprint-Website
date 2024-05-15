@@ -771,6 +771,17 @@ select {
       -ms-flex-align: center;
           align-items: center;
   text-align: center;
+  color: #29367e;
+}
+
+.client_section .review-link {
+  background-color: white;
+  border-radius: 15px;
+  font-size: 20pt;
+  padding: 10pt;
+  font-weight:bolder;
+  color: #29367e;
+  text-transform: uppercase;
 }
 
 .client_section h2 {
