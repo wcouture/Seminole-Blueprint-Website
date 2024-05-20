@@ -10,7 +10,7 @@
             <label>Bid Date</label>
             <input type="date" id="f_date" placeholder="01/01/1900">
             <label>Plans Set</label>
-            <input type="file" name="files[]" multiple="multiple" id="f_plans" required>
+            <input type="file" name="file" multiple="true" id="f_plans" required>
 
             <button>Submit Plans</button> 
         </form>
@@ -18,7 +18,8 @@
 
     <script>
         let plan_form = document.getElementById("plan-form");
-        
+
+
         function display_success() {
             let center = document.getElementById("center");
             center.className = "centered-region fade-out-quick";
@@ -29,14 +30,19 @@
             }, 500)
         }
 
+
         plan_form.addEventListener("submit", (e) => {
             e.preventDefault();
             
             let email = document.getElementById("f_email").value;
             let title = document.getElementById("f_title").value;
             let bid_date = document.getElementById("f_date").value;
-            let plans = document.getElementById("f_plans").files[0];
+            let plans = document.getElementById("f_plans").files;
+            
+            send_file(0, plans, title, email, bid_date)
+        })
 
+        function send_file(i, plans, title, email, bid_date) {
             let config = {
                 method: "POST",
                 mode: "same-origin",
@@ -44,22 +50,29 @@
             };
 
             let data = new FormData();
-
-            data.append("file", plans);
+            data.append("file", plans[i]);
             data.append("title", title);
             data.append("email", email);
             data.append("bid_date", bid_date);
+            
+            let start = (i == 0);
+            let end = (i == plans.length - 1);
 
+            data.append("start", start);
+            data.append("end", end);
+            
             config.body = data;
-
+            
             fetch("/upload", config)
             .then((response) => response.json())
             .then((res) => {
                 if (res.status == 'success'){
                     display_success()
+                }else {
+                    send_file(i + 1, plans, title, email, bid_date)
                 }
             })
-        })
+        }
         
     </script>
 </section>

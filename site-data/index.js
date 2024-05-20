@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const combyne = require('combyne');
 const multer = require("multer");
-const upload = multer({dest: "data/signs"})
+const upload = multer({dest: "data/temp"})
 const exec = require('child_process').exec;
 
 const bodyParser = require('body-parser');
@@ -18,7 +18,14 @@ const port = "3001"
 const success = JSON.stringify({status: "success"})
 const admin_pass = "$emBlue1nc";
 
-const message_recipient = "eaststore@semblueinc.com";
+const message_recipient = "wcouture17@gmail.com";
+
+let queued_message = {
+    "recipient": "",
+    "links": "",
+    "title": "",
+    "bid_date": ""
+}
 
 const page_template = fs.readFileSync("pages/templates/layout.html", "utf-8")
 const form_path = "assets/tax-forms/";
@@ -38,6 +45,16 @@ const __directories = [
 	"storage",
 	"include",
 ];
+
+// Temp plan storage
+const SECOND = 1000;
+const MINUTE = 60 * SECOND;
+const HOUR = 60 * MINUTE;
+const DAY = 24 * HOUR;
+
+const TEMP_STORAGE_CUTOFF = DAY * 30;
+
+let temp_plan_stored = {"plans": []};
 
 // Plan display data
 let stored_plan_data = {};
@@ -105,6 +122,10 @@ function load_stored_plans() {
     const data = fs.readFileSync("assets/plan-data/data_table.json", 'utf-8');
     plans = JSON.parse(data);
     stored_plan_data = plans;
+
+    const temp_data = fs.readFileSync("assets/temp/temp_data.json", "utf-8");
+    plans = JSON.parse(temp_data)
+    temp_plan_stored = plans;
 }
 
 // Read raw html data
@@ -179,6 +200,18 @@ app.get("/admin", (req,res) => {
     res.send(render_page("pages/admin.html"))
 })
 
+app.get("/check_temps", (req, res) =>{
+    let plans = temp_plan_stored.plans;
+    let now = Date.now();
+
+    for (let i = 0; i < plans.length; i++) {
+        if (now - plans[i].upload_timestamp > TEMP_STORAGE_CUTOFF) {
+            fs.rmSync(plans[i].path)
+            Console.Log(`Removing temp-stored plan set: ${plans[i].path}`);
+        }
+    }
+})
+
 app.post("/authenticate", (req, res) => {
     let pass = req.body.key;
     let result = { result: "failed" }
@@ -248,23 +281,42 @@ app.post("/upload", upload.single('file'), (req, res) => {
     let bid_date = req.body.bid_date;
 
     var file_name = req.file.originalname;
+        
     while(file_name.indexOf(' ') >= 0) {
         file_name = file_name.replace(' ', '_');
     }
 
 
-    let file_path = "assets/plan-data/" + file_name;
+    let file_path = "assets/temp/" + file_name;
     fs.rename(req.file.path, file_path, (err) => {
         if (err) {
             console.error("Error moving plan pdf: ", err);
-            res.status(500).send('Error saving plan pdf');
+            res.send('Error saving plan pdf');
             return;
         }
-    });
+        let plan_item = {path: file_path, upload_timestamp: Date.now()}
+        temp_plan_stored.plans.push(plan_item)
+        save_file("assets/temp/temp_data.json", JSON.stringify(temp_plan_stored))
+    }); 
 
-    let message = `<h1>Plan Set Upload</h1><h5>${email}<br>${title}<br>${bid_date}<br>https://semblueinc.com/${file_path}</h5>`
-    send_message(message_recipient, "Plan Set Upload", message);
-    res.send(success);
+    if (req.body.start == "true") {
+        queued_message.title = title;
+        queued_message.recipient = email;
+        queued_message.bid_date = bid_date;
+        queued_message.links += "https://semblueinc.com/" + file_path + "<br>";
+    }
+    else {
+        queued_message.links += "https://semblueinc.com/" + file_path + "<br>";
+    }
+    
+    if (req.body.end == "true")
+    {
+        let message = `<h1>Plan Set Upload</h1><h5>${queued_message.recipient}<br>${queued_message.title}<br>${queued_message.bid_date}<br>${queued_message.links}</h5>`
+        send_message(message_recipient, "Plan Set Upload", message);
+        res.send(success);
+        return;
+    }
+    res.send(JSON.stringify({"status": "waiting for all files"}))
 })
 
 function find_plan(plan, plan_cat) {
