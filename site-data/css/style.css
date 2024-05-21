@@ -953,6 +953,12 @@ input[type="file"]::file-selector-button:active {
   background-image: linear-gradient(#fff, #eee, #a2a3a4);
 }
 
+#f_list_label {
+  font-size: 10pt;
+  margin-left: -50%;
+  width: 200%;
+}
+
 .contact_section .centered-region {
   min-height: 500px;
   margin-left: 40%;
