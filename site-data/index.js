@@ -200,7 +200,8 @@ app.get("/admin", (req,res) => {
     res.send(render_page("pages/admin.html"))
 })
 
-app.get("/check_temps", (req, res) =>{
+app.get("/check-temps", (req, res) =>{
+    res.send(success);
     let plans = temp_plan_stored.plans;
     let now = Date.now();
 
@@ -346,8 +347,9 @@ app.post("/plan-upload", upload.single("file"), (req, res) => {
 	}
 	else {
         	var file_name = req.file.originalname;
-        	while(file_name.indexOf(' ') >= 0) {
+        	while(file_name.indexOf(' ') >= 0 || file_name.indexOf('#') >= 0) {
             		file_name = file_name.replace(' ', '_');
+			file_name = file_name.replace('#','');
         	}
 		let file_path = "assets/plan-data/" + file_name;
     		fs.rename(req.file.path, file_path, (err) => {
