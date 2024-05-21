@@ -18,13 +18,14 @@ const port = "3001"
 const success = JSON.stringify({status: "success"})
 const admin_pass = "$emBlue1nc";
 
-const message_recipient = "wcouture17@gmail.com";
+const message_recipient = "eaststore@gsemblueinc.com";
 
 let queued_message = {
     "recipient": "",
     "links": "",
     "title": "",
-    "bid_date": ""
+    "bid_date": "",
+    "message": ""
 }
 
 const page_template = fs.readFileSync("pages/templates/layout.html", "utf-8")
@@ -280,7 +281,7 @@ app.post("/upload", upload.single('file'), (req, res) => {
     let title = req.body.title;
     let email = req.body.email;
     let bid_date = req.body.bid_date;
-
+    let details = req.body.message;
     var file_name = req.file.originalname;
         
     while(file_name.indexOf(' ') >= 0) {
@@ -304,6 +305,7 @@ app.post("/upload", upload.single('file'), (req, res) => {
         queued_message.title = title;
         queued_message.recipient = email;
         queued_message.bid_date = bid_date;
+	queued_message.message = details;
         queued_message.links += "https://semblueinc.com/" + file_path + "<br>";
     }
     else {
@@ -312,7 +314,7 @@ app.post("/upload", upload.single('file'), (req, res) => {
     
     if (req.body.end == "true")
     {
-        let message = `<h1>Plan Set Upload</h1><h5>${queued_message.recipient}<br>${queued_message.title}<br>${queued_message.bid_date}<br>${queued_message.links}</h5>`
+        let message = `<h1>Plan Set Upload</h1><h5>${queued_message.recipient}<br>${queued_message.title}<br>${queued_message.bid_date}<br>${queued_message.links}<br><br>Details:<br>${queued_message.message}</h5>`
         send_message(message_recipient, "Plan Set Upload", message);
         res.send(success);
         return;

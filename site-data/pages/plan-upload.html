@@ -9,7 +9,9 @@
             <input type="text" id="f_title" placeholder="planset1" required>
             <label>Bid Date</label>
             <input type="date" id="f_date" placeholder="01/01/1900">
-            <label>Plans Set</label>
+	    <label>Message</label>
+	    <textarea wrap="soft" id="f_message" class="message-box"></textarea>
+	    <label>Plans Set</label>
             <input type="file" name="file" multiple="true" id="f_plans" required>
 
             <button>Submit Plans</button> 
@@ -38,11 +40,12 @@
             let title = document.getElementById("f_title").value;
             let bid_date = document.getElementById("f_date").value;
             let plans = document.getElementById("f_plans").files;
+	    let message = document.getElementById("f_message").value;
             
-            send_file(0, plans, title, email, bid_date)
+            send_file(0, plans, title, email, message, bid_date)
         })
 
-        function send_file(i, plans, title, email, bid_date) {
+        function send_file(i, plans, title, email, message, bid_date) {
             let config = {
                 method: "POST",
                 mode: "same-origin",
@@ -54,6 +57,7 @@
             data.append("title", title);
             data.append("email", email);
             data.append("bid_date", bid_date);
+	    data.append("message", message);
             
             let start = (i == 0);
             let end = (i == plans.length - 1);
@@ -69,7 +73,7 @@
                 if (res.status == 'success'){
                     display_success()
                 }else {
-                    send_file(i + 1, plans, title, email, bid_date)
+                    send_file(i + 1, plans, title, email, message, bid_date)
                 }
             })
         }
