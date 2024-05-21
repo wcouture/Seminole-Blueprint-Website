@@ -11,6 +11,7 @@
             <input type="date" id="f_date" placeholder="01/01/1900">
             <label>Plans Set</label>
             <input type="file" name="file" multiple="true" id="f_plans" required>
+            <p id="f_list_label"></p>
 
             <button>Submit Plans</button> 
         </form>
@@ -18,7 +19,18 @@
 
     <script>
         let plan_form = document.getElementById("plan-form");
+        let f_input = document.getElementById("f_plans");
+        let file_list = document.getElementById("f_list_label")
+        f_input.addEventListener("change", () => {
+            let files = ""
+            for (let i = 0; i < f_input.files.length; i++){
+                files += f_input.files[i].name + ", "
+            }
 
+            files = files.substring(0, files.length - 2)
+            file_list.innerHTML = files;
+
+        })
 
         function display_success() {
             let center = document.getElementById("center");
