@@ -298,7 +298,7 @@ app.post("/upload", upload.single('file'), (req, res) => {
         }
         let plan_item = {path: file_path, upload_timestamp: Date.now()}
         temp_plan_stored.plans.push(plan_item)
-        save_file("assets/temp/temp_data.json", JSON.stringify(temp_plan_stored))
+        save_file("assets/temp/temp_data.json", JSON.stringify(temp_plan_stored, null, 4))
     }); 
 
     if (req.body.start == "true") {
@@ -324,8 +324,8 @@ app.post("/upload", upload.single('file'), (req, res) => {
 
 function find_plan(plan, plan_cat) {
 	let plans = stored_plan_data.categories[`${plan_cat}`]["plans"]
-	for (let i = 0; i > plans.length; i++) {
-		if (stored_plan_data.categories[`${plan_cat}`]['plans'][i].id == plan_set.id) {
+	for (let i = 0; i < plans.length; i++) {
+		if (stored_plan_data.categories[`${plan_cat}`]['plans'][i].id == plan.id) {
 			return i;
 		}
 	}
@@ -334,12 +334,13 @@ function find_plan(plan, plan_cat) {
 
 app.post("/plan-upload", upload.single("file"), (req, res) => {
     	let plan_set = {};
-    	plan_set.title = req.body.title;
+    	plan_set.title = req.body.name;
     	plan_set.contractor = req.body.contractor;
     	plan_set.bid_date = req.body.bid_date;
-    	plan_set.current_set = req.body.current_set;
+    	plan_set.current_set = req.body.version;
 	plan_set.tracking = req.body.tracking;
 	plan_set.id = req.body.id;
+	plan_set.newforma = req.body.newforma;
 //	plan_set.path = req.body.path;
 	
 	let plan_cat = req.body.category;
@@ -366,15 +367,20 @@ app.post("/plan-upload", upload.single("file"), (req, res) => {
 	}
 	let plan_index = find_plan(plan_set, plan_cat);
 	if (plan_index >= 0 ) {
-		if (plan_set.tracking != "Yes") {
+		if (plan_set.tracking == "No") {
+			console.log("deleting plan: " + plan_index);
 			stored_plan_data.categories[`${plan_cat}`]["plans"].splice(plan_index, 1);
-			
+			if (plan_set.path != "#") {
+				fs.rmSync(plan_set.path)
+				console.log("removed plans: " + plan_set.path);
+			}
 		}else{
 			stored_plan_data.categories[`${plan_cat}`]["plans"][plan_index].title = plan_set.title;
 			stored_plan_data.categories[`${plan_cat}`]["plans"][plan_index].contractor = plan_set.contractor;
 			stored_plan_data.categories[`${plan_cat}`]["plans"][plan_index].bid_date = plan_set.bid_date;
 			stored_plan_data.categories[`${plan_cat}`]["plans"][plan_index].current_set = plan_set.current_set;
 			stored_plan_data.categories[`${plan_cat}`]["plans"][plan_index].path = plan_set.path;
+			stored_plan_data.categories[`${plan_cat}`]["plans"][plan_index].newforma = plan_set.newforma;
 		}
 	}
 	else if(plan_set.tracking == "Yes") {
@@ -382,7 +388,7 @@ app.post("/plan-upload", upload.single("file"), (req, res) => {
 	}
 
 
-    save_file("assets/plan-data/data_table.json", JSON.stringify(stored_plan_data));
+    save_file("assets/plan-data/data_table.json", JSON.stringify(stored_plan_data, null, 4));
 
     res.send(success);
 })
