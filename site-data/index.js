@@ -340,6 +340,7 @@ app.post("/plan-upload", upload.single("file"), (req, res) => {
     	plan_set.current_set = req.body.current_set;
 	plan_set.tracking = req.body.tracking;
 	plan_set.id = req.body.id;
+    plan_set.newforma = req.body.newforma;
 //	plan_set.path = req.body.path;
 	
 	let plan_cat = req.body.category;
@@ -375,6 +376,7 @@ app.post("/plan-upload", upload.single("file"), (req, res) => {
 			stored_plan_data.categories[`${plan_cat}`]["plans"][plan_index].bid_date = plan_set.bid_date;
 			stored_plan_data.categories[`${plan_cat}`]["plans"][plan_index].current_set = plan_set.current_set;
 			stored_plan_data.categories[`${plan_cat}`]["plans"][plan_index].path = plan_set.path;
+            stored_plan_data.categories[`${plan_cat}`]["plans"][plan_index].newforma = plan_set.newforma;
 		}
 	}
 	else if(plan_set.tracking == "Yes") {

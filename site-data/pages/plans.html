@@ -86,7 +86,11 @@
                 header_row.innerHTML = `<th style="width: 30%">Project Title</th><th style="width: 20%">Contractor</th><th style="width: 10%">Bid Date</th><th style="width: 25%">Current Set</th><th>Full Plans</th>`;
                 table.appendChild(header_row)
 
-                var link = `<a href="${plan.path}">preview</a>`
+
+                var url = plan.newforma;
+                if (url == "NA")
+                    url = plan.path;
+                var link = `<a href="${url}">preview</a>`
                 if (plan.path == "#")
                     link = "<a href='/contact'>Contact Us</a>"
                 
