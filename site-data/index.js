@@ -172,10 +172,12 @@ app.get("/about", (req, res) => {
     res.send(render_page("pages/about.html"))
 })
 
+/*
 app.get("/clear", (req, res) => {
 	clear_plan_data();
 	res.send(success);
 })
+*/
 
 app.get("/services", (req, res) => {
     res.send(render_page(`pages/services/${req.query.page}.html`))
