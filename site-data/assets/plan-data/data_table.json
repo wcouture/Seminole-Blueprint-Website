@@ -87,16 +87,16 @@
                     "contractor": "nan",
                     "bid_date": "5/2/2024",
                     "tracking": "Yes",
-                    "id": "19",
-                    "path": "assets/plan-data/Del_Taco_Crawfordville_Full_Set_Online_Plans.pdf"
+                    "id": 19,
+                    "path": "#"
                 },
                 {
                     "title": "Firestone Crawfordville",
                     "contractor": "nan",
                     "bid_date": "5/1/2024",
                     "tracking": "Yes",
-                    "id": "20",
-                    "path": "assets/plan-data/Firestone_Crawfordville_Full_Set_Online_Plans.pdf"
+                    "id": 20,
+                    "path": "#"
                 },
                 {
                     "title": "Starbucks Crawfordville",
@@ -111,8 +111,8 @@
                     "contractor": "Oliver Renovations",
                     "bid_date": "5/10/2024",
                     "tracking": "Yes",
-                    "id": "22",
-                    "path": "assets/plan-data/Apalachee_Pkwy_Sunstop_527_Full_Set_Online_Plans.pdf"
+                    "id": 22,
+                    "path": "#"
                 },
                 {
                     "title": "Second Harvest",
@@ -127,16 +127,8 @@
                     "contractor": "nan",
                     "bid_date": "unknown",
                     "tracking": "Yes",
-                    "id": "24",
-                    "path": "assets/plan-data/bagel_&_co_full_set_online_plans.pdf"
-                },
-                {
-                    "title": "Dog Haus TLH",
-                    "contractor": "Tip Top Construction",
-                    "bid_date": "",
-                    "tracking": "Yes",
-                    "id": "139",
-                    "path": "assets/plan-data/Dog_Haus_Tallahassee_Full_Set_Online_Plans.pdf"
+                    "id": 24,
+                    "path": "#"
                 }
             ]
         },
@@ -427,16 +419,16 @@
                     "contractor": "nan",
                     "bid_date": "unknown",
                     "tracking": "Yes",
-                    "id": "71",
-                    "path": "assets/plan-data/UCA_Suite_1500_Interior_Renovations_Full_Set_Online_Plans.pdf"
+                    "id": 71,
+                    "path": "#"
                 },
                 {
                     "title": "UCC 2nd and 3rd floor Interior Improvements",
                     "contractor": "nan",
                     "bid_date": "unknown",
                     "tracking": "Yes",
-                    "id": "72",
-                    "path": "assets/plan-data/UCC_2nd_and_3rd_Floor_Interior_Improvements_Full_Set_Online_Plans.pdf"
+                    "id": 72,
+                    "path": "#"
                 },
                 {
                     "title": "Griffin MS Phase 1",
@@ -451,31 +443,15 @@
                     "contractor": "Ram",
                     "bid_date": "5/15/2024",
                     "tracking": "Yes",
-                    "id": "74",
-                    "path": "assets/plan-data/South_Central_Chiller_&_Boiler_Plant_Full_Set_Online_Plans_90%.pdf"
+                    "id": 74,
+                    "path": "#"
                 },
                 {
                     "title": "English Building Restroom",
                     "contractor": "nan",
                     "bid_date": "unknown",
                     "tracking": "Yes",
-                    "id": "75",
-                    "path": "assets/plan-data/TCC_English_Building_Restroom_Full_Set_Online_Plans.pdf"
-                },
-                {
-                    "title": "500 Bed Residence Hall",
-                    "contractor": "",
-                    "bid_date": "",
-                    "tracking": "Yes",
-                    "id": "140",
-                    "path": "assets/plan-data/500_Bed_Residence_Hall_Full_Set_Online_Plans_Advanced_Schematic_Design.pdf"
-                },
-                {
-                    "title": "Gym Lobby Expansion Phase II",
-                    "contractor": "Rippee",
-                    "bid_date": "",
-                    "tracking": "Yes",
-                    "id": 155,
+                    "id": 75,
                     "path": "#"
                 }
             ]
@@ -543,8 +519,8 @@
                     "contractor": "Oliver Sperry",
                     "bid_date": "unknown",
                     "tracking": "Yes",
-                    "id": "92",
-                    "path": "assets/plan-data/Chattahoochee_Southside_Cenior_Center_Online_Plans.pdf"
+                    "id": 92,
+                    "path": "#"
                 },
                 {
                     "title": "StarMetro Southside Transit Center",
@@ -663,8 +639,8 @@
                     "contractor": "Barkley Consulting Engineers, Inc",
                     "bid_date": "unknown",
                     "tracking": "Yes",
-                    "id": "116",
-                    "path": "assets/plan-data/Pisgah_UMC_Fellowship_Hall_Full_Set_Online_Plans.pdf"
+                    "id": 116,
+                    "path": "#"
                 },
                 {
                     "title": "St Johns Chrysostom",
@@ -672,6 +648,14 @@
                     "bid_date": "unknown",
                     "tracking": "Yes",
                     "id": 117,
+                    "path": "#"
+                },
+                {
+                    "title": "Asambela Apostolic Church",
+                    "contractor": "",
+                    "bid_date": "",
+                    "tracking": "Yes",
+                    "id": 144,
                     "path": "#"
                 }
             ]
@@ -754,16 +738,16 @@
                     "contractor": "nan",
                     "bid_date": "5/14/2024",
                     "tracking": "Yes",
-                    "id": "134",
-                    "path": "assets/plan-data/WS_Stevens_Covid_Shelter_Renovations_Full_Set_Online_Plans.pdf"
+                    "id": 134,
+                    "path": "#"
                 },
                 {
                     "title": "Pancare Chipley",
                     "contractor": "Allstate",
                     "bid_date": "4/25/2024",
                     "tracking": "Yes",
-                    "id": "135",
-                    "path": "assets/plan-data/PanCare_Chipley_Renovation_and_New_Building_Full_Set_Online_Plans.pdf"
+                    "id": 135,
+                    "path": "#"
                 }
             ]
         },

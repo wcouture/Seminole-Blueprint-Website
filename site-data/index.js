@@ -10,6 +10,7 @@ const exec = require('child_process').exec;
 
 const bodyParser = require('body-parser');
 const app = express();
+// Sets the upload size limit for json blobs
 app.use(bodyParser.json({limit: '200mb'}));
 app.use(bodyParser.urlencoded({limit: '100mb', extended: true}));
 
@@ -18,7 +19,7 @@ const port = "3001"
 const success = JSON.stringify({status: "success"})
 const admin_pass = "$emBlue1nc";
 
-const message_recipient = "eaststore@gsemblueinc.com";
+const message_recipient = "eaststore@semblueinc.com";
 
 let queued_message = {
     "recipient": "",
@@ -39,6 +40,7 @@ const __directories = [
     "js",
     "pages",
     "assets",
+    "temp",
     "tax-forms",
     "printing-info",
     "bgswitch",
@@ -81,6 +83,7 @@ const transporter = nodemailer.createTransport({
 	}
 })
 
+// Takes in a category id and returns the corresponding category's name
 function cat_id_to_name(id) {
 	cats = plan_categories.cats;
 	for(let i = 0; i < cats.length; i++) {
@@ -90,6 +93,7 @@ function cat_id_to_name(id) {
 	return "Other"
 }
 
+// Removes all stored plan data and their pdfs
 function clear_plan_data() {
 	for(let cat = 1; cat <= 10; cat++) {
 		length = stored_plan_data.categories[`${cat}`].plans.length
@@ -108,6 +112,7 @@ function clear_plan_data() {
 	});
 }
 
+// Saves inputted data to a file with the given directory path
 function save_file(dir, data){
     fs.writeFile(dir, data, (err) => {
         if (err) {
@@ -119,6 +124,7 @@ function save_file(dir, data){
     })
 }
 
+// Opens stored plan data file, parses the json, loads data into memory
 function load_stored_plans() {
     const data = fs.readFileSync("assets/plan-data/data_table.json", 'utf-8');
     plans = JSON.parse(data);
@@ -144,6 +150,7 @@ function render_page(path) {
     return page.render(page_data)
 }
 
+// Send an email to the inputted recipient with the given subject and message body
 function send_message(recipient, subject, message) {
 	let mailOptions = {
 		"from": 'noreply.semblueinc@gmail.com',
@@ -161,6 +168,7 @@ function send_message(recipient, subject, message) {
 	})
 }
 
+// Landing page
 app.get("/", (req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
 	res.setHeader("Access-Control-Allow-Headers", "*");
@@ -168,39 +176,45 @@ app.get("/", (req, res) => {
 	res.send(render_page("pages/index.html"))
 });
 
-app.get("/about", (req, res) => {
-    res.send(render_page("pages/about.html"))
-})
-
+// Calls the clear function to clear stored plan data
 app.get("/clear", (req, res) => {
 	clear_plan_data();
 	res.send(success);
 })
 
+// Request to open up the page for one of the services.
+// Specific service name is included in the query and used to determine the correct html page.
 app.get("/services", (req, res) => {
     res.send(render_page(`pages/services/${req.query.page}.html`))
 })
 
+// Returns the contact form page
 app.get("/contact", (req, res) => {
     res.send(render_page("pages/contact.html"))
 })
 
+// Returns page for users to access all tax documents for semblueinc
 app.get("/tax-forms", (req, res) => {
     res.send(render_page("pages/forms.html"))
 })
 
+// Returns page for viewing all current plans being tracked
 app.get("/plans", (req, res) => {
     res.send(render_page("pages/plans.html"))
 })
 
+// Returns page with form for uploading a set of plans along with some extra information.
 app.get("/plan-upload", (req, res) => {
     res.send(render_page("pages/plan-upload.html"))
 })
 
+// Returns log-in page for admin tools page
 app.get("/admin", (req,res) => {
     res.send(render_page("pages/admin.html"))
 })
 
+// Checks if temporarily stored plan uploads have expired.
+// If plans are expired then remove them from server.
 app.get("/check-temps", (req, res) =>{
     res.send(success);
     let plans = temp_plan_stored.plans;
@@ -214,6 +228,9 @@ app.get("/check-temps", (req, res) =>{
     }
 })
 
+// Check within the admin log-in panel for password authentication.
+// If password matches, return page data for admin tools page.
+// If password doesn't match, return failed result blob.
 app.post("/authenticate", (req, res) => {
     let pass = req.body.key;
     let result = { result: "failed" }
@@ -226,6 +243,9 @@ app.post("/authenticate", (req, res) => {
     res.send(JSON.stringify(result))
 })
 
+// Uploads contact form information submitted from contact page.
+// Saves data into brief message, saves to a file in data directory,
+// and send an email to store email with contact message.
 app.post("/contact-request", (req, res) => {
     let data = req.body
     let file_message = `Name: ${data.name}<br>Email: ${data.email}<br>Number: ${data.number}<br>Message: ${data.message}`
@@ -238,6 +258,9 @@ app.post("/contact-request", (req, res) => {
 	send_message(message_recipient, "Contact Request", html);
 })
 
+// Uploads information from supply order form on the supplies services page.
+// Saves supplies information into a brief message which is then saved to file
+// in data and sent to the store email.
 app.post("/order-request", (req, res) => {
     let data = req.body
     let message = `Name: ${data.name}<br>Email: ${data.email}<br>Number: ${data.number}<br>`;
@@ -256,6 +279,9 @@ app.post("/order-request", (req, res) => {
     res.send(success)
 })
 
+// Uploads information from custom sign design form on sign services page.
+// Saves sign design and type to a brief message which is then saved to file
+// in the data directory and then sent to the store email.
 app.post("/design-upload", upload.single("file"), (req, res) => {
     let order_name = req.body.name.replaceAll(' ', '_');
     let dir_name = "data/signs/designs/";
