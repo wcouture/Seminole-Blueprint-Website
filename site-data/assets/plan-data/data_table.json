@@ -104,7 +104,7 @@
                     "bid_date": "5/2/2024",
                     "tracking": "Yes",
                     "id": 21,
-                    "path": "#"
+                    "path": "assets/plan-data/Starbucks_Crawfordville_Shell_Bldg_Full_Set_Online_Plans.pdf"
                 },
                 {
                     "title": "Sun Stop #527",
@@ -112,7 +112,7 @@
                     "bid_date": "5/10/2024",
                     "tracking": "Yes",
                     "id": 22,
-                    "path": "#"
+                    "path": "assets/plan-data/Apalachee_Pkwy_Sunstop_527_Full_Set_Online_Plans.pdf"
                 },
                 {
                     "title": "Second Harvest",
@@ -128,7 +128,7 @@
                     "bid_date": "unknown",
                     "tracking": "Yes",
                     "id": 24,
-                    "path": "#"
+                    "path": "assets/plan-data/bagel_&_co_full_set_online_plans.pdf"
                 }
             ]
         },

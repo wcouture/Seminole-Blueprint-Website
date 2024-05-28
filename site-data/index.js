@@ -176,11 +176,12 @@ app.get("/", (req, res) => {
 	res.send(render_page("pages/index.html"))
 });
 
-// Calls the clear function to clear stored plan data
+/*
 app.get("/clear", (req, res) => {
 	clear_plan_data();
 	res.send(success);
 })
+*/
 
 // Request to open up the page for one of the services.
 // Specific service name is included in the query and used to determine the correct html page.

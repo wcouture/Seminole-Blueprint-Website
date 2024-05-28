@@ -90,9 +90,7 @@
 		if (url == undefined || url == "NA")
 			url = plan.path;
 
-                var link = `<a href="${url}">preview</a>`
-                if (url == "#")
-                    link = "<a href='/contact'>Contact Us</a>"
+                var link = `<a href="https://servius.tech/newforma?project=${plan.title}">NewForma</a>`
                 
                 let data_row = document.createElement("tr");
                 data_row.innerHTML = `<td>${plan.title}</td><td>${plan.contractor}</td><td>${plan.bid_date}</td><td>${plan.current_set}</td><td>${link}</td>`;
