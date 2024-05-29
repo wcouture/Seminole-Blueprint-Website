@@ -19,7 +19,7 @@ const port = "3001"
 const success = JSON.stringify({status: "success"})
 const admin_pass = "$emBlue1nc";
 
-const message_recipient = "wcouture17@gmail.com";
+const message_recipient = "eaststore@semblueinc.com";
 
 let queued_message = {
     "recipient": "",
@@ -225,8 +225,12 @@ app.get("/check-temps", (req, res) =>{
         if (now - plans[i].upload_timestamp > TEMP_STORAGE_CUTOFF) {
             fs.rmSync(plans[i].path)
             Console.Log(`Removing temp-stored plan set: ${plans[i].path}`);
+	    plans.splice(i, 1);
+	    i--;
         }
     }
+    temp_plan_stored.plans = plans;
+    save_file("assets/temp/temp_data.json", JSON.stringify(temp_plan_stored));
 })
 
 // Check within the admin log-in panel for password authentication.
