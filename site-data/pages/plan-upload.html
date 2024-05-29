@@ -5,34 +5,44 @@
         <form id="plan-form" class="plan-form">
             <label>Email *</label>
             <input type="email" id="f_email" placeholder="user@mail.com" reqiured>
+            
             <label>Project Name *</label>
             <input type="text" id="f_title" placeholder="planset1" required>
+            
             <label>Bid Date</label>
             <input type="date" id="f_date" placeholder="01/01/1900">
-	    <label>Message</label>
-	    <textarea wrap="soft" id="f_message" class="message-box"></textarea>
-	    <label>Plans Set</label>
-            <input type="file" name="file" multiple="true" id="f_plans" required>
-            <p id="f_list_label"></p>
-
-            <button>Submit Plans</button> 
+	        
+            <label>Message</label>
+	        <textarea wrap="soft" id="f_message" class="message-box"></textarea>
+	        
+            <label>Plans Set</label><br>
+            <a href="#" id="add-file">
+                <div class="add-file-input">Add File</div>
+            </a>
+            
+            <div id="file-inputs">
+            </div>
+            <button>Submit Plans</button>
         </form>
     </div>
 
     <script>
-	let working = false;
+	    let working = false;
         let plan_form = document.getElementById("plan-form");
-        let f_input = document.getElementById("f_plans");
-        let file_list = document.getElementById("f_list_label")
-        f_input.addEventListener("change", () => {
-            let files = ""
-            for (let i = 0; i < f_input.files.length; i++){
-                files += f_input.files[i].name + ", "
-            }
+        let add_file = document.getElementById("add-file");
+        let f_inputs = [];
 
-            files = files.substring(0, files.length - 2)
-            file_list.innerHTML = files;
+        add_file.addEventListener("click", (e) => {
+            e.preventDefault();
 
+            let input = document.createElement("input");
+            input.type = "file";
+            input.name = `file${f_inputs.length}`;
+            input.required = true;
+
+            document.getElementById("file-inputs").appendChild(input);
+
+            f_inputs.push(input);
         })
 
         function display_success() {
@@ -48,13 +58,20 @@
 
         plan_form.addEventListener("submit", (e) => {
             e.preventDefault();
+            if (e.target.id == "add-file") {
+                return;
+            }
             
             let email = document.getElementById("f_email").value;
             let title = document.getElementById("f_title").value;
             let bid_date = document.getElementById("f_date").value;
-            let plans = document.getElementById("f_plans").files;
-	    let message = document.getElementById("f_message").value;
+	        let message = document.getElementById("f_message").value;
             
+            let plans = []
+            for (let i = 0; i < f_inputs.length; i++) {
+                plans.push(f_inputs[i].files[0]);
+            }
+
             send_file(0, plans, title, email, message, bid_date)
         })
 
@@ -70,7 +87,7 @@
             data.append("title", title);
             data.append("email", email);
             data.append("bid_date", bid_date);
-	    data.append("message", message);
+	        data.append("message", message);
             
             let start = (i == 0);
             let end = (i == plans.length - 1);
@@ -89,15 +106,15 @@
                     send_file(i + 1, plans, title, email, message, bid_date)
                 }
 
-		if (res.status == 'working' && working == true) {
-			let center = document.getElementById("center");
-			center.className = "centered-region fade-out-quick"
-			working = true
-			setTimeout(() => {
-				center.innerHTML = "<p>Uploading...</p>"
-				center.className = "centered-region fade-in-quick"
-			}, 500)
-		}
+		        if (res.status == 'working' && working == true) {
+                    let center = document.getElementById("center");
+                    center.className = "centered-region fade-out-quick"
+                    working = true
+                    setTimeout(() => {
+                        center.innerHTML = "<p>Uploading...</p>"
+                        center.className = "centered-region fade-in-quick"
+                    }, 500)
+                }
             })
         }
         

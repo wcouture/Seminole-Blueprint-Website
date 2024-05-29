@@ -19,7 +19,7 @@ const port = "3001"
 const success = JSON.stringify({status: "success"})
 const admin_pass = "$emBlue1nc";
 
-const message_recipient = "eaststore@semblueinc.com";
+const message_recipient = "wcouture17@gmail.com";
 
 let queued_message = {
     "recipient": "",
@@ -332,7 +332,8 @@ app.post("/upload", upload.single('file'), (req, res) => {
         queued_message.title = title;
         queued_message.recipient = email;
         queued_message.bid_date = bid_date;
-	queued_message.message = details;
+	    queued_message.message = details;
+        queued_message.links = "";
         queued_message.links += "https://semblueinc.com/" + file_path + "<br>";
     }
     else {
