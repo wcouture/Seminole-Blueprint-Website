@@ -71,7 +71,7 @@
         }
 
         function populate_list(data) {
-            for (let i = 0; i < data.plans.length; i++) {
+			    for (let i = data.plans.length - 1; i > 0; i--) {
                 let plan = data.plans[i];
 
                 let item = document.createElement("div");
