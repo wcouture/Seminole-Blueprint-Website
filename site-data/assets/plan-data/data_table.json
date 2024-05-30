@@ -463,6 +463,26 @@
                     "id": 149,
                     "newforma": "NA",
                     "path": "#"
+                },
+                {
+                    "title": "Chipola College Emergency Generators",
+                    "contractor": "",
+                    "bid_date": "05-28-2024",
+                    "current_set": "Add03",
+                    "tracking": "Yes",
+                    "id": 150,
+                    "newforma": "NA",
+                    "path": "#"
+                },
+                {
+                    "title": "Chipola College Wind Retrofits",
+                    "contractor": "",
+                    "bid_date": "05-28-2024",
+                    "current_set": "Add03",
+                    "tracking": "Yes",
+                    "id": 151,
+                    "newforma": "NA",
+                    "path": "#"
                 }
             ]
         },
@@ -757,6 +777,16 @@
                     "bid_date": "4/25/2024",
                     "tracking": "Yes",
                     "id": 135,
+                    "path": "#"
+                },
+                {
+                    "title": "Sanitas Central Ocala",
+                    "contractor": "OliverSperry Renovations",
+                    "bid_date": "06-06-2024",
+                    "current_set": "100% Construction",
+                    "tracking": "Yes",
+                    "id": 152,
+                    "newforma": "NA",
                     "path": "#"
                 }
             ]

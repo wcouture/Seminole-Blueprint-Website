@@ -59,6 +59,13 @@ const TEMP_STORAGE_CUTOFF = DAY * 30;
 
 let temp_plan_stored = {"plans": []};
 
+let requests = { 
+	"contact": [],
+	"supply": [],
+	"design": [],
+	"file": [],
+}
+
 // Plan display data
 let stored_plan_data = {};
 let plan_categories = {cats: [
@@ -176,6 +183,21 @@ app.get("/", (req, res) => {
 	res.send(render_page("pages/index.html"))
 });
 
+
+app.get("/requests", (req, res) => {
+	let type = req.query.type;
+	let list = requests[type];
+
+	let list_element = `
+		<script>
+			let data = ${list};
+		</script>
+	`;
+
+	let page_data = render_page('pages/requests.html');
+	res.send(list_element + page_data);
+});
+
 /*
 app.get("/clear", (req, res) => {
 	clear_plan_data();
@@ -253,14 +275,28 @@ app.post("/authenticate", (req, res) => {
 // and send an email to store email with contact message.
 app.post("/contact-request", (req, res) => {
     let data = req.body
-    let file_message = `Name: ${data.name}<br>Email: ${data.email}<br>Number: ${data.number}<br>Message: ${data.message}`
+    let html = `
+	<div style="display: flex; align-contents: center; text-align: center;">
+		<div style="margin-left: auto; margin-right: auto; width:auto;">
+			<h2><b>Contact Request</b></h2>
+			<h3><u>Name</u></h3>
+			<h4>${data.name}</h4>
+			<h3><u>Email</u></h3>
+			<h4>${data.email}</h4>
+			<h3><u>Phone</u></h3>
+			<h4>${data.number}</h4>
+			<h3><u>Message</u></h3>
+			<h4>${data.message}</h4>
+		</div>
+	</div>
+    `
 
-    save_file(`data/contact/${data.email}-message.text`, file_message)
+    requests["contact"].push(html);
+    save_file(`data/requests.json`, JSON.stringify(requests))
 
     res.send(success)
 	
-	let html = `<body><p>${file_message}</p></body>`
-	send_message(message_recipient, "Contact Request", html);
+    send_message(message_recipient, "Contact Request", html);
 })
 
 // Uploads information from supply order form on the supplies services page.
@@ -268,18 +304,30 @@ app.post("/contact-request", (req, res) => {
 // in data and sent to the store email.
 app.post("/order-request", (req, res) => {
     let data = req.body
-    let message = `Name: ${data.name}<br>Email: ${data.email}<br>Number: ${data.number}<br>`;
-
-	let supplies = data.supplies;
-	for (let i = 0; i < supplies.length; i++) {
-		message += `<br>Item ${i + 1}:<br>Type: ${supplies[i].type}<br>Count: ${supplies[i].count}<br>`;
-	}
-
-	let html = `<body><p>${message}</p></body>`
+    let items = ""
+    let supplies = data.supplies;
+    for (let i = 0; i < supplies.length; i++) {
+	items += `<br>Item ${i + 1}:<br>Type: ${supplies[i].type}<br>Count: ${supplies[i].count}<br>`;
+    }
+    let message = `
+	<div style="display: flex; align-contents: center; text-align: center;">
+		<div style="margin-left: auto; margin-right: auto; width: auto;">
+			<h2><b>Supply Order</b></h2>
+			<h3><u>Name</u></h3>
+			<h4>${data.name}</h4>
+			<h3><u>Email</u></h3>
+			<h4>${data.email}</h4>
+			<h3><u>Phone</u></h3>
+			<h4>${data.number}</h4>
+			<h3><u>Items</u></h3>
+			<h4>${items}</h4>
+		</div>
+	</>`
 
     send_message(message_recipient, "Order Request", html);
-	save_file("data/supplies/supply-order.txt", message);
-		
+    
+    request["supply"].push(message);
+    save_file('data/requests.json', JSON.stringify(requests));
 
     res.send(success)
 })
@@ -299,11 +347,26 @@ app.post("/design-upload", upload.single("file"), (req, res) => {
           return;
         }
     });
-	let data = req.body;	
+    let data = req.body;	
+    let html = `
+	<div style="display: flex; align-contents: center; text-align: center;">
+		<div style="margin-left: auto; margin-right: auto; width: auto;">
+			<h2><b>Custom Sign Design</b></h2>
+			<h3><u>Name</u></h3>
+			<h4>${data.name}</h4>
+			<h3><u>Email</u></h3>
+			<h4>${data.email}</h4>
+			<h3><u>Phone</u></h3>
+			<h4>${data.number}</h4>
+			<h3><u>Format</u></h3>
+			<h4>${data.format}</h4>
+			<img src="https://www.semblueinc.com/retrieve-design/${req.file.originalname}"></img>
+		</div>
+	</div`
+    send_message(message_recipient, "Sign Design Request", html);
 
-	let message = `Name: ${data.name}<br>Email: ${data.email}<br>Number: ${data.number}<br>Format: ${data.format}`;
-	let html = `<body><p>${message}</p><img src="https://www.semblueinc.com/retrieve-design/${req.file.originalname}"></img></body>`;
-	send_message(message_recipient, "Sign Design Request", html);
+    request["design"].push(html);
+    save_file('data/requests.json', JSON.stringify(requests));
 
     res.send(success)
 })
@@ -346,8 +409,28 @@ app.post("/upload", upload.single('file'), (req, res) => {
     
     if (req.body.end == "true")
     {
-        let message = `<h1>Plan Set Upload</h1><h5>${queued_message.recipient}<br>${queued_message.title}<br>${queued_message.bid_date}<br>${queued_message.links}<br><br>Details:<br>${queued_message.message}</h5>`
-        send_message(message_recipient, "Plan Set Upload", message);
+        let html = `
+		<div style="display: flex; align-contents: center; text-align: center;">
+			<div style="margin-left: auto; margin-right: auto; width: auto;">
+				<h2><b>Plan Set Upload</b></h2>
+				<h3><u>Project Name</u></h3>
+				<h4>${queued_message.title}</h4>
+				<h3><u>Email</u></h3>
+				<h4>${queued_message.recipient}</h4>
+				<h3><u>Bid Date</u></h3>
+				<h4>${queued_message.bid_date}</h4>
+				<h3><u>Links</u></h3>
+				<h4>${queued_message.links}</h4>
+				<h3><u>Message</u></h3>
+				<h4>${queued_message.message}</h4>
+			</div>
+		</div>
+	    `
+        send_message(message_recipient, "Plan Set Upload", html);
+	
+	requests["file"].push(html);
+	save_file('data/requests.json', JSON.stringify(requests));
+	
         res.send(success);
         return;
     }
