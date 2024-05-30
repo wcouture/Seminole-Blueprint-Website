@@ -10,6 +10,7 @@ const exec = require('child_process').exec;
 
 const bodyParser = require('body-parser');
 const app = express();
+
 // Sets the upload size limit for json blobs
 app.use(bodyParser.json({limit: '200mb'}));
 app.use(bodyParser.urlencoded({limit: '100mb', extended: true}));
@@ -38,6 +39,7 @@ const __directories = [
     "fonts",
     "images",
     "js",
+	"data",
     "pages",
     "assets",
     "temp",
@@ -60,10 +62,10 @@ const TEMP_STORAGE_CUTOFF = DAY * 30;
 let temp_plan_stored = {"plans": []};
 
 let requests = { 
-	"contact": [],
-	"supply": [],
-	"design": [],
-	"file": [],
+	contact: [],
+	supply: [],
+	design: [],
+	file: [],
 }
 
 // Plan display data
@@ -186,16 +188,15 @@ app.get("/", (req, res) => {
 
 app.get("/requests", (req, res) => {
 	let type = req.query.type;
-	let list = requests[type];
-
 	let list_element = `
 		<script>
-			let data = ${list};
+			let t = "${type}";
+			set_type(data);
 		</script>
 	`;
 
 	let page_data = render_page('pages/requests.html');
-	res.send(list_element + page_data);
+	res.send(page_data + list_element);
 });
 
 /*
@@ -276,7 +277,7 @@ app.post("/authenticate", (req, res) => {
 app.post("/contact-request", (req, res) => {
     let data = req.body
     let html = `
-	<div style="display: flex; align-contents: center; text-align: center;">
+	<div style="display: flex; align-content: center; text-align: center;">
 		<div style="margin-left: auto; margin-right: auto; width:auto;">
 			<h2><b>Contact Request</b></h2>
 			<h3><u>Name</u></h3>
@@ -310,7 +311,7 @@ app.post("/order-request", (req, res) => {
 	items += `<br>Item ${i + 1}:<br>Type: ${supplies[i].type}<br>Count: ${supplies[i].count}<br>`;
     }
     let message = `
-	<div style="display: flex; align-contents: center; text-align: center;">
+	<div style="display: flex; align-content: center; text-align: center;">
 		<div style="margin-left: auto; margin-right: auto; width: auto;">
 			<h2><b>Supply Order</b></h2>
 			<h3><u>Name</u></h3>
@@ -349,7 +350,7 @@ app.post("/design-upload", upload.single("file"), (req, res) => {
     });
     let data = req.body;	
     let html = `
-	<div style="display: flex; align-contents: center; text-align: center;">
+	<div style="display: flex; align-content: center; text-align: center;">
 		<div style="margin-left: auto; margin-right: auto; width: auto;">
 			<h2><b>Custom Sign Design</b></h2>
 			<h3><u>Name</u></h3>
@@ -410,7 +411,7 @@ app.post("/upload", upload.single('file'), (req, res) => {
     if (req.body.end == "true")
     {
         let html = `
-		<div style="display: flex; align-contents: center; text-align: center;">
+		<div style="display: flex; align-content: center; text-align: center;">
 			<div style="margin-left: auto; margin-right: auto; width: auto;">
 				<h2><b>Plan Set Upload</b></h2>
 				<h3><u>Project Name</u></h3>
