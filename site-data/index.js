@@ -293,7 +293,7 @@ app.post("/contact-request", (req, res) => {
     `
 
     requests["contact"].push(html);
-    save_file(`data/requests.json`, JSON.stringify(requests))
+    save_file(`data/requests.json`, JSON.stringify(requests, null, 4))
 
     res.send(success)
 	
@@ -328,7 +328,7 @@ app.post("/order-request", (req, res) => {
     send_message(message_recipient, "Order Request", html);
     
     request["supply"].push(message);
-    save_file('data/requests.json', JSON.stringify(requests));
+    save_file('data/requests.json', JSON.stringify(requests, null, 4));
 
     res.send(success)
 })
@@ -367,7 +367,7 @@ app.post("/design-upload", upload.single("file"), (req, res) => {
     send_message(message_recipient, "Sign Design Request", html);
 
     request["design"].push(html);
-    save_file('data/requests.json', JSON.stringify(requests));
+    save_file('data/requests.json', JSON.stringify(requests, null, 4));
 
     res.send(success)
 })
@@ -430,7 +430,7 @@ app.post("/upload", upload.single('file'), (req, res) => {
         send_message(message_recipient, "Plan Set Upload", html);
 	
 	requests["file"].push(html);
-	save_file('data/requests.json', JSON.stringify(requests));
+	save_file('data/requests.json', JSON.stringify(requests, null, 4));
 	
         res.send(success);
         return;
