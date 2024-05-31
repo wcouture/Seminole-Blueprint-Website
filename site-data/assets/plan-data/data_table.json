@@ -11,43 +11,11 @@
                     "path": "#"
                 },
                 {
-                    "title": "Wellpack Pharmacy Interior Buildout",
-                    "contractor": "Shaffield Contstruction",
-                    "bid_date": "unknown",
-                    "tracking": "Yes",
-                    "id": 8,
-                    "path": "#"
-                },
-                {
-                    "title": "Hamilton Reality",
-                    "contractor": "Shaffield Contstruction",
-                    "bid_date": "unknown",
-                    "tracking": "Yes",
-                    "id": 9,
-                    "path": "#"
-                },
-                {
                     "title": "Cubesmart at Capitol Hill Plaza",
                     "contractor": "Sperry & Associates",
                     "bid_date": "unknown",
                     "tracking": "Yes",
                     "id": 10,
-                    "path": "#"
-                },
-                {
-                    "title": "Carrabelle Marina Bldg",
-                    "contractor": "Barton Construction",
-                    "bid_date": "unknown",
-                    "tracking": "Yes",
-                    "id": 11,
-                    "path": "#"
-                },
-                {
-                    "title": "Hotel Indigo Addition",
-                    "contractor": "Hooper Co",
-                    "bid_date": "2/26/2024",
-                    "tracking": "Yes",
-                    "id": 12,
                     "path": "#"
                 },
                 {
@@ -60,26 +28,18 @@
                 },
                 {
                     "title": "Wawa Blairstone",
-                    "contractor": "nan",
-                    "bid_date": "unknown",
+                    "contractor": "JM Phelps",
+                    "bid_date": "",
                     "tracking": "Yes",
                     "id": 15,
                     "path": "#"
                 },
                 {
                     "title": "Wawa Woodville Highway Civil",
-                    "contractor": "nan",
-                    "bid_date": "unknown",
+                    "contractor": "",
+                    "bid_date": "",
                     "tracking": "Yes",
                     "id": 16,
-                    "path": "#"
-                },
-                {
-                    "title": "Tesla Dalership",
-                    "contractor": "nan",
-                    "bid_date": "unknown",
-                    "tracking": "Yes",
-                    "id": 17,
                     "path": "#"
                 },
                 {
@@ -87,23 +47,23 @@
                     "contractor": "nan",
                     "bid_date": "5/2/2024",
                     "tracking": "Yes",
-                    "id": 19,
-                    "path": "#"
+                    "id": "19",
+                    "path": "assets/plan-data/Del_Taco_Crawfordville_Full_Set_Online_Plans.pdf"
                 },
                 {
                     "title": "Firestone Crawfordville",
                     "contractor": "nan",
                     "bid_date": "5/1/2024",
                     "tracking": "Yes",
-                    "id": 20,
-                    "path": "#"
+                    "id": "20",
+                    "path": "assets/plan-data/Firestone_Crawfordville_Full_Set_Online_Plans.pdf"
                 },
                 {
                     "title": "Starbucks Crawfordville",
                     "contractor": "nan",
                     "bid_date": "5/2/2024",
                     "tracking": "Yes",
-                    "id": 21,
+                    "id": "21",
                     "path": "assets/plan-data/Starbucks_Crawfordville_Shell_Bldg_Full_Set_Online_Plans.pdf"
                 },
                 {
@@ -111,7 +71,7 @@
                     "contractor": "Oliver Renovations",
                     "bid_date": "5/10/2024",
                     "tracking": "Yes",
-                    "id": 22,
+                    "id": "22",
                     "path": "assets/plan-data/Apalachee_Pkwy_Sunstop_527_Full_Set_Online_Plans.pdf"
                 },
                 {
@@ -121,14 +81,6 @@
                     "tracking": "Yes",
                     "id": 23,
                     "path": "#"
-                },
-                {
-                    "title": "Bagel and Co",
-                    "contractor": "nan",
-                    "bid_date": "unknown",
-                    "tracking": "Yes",
-                    "id": 24,
-                    "path": "assets/plan-data/bagel_&_co_full_set_online_plans.pdf"
                 }
             ]
         },
@@ -419,16 +371,16 @@
                     "contractor": "nan",
                     "bid_date": "unknown",
                     "tracking": "Yes",
-                    "id": 71,
-                    "path": "#"
+                    "id": "71",
+                    "path": "assets/plan-data/UCA_Suite_1500_Interior_Renovations_Full_Set_Online_Plans.pdf"
                 },
                 {
                     "title": "UCC 2nd and 3rd floor Interior Improvements",
                     "contractor": "nan",
                     "bid_date": "unknown",
                     "tracking": "Yes",
-                    "id": 72,
-                    "path": "#"
+                    "id": "72",
+                    "path": "assets/plan-data/UCC_2nd_and_3rd_Floor_Interior_Improvements_Full_Set_Online_Plans.pdf"
                 },
                 {
                     "title": "Griffin MS Phase 1",
@@ -443,45 +395,39 @@
                     "contractor": "Ram",
                     "bid_date": "5/15/2024",
                     "tracking": "Yes",
-                    "id": 74,
-                    "path": "#"
+                    "id": "74",
+                    "path": "assets/plan-data/South_Central_Chiller_&_Boiler_Plant_Full_Set_Online_Plans_90%.pdf"
                 },
                 {
                     "title": "English Building Restroom",
                     "contractor": "nan",
                     "bid_date": "unknown",
                     "tracking": "Yes",
-                    "id": 75,
-                    "path": "#"
+                    "id": "75",
+                    "path": "assets/plan-data/TCC_English_Building_Restroom_Full_Set_Online_Plans.pdf"
                 },
                 {
                     "title": "Stewart Street School HVAC",
                     "contractor": "Southland Contracting",
                     "bid_date": "",
-                    "current_set": "Bid Set",
                     "tracking": "Yes",
                     "id": 149,
-                    "newforma": "NA",
                     "path": "#"
                 },
                 {
                     "title": "Chipola College Emergency Generators",
                     "contractor": "",
                     "bid_date": "05-28-2024",
-                    "current_set": "Add03",
                     "tracking": "Yes",
                     "id": 150,
-                    "newforma": "NA",
                     "path": "#"
                 },
                 {
                     "title": "Chipola College Wind Retrofits",
                     "contractor": "",
                     "bid_date": "05-28-2024",
-                    "current_set": "Add03",
                     "tracking": "Yes",
                     "id": 151,
-                    "newforma": "NA",
                     "path": "#"
                 }
             ]
@@ -651,17 +597,9 @@
                 {
                     "title": "City Church",
                     "contractor": "Sperry & Associates",
-                    "bid_date": "unknown",
+                    "bid_date": "",
                     "tracking": "Yes",
                     "id": 111,
-                    "path": "#"
-                },
-                {
-                    "title": "St Johns Episcopal Church Chiller Replacement",
-                    "contractor": "Childers",
-                    "bid_date": "unknown",
-                    "tracking": "Yes",
-                    "id": 115,
                     "path": "#"
                 },
                 {
@@ -674,8 +612,8 @@
                 },
                 {
                     "title": "St Johns Chrysostom",
-                    "contractor": "nan",
-                    "bid_date": "unknown",
+                    "contractor": "RPCC",
+                    "bid_date": "",
                     "tracking": "Yes",
                     "id": 117,
                     "path": "#"
@@ -712,7 +650,7 @@
                     "contractor": "RPCC",
                     "bid_date": "unknown",
                     "tracking": "Yes",
-                    "id": 123,
+                    "id": 157,
                     "path": "#"
                 },
                 {
@@ -720,7 +658,7 @@
                     "contractor": "Childers",
                     "bid_date": "8/3/2023",
                     "tracking": "Yes",
-                    "id": 124,
+                    "id": 158,
                     "path": "#"
                 },
                 {
@@ -728,7 +666,7 @@
                     "contractor": "RPCC",
                     "bid_date": "unknown",
                     "tracking": "Yes",
-                    "id": 125,
+                    "id": 159,
                     "path": "#"
                 },
                 {
@@ -736,7 +674,7 @@
                     "contractor": "Childers",
                     "bid_date": "10/26/2023",
                     "tracking": "Yes",
-                    "id": 126,
+                    "id": 160,
                     "path": "#"
                 },
                 {
@@ -744,7 +682,7 @@
                     "contractor": "nan",
                     "bid_date": "unknown",
                     "tracking": "Yes",
-                    "id": 127,
+                    "id": 161,
                     "path": "#"
                 },
                 {
@@ -752,7 +690,7 @@
                     "contractor": "RPCC",
                     "bid_date": "unknown",
                     "tracking": "Yes",
-                    "id": 132,
+                    "id": 166,
                     "path": "#"
                 },
                 {
@@ -760,7 +698,7 @@
                     "contractor": "nan",
                     "bid_date": "unknown",
                     "tracking": "Yes",
-                    "id": 133,
+                    "id": 167,
                     "path": "#"
                 },
                 {
@@ -768,7 +706,7 @@
                     "contractor": "nan",
                     "bid_date": "5/14/2024",
                     "tracking": "Yes",
-                    "id": 134,
+                    "id": 168,
                     "path": "#"
                 },
                 {
@@ -776,17 +714,7 @@
                     "contractor": "Allstate",
                     "bid_date": "4/25/2024",
                     "tracking": "Yes",
-                    "id": 135,
-                    "path": "#"
-                },
-                {
-                    "title": "Sanitas Central Ocala",
-                    "contractor": "OliverSperry Renovations",
-                    "bid_date": "06-06-2024",
-                    "current_set": "100% Construction",
-                    "tracking": "Yes",
-                    "id": 152,
-                    "newforma": "NA",
+                    "id": 169,
                     "path": "#"
                 }
             ]

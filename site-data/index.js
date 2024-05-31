@@ -199,12 +199,11 @@ app.get("/requests", (req, res) => {
 	res.send(page_data + list_element);
 });
 
-/*
+
 app.get("/clear", (req, res) => {
 	clear_plan_data();
 	res.send(success);
 })
-*/
 
 // Request to open up the page for one of the services.
 // Specific service name is included in the query and used to determine the correct html page.
