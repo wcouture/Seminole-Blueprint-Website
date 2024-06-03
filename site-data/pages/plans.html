@@ -71,7 +71,7 @@
         }
 
         function populate_list(data) {
-			for (let i = data.plans.length - 1; i > 0; i--) {
+			for (let i = data.plans.length - 1; i >= 0; i--) {
                 let plan = data.plans[i];
 
                 let item = document.createElement("div");
@@ -81,9 +81,10 @@
                 let table = document.createElement("table");
                 item.appendChild(table)
 
+		let project_access = (plan.is_public == "Yes") ? "Public Project" : "Private Project";
 
                 let header_row = document.createElement("tr");
-                header_row.innerHTML = `<th style="width: 25%">Project Title</th><th style="width: 20%">Contractor</th><th style="width: 10%">Bid Date</th><th style="width: 20%">Current Set</th><th>Preview</th><th>Full Plans</th>`;
+					    header_row.innerHTML = `<th style="width: 25%">Project Title</th><th style="width: 20%">Contractor</th><th style="width: 10%">Bid Date</th><th style="width: 20%">Current Set</th><th style="width: 12.5%">Preview</th><th style="width: 12.5%">${project_access}</th>`;
                 table.appendChild(header_row)
 
 		        var link = `<a href="${plan.newforma}">NewForma</a>`
@@ -96,8 +97,12 @@
                 if (url == "#")
                     preview = "NA"
 
+		let contractor = plan.contractor.replace(",", "<br>")
+		while(contractor.includes(","))
+			contractor = contractor.replace(",", "<br>")
+
                 let data_row = document.createElement("tr");
-                data_row.innerHTML = `<td>${plan.title}</td><td>${plan.contractor}</td><td>${plan.bid_date}</td><td>${plan.current_set}</td><td>${preview}</td><td>${link}</td>`;
+                data_row.innerHTML = `<td>${plan.title}</td><td>${contractor}</td><td>${plan.bid_date}</td><td>${plan.current_set}</td><td>${preview}</td><td>${link}</td>`;
                 table.appendChild(data_row)
             }
             if (data.plans.length == 0) {

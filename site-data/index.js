@@ -111,7 +111,7 @@ function clear_plan_data() {
 			length = stored_plan_data.categories[`${cat}`].plans.length;
 		}
 	}
-	save_file("assets/plan-data/data_table.json", JSON.stringify(stored_plan_data));
+	save_file("assets/plan-data/data_table.json", JSON.stringify(stored_plan_data, null, 4));
 	exec('rm assets/plan-data/*.pdf', (err, s_out, s_err) => {
 		console.log('stdout: ' + s_out);
 		console.log('stderr: ' + s_err);
@@ -199,11 +199,12 @@ app.get("/requests", (req, res) => {
 	res.send(page_data + list_element);
 });
 
-
+/*
 app.get("/clear", (req, res) => {
 	clear_plan_data();
 	res.send(success);
 })
+*/
 
 // Request to open up the page for one of the services.
 // Specific service name is included in the query and used to determine the correct html page.
@@ -456,7 +457,9 @@ app.post("/plan-upload", upload.single("file"), (req, res) => {
 	plan_set.tracking = req.body.tracking;
 	plan_set.id = req.body.id;
 	plan_set.newforma = req.body.newforma;
-//	plan_set.path = req.body.path;
+	plan_set.is_public = req.body.public;
+	console.log(req.body);
+	//plan_set.path = req.body.path;
 	
 	let plan_cat = req.body.category;
 
@@ -496,10 +499,12 @@ app.post("/plan-upload", upload.single("file"), (req, res) => {
 			stored_plan_data.categories[`${plan_cat}`]["plans"][plan_index].current_set = plan_set.current_set;
 			stored_plan_data.categories[`${plan_cat}`]["plans"][plan_index].path = plan_set.path;
 			stored_plan_data.categories[`${plan_cat}`]["plans"][plan_index].newforma = plan_set.newforma;
+			stored_plan_data.categories[`${plan_cat}`]["plans"][plan_index].is_public = plan_set.is_public;
 		}
 	}
 	else if(plan_set.tracking == "Yes") {
-    		stored_plan_data.categories[`${plan_cat}`]["plans"].push(plan_set);
+ 		stored_plan_data.categories[`${plan_cat}`]["plans"].push(plan_set);
+		console.log("Pushing: ", plan_set);
 	}
 
 
