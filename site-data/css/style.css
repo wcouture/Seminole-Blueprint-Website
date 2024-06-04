@@ -691,7 +691,7 @@ select {
           align-items: center;
   background-color: white;
   color: black;
-  min-height: 300px;
+  min-height: 325px;
   transition-duration: 0.3s;
 }
 
