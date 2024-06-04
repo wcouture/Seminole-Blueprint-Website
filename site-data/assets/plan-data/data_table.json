@@ -125,7 +125,7 @@
                 },
                 {
                     "title": "MidSouth Bank",
-                    "contractor": "",
+                    "contractor": "RAM, RPCC",
                     "bid_date": "06-05-2024",
                     "current_set": "Add01",
                     "tracking": "Yes",
@@ -572,39 +572,6 @@
         "3": {
             "plans": [
                 {
-                    "title": "Goodwood Water Tower",
-                    "contractor": "CSI",
-                    "bid_date": "unknown",
-                    "current_set": "Add02",
-                    "tracking": "Yes",
-                    "id": 76,
-                    "newforma": "NA",
-                    "is_public": "No",
-                    "path": "#"
-                },
-                {
-                    "title": "Liberty County Jail and Admin",
-                    "contractor": "Culpepper",
-                    "bid_date": "11/21/2023",
-                    "current_set": "Add02",
-                    "tracking": "Yes",
-                    "id": 79,
-                    "newforma": "NA",
-                    "is_public": "No",
-                    "path": "#"
-                },
-                {
-                    "title": "Marianna New Public Safety Bldg Phase 2",
-                    "contractor": "Knight Commercial",
-                    "bid_date": "11/13/2023",
-                    "current_set": "100% Construction",
-                    "tracking": "Yes",
-                    "id": 81,
-                    "newforma": "NA",
-                    "is_public": "No",
-                    "path": "#"
-                },
-                {
                     "title": "Tallahassee Senior Center",
                     "contractor": "Culpepper",
                     "bid_date": "unknown",
@@ -622,17 +589,6 @@
                     "current_set": "80% Submittal",
                     "tracking": "Yes",
                     "id": 83,
-                    "newforma": "NA",
-                    "is_public": "No",
-                    "path": "#"
-                },
-                {
-                    "title": "Miccosukee Rd Bridge Replacement",
-                    "contractor": "nan",
-                    "bid_date": "2/13/2024",
-                    "current_set": "100% Construction",
-                    "tracking": "Yes",
-                    "id": 89,
                     "newforma": "NA",
                     "is_public": "No",
                     "path": "#"
@@ -843,7 +799,7 @@
                     "title": "Aero Center Tallahassee",
                     "contractor": "Sperry & Associates",
                     "bid_date": "2/14/2024",
-                    "current_set": "nan",
+                    "current_set": "",
                     "tracking": "Yes",
                     "id": 122,
                     "newforma": "NA",
