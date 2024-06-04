@@ -690,6 +690,15 @@ select {
       -ms-flex-align: center;
           align-items: center;
   background-color: white;
+  color: black;
+  min-height: 325px;
+  transition-duration: 0.3s;
+}
+
+.service_section .box:hover {
+  transition-duration: 0.3s;
+  background-color: #29367e;
+  color: white;
 }
 
 .service_section .box .img-box {
