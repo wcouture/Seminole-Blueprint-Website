@@ -87,7 +87,7 @@
 					    header_row.innerHTML = `<th style="width: 25%">Project Title</th><th style="width: 20%">Contractor</th><th style="width: 10%">Bid Date</th><th style="width: 20%">Current Set</th><th style="width: 12.5%">Preview</th><th style="width: 12.5%">${project_access}</th>`;
                 table.appendChild(header_row)
 
-		        var link = `<a href="${plan.newforma}">NewForma</a>`
+		        var link = `<a target="_blank" href="${plan.newforma}">NewForma</a>`
 		        if (plan.newforma == undefined || plan.newforma == "NA")
 			        link = `<a href="/contact">Contact Us</a>`
 

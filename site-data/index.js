@@ -185,7 +185,6 @@ app.get("/", (req, res) => {
 	res.send(render_page("pages/index.html"))
 });
 
-
 app.get("/requests", (req, res) => {
 	let type = req.query.type;
 	let list_element = `

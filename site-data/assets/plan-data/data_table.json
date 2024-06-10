@@ -3,31 +3,9 @@
         "1": {
             "plans": [
                 {
-                    "title": "JVP Mixed-Use",
-                    "contractor": "RPCC",
-                    "bid_date": "2/21/2024",
-                    "current_set": "100% Construction",
-                    "tracking": "Yes",
-                    "id": 4,
-                    "newforma": "NA",
-                    "is_public": "No",
-                    "path": "#"
-                },
-                {
-                    "title": "Cubesmart at Capitol Hill Plaza",
-                    "contractor": "Sperry & Associates",
-                    "bid_date": "unknown",
-                    "current_set": "Fire Marshall Approved Set",
-                    "tracking": "Yes",
-                    "id": 10,
-                    "newforma": "NA",
-                    "is_public": "No",
-                    "path": "#"
-                },
-                {
                     "title": "Governors Club Lounge",
                     "contractor": "Childers",
-                    "bid_date": "unknown",
+                    "bid_date": "",
                     "current_set": "Add03",
                     "tracking": "Yes",
                     "id": 14,
@@ -59,9 +37,9 @@
                 },
                 {
                     "title": "Del Taco Crawfordville",
-                    "contractor": "nan",
+                    "contractor": "",
                     "bid_date": "5/2/2024",
-                    "current_set": "nan",
+                    "current_set": "100% Construction",
                     "tracking": "Yes",
                     "id": "19",
                     "newforma": "NA",
@@ -70,9 +48,9 @@
                 },
                 {
                     "title": "Firestone Crawfordville",
-                    "contractor": "nan",
+                    "contractor": "",
                     "bid_date": "5/1/2024",
-                    "current_set": "nan",
+                    "current_set": "100% Construction",
                     "tracking": "Yes",
                     "id": "20",
                     "newforma": "NA",
@@ -81,9 +59,9 @@
                 },
                 {
                     "title": "Starbucks Crawfordville",
-                    "contractor": "nan",
+                    "contractor": "",
                     "bid_date": "5/2/2024",
-                    "current_set": "nan",
+                    "current_set": "100% Construction",
                     "tracking": "Yes",
                     "id": "21",
                     "newforma": "NA",
@@ -104,18 +82,18 @@
                 {
                     "title": "Second Harvest",
                     "contractor": "Southern Standard",
-                    "bid_date": "unknown",
+                    "bid_date": "",
                     "current_set": "100% Construction",
                     "tracking": "Yes",
                     "id": 23,
-                    "newforma": "NA",
+                    "newforma": "https://projects.servius.tech/UserWeb/PublishedFiles/PublishedFiles.aspx?pid=d4187d49-4a1b-41a1-bd82-793d6e975655&itemId=bf15cb00-aaf7-4870-92cc-ea14928874e8",
                     "is_public": "No",
                     "path": "#"
                 },
                 {
                     "title": "Bagel and Co",
-                    "contractor": "nan",
-                    "bid_date": "unknown",
+                    "contractor": "",
+                    "bid_date": "",
                     "current_set": "100% Construction",
                     "tracking": "Yes",
                     "id": "24",
@@ -149,39 +127,6 @@
         },
         "2": {
             "plans": [
-                {
-                    "title": "Center for Innovation Exterior Improvements",
-                    "contractor": "Cook Brothers",
-                    "bid_date": "11/17/2023",
-                    "current_set": "100% Construction",
-                    "tracking": "Yes",
-                    "id": 28,
-                    "newforma": "NA",
-                    "is_public": "No",
-                    "path": "#"
-                },
-                {
-                    "title": "Center for Innovation Smoke Evacuation",
-                    "contractor": "Cook Brothers",
-                    "bid_date": "4/3/2024",
-                    "current_set": "Add02",
-                    "tracking": "Yes",
-                    "id": 29,
-                    "newforma": "NA",
-                    "is_public": "No",
-                    "path": "#"
-                },
-                {
-                    "title": "Center for Innovation Stair tower",
-                    "contractor": "Cook Brothers",
-                    "bid_date": "11/16/2023",
-                    "current_set": "Add01",
-                    "tracking": "Yes",
-                    "id": 30,
-                    "newforma": "NA",
-                    "is_public": "No",
-                    "path": "#"
-                },
                 {
                     "title": "Doak Improvements 1A",
                     "contractor": "Ram",
@@ -249,20 +194,9 @@
                     "path": "#"
                 },
                 {
-                    "title": "Frank Harsfield ES Cafeteria",
-                    "contractor": "nan",
-                    "bid_date": "unknown",
-                    "current_set": "nan",
-                    "tracking": "Yes",
-                    "id": 41,
-                    "newforma": "NA",
-                    "is_public": "No",
-                    "path": "#"
-                },
-                {
                     "title": "GCS Maint Bldg Interior Renovation",
                     "contractor": "Southland Contraction",
-                    "bid_date": "unknown",
+                    "bid_date": "",
                     "current_set": "Bid",
                     "tracking": "Yes",
                     "id": 44,
@@ -271,21 +205,10 @@
                     "path": "#"
                 },
                 {
-                    "title": "Kuersteiner Interior Modifications",
-                    "contractor": "Mills and McKinnon Contractors",
-                    "bid_date": "unknown",
-                    "current_set": "100% Construction",
-                    "tracking": "Yes",
-                    "id": 45,
-                    "newforma": "NA",
-                    "is_public": "No",
-                    "path": "#"
-                },
-                {
                     "title": "Leon High School Gym",
                     "contractor": "Ram",
-                    "bid_date": "unknown",
-                    "current_set": "ASI04",
+                    "bid_date": "",
+                    "current_set": "ASI07",
                     "tracking": "Yes",
                     "id": 46,
                     "newforma": "NA",
@@ -293,43 +216,10 @@
                     "path": "#"
                 },
                 {
-                    "title": "Leon High School Reroof",
-                    "contractor": "Harrell Roofing",
-                    "bid_date": "unknown",
-                    "current_set": "100% Construction",
-                    "tracking": "Yes",
-                    "id": 47,
-                    "newforma": "NA",
-                    "is_public": "No",
-                    "path": "#"
-                },
-                {
-                    "title": "Lucille Moore Elem Renovations",
-                    "contractor": "Allstate",
-                    "bid_date": "12/6/2023",
-                    "current_set": "100% Construction",
-                    "tracking": "Yes",
-                    "id": 48,
-                    "newforma": "NA",
-                    "is_public": "No",
-                    "path": "#"
-                },
-                {
-                    "title": "McIntosc Building Remodel",
-                    "contractor": "Mad Dog",
-                    "bid_date": "unknown",
-                    "current_set": "100% Construction",
-                    "tracking": "Yes",
-                    "id": 49,
-                    "newforma": "NA",
-                    "is_public": "No",
-                    "path": "#"
-                },
-                {
                     "title": "Nims Cafeteria Replacement",
-                    "contractor": "nan",
-                    "bid_date": "unknown",
-                    "current_set": "Design Development",
+                    "contractor": "Rippee",
+                    "bid_date": "",
+                    "current_set": "ASI01",
                     "tracking": "Yes",
                     "id": 51,
                     "newforma": "NA",
@@ -337,42 +227,9 @@
                     "path": "#"
                 },
                 {
-                    "title": "Rogers Bldg Basement Remodeling - Phase IIb",
-                    "contractor": "nan",
-                    "bid_date": "unknown",
-                    "current_set": "100% Construction",
-                    "tracking": "Yes",
-                    "id": 52,
-                    "newforma": "NA",
-                    "is_public": "No",
-                    "path": "#"
-                },
-                {
-                    "title": "Stewart Street School HVAC",
-                    "contractor": "Southland Contraction",
-                    "bid_date": "unknown",
-                    "current_set": "100% Construction",
-                    "tracking": "Yes",
-                    "id": 54,
-                    "newforma": "https://projects.servius.tech/UserWeb/PublishedFiles/PublishedFiles.aspx?pid=ab25d7a7-23d5-484e-b4da-7ecc4546aa27&itemId=acbe8fad-6b9b-4a96-87b4-09b06c4924de\n",
-                    "is_public": "No",
-                    "path": "#"
-                },
-                {
-                    "title": "UCB Stair and Office Upgrade",
-                    "contractor": "Mad Dog",
-                    "bid_date": "unknown",
-                    "current_set": "100% Construction",
-                    "tracking": "Yes",
-                    "id": 57,
-                    "newforma": "NA",
-                    "is_public": "No",
-                    "path": "#"
-                },
-                {
                     "title": "WT Moore Classroom Renovation",
                     "contractor": "Ram",
-                    "bid_date": "unknown",
+                    "bid_date": "",
                     "current_set": "ASI07",
                     "tracking": "Yes",
                     "id": 58,
@@ -381,31 +238,9 @@
                     "path": "#"
                 },
                 {
-                    "title": "Mims Cafeteria Replacement",
-                    "contractor": "nan",
-                    "bid_date": "unknown",
-                    "current_set": "nan",
-                    "tracking": "Yes",
-                    "id": 59,
-                    "newforma": "NA",
-                    "is_public": "No",
-                    "path": "#"
-                },
-                {
-                    "title": "Georgia Christian School",
-                    "contractor": "SC Baker Construction",
-                    "bid_date": "1/24/2024",
-                    "current_set": "nan",
-                    "tracking": "Yes",
-                    "id": 60,
-                    "newforma": "NA",
-                    "is_public": "No",
-                    "path": "#"
-                },
-                {
                     "title": "Dittmer Building Re-Roofing",
                     "contractor": "Childers",
-                    "bid_date": "unknown",
+                    "bid_date": "",
                     "current_set": "Design Development",
                     "tracking": "Yes",
                     "id": 62,
@@ -415,9 +250,9 @@
                 },
                 {
                     "title": "AC Bldg 3rd Floor TCC Improvements",
-                    "contractor": "nan",
-                    "bid_date": "unknown",
-                    "current_set": "Design Development",
+                    "contractor": "",
+                    "bid_date": "",
+                    "current_set": "100% Construction",
                     "tracking": "Yes",
                     "id": 64,
                     "newforma": "NA",
@@ -425,23 +260,12 @@
                     "path": "#"
                 },
                 {
-                    "title": "Hartsfield ES Cafeteria",
+                    "title": "Frank Hartsfield ES Cafeteria",
                     "contractor": "Allstate",
-                    "bid_date": "unknown",
+                    "bid_date": "",
                     "current_set": "ASI05",
                     "tracking": "Yes",
                     "id": 66,
-                    "newforma": "NA",
-                    "is_public": "No",
-                    "path": "#"
-                },
-                {
-                    "title": "Bryan Hall Shower Replacement",
-                    "contractor": "Mad Dog",
-                    "bid_date": "unknown",
-                    "current_set": "100% Construction",
-                    "tracking": "Yes",
-                    "id": 68,
                     "newforma": "NA",
                     "is_public": "No",
                     "path": "#"
@@ -458,21 +282,10 @@
                     "path": "#"
                 },
                 {
-                    "title": "Sopchoppy School Restoration and Repairs",
-                    "contractor": "nan",
-                    "bid_date": "unknown",
-                    "current_set": "100% Construction",
-                    "tracking": "Yes",
-                    "id": 70,
-                    "newforma": "NA",
-                    "is_public": "No",
-                    "path": "#"
-                },
-                {
                     "title": "UCA Suite 1500",
-                    "contractor": "nan",
-                    "bid_date": "unknown",
-                    "current_set": "nan",
+                    "contractor": "",
+                    "bid_date": "",
+                    "current_set": "100% Construction",
                     "tracking": "Yes",
                     "id": "71",
                     "newforma": "NA",
@@ -481,8 +294,8 @@
                 },
                 {
                     "title": "UCC 2nd and 3rd floor Interior Improvements",
-                    "contractor": "nan",
-                    "bid_date": "unknown",
+                    "contractor": "",
+                    "bid_date": "",
                     "current_set": "100% Construction",
                     "tracking": "Yes",
                     "id": "72",
@@ -504,7 +317,7 @@
                 {
                     "title": "English Building Restroom",
                     "contractor": "",
-                    "bid_date": "unknown",
+                    "bid_date": "",
                     "current_set": "100% Construction",
                     "tracking": "Yes",
                     "id": "75",
@@ -548,7 +361,7 @@
                 {
                     "title": "Griffin MS Phase 1",
                     "contractor": "Childers",
-                    "bid_date": "unknown",
+                    "bid_date": "",
                     "current_set": "Add01",
                     "tracking": "Yes",
                     "id": 73,
@@ -566,6 +379,61 @@
                     "newforma": "https://projects.servius.tech/UserWeb/Transfers/PublicTransferForm.aspx?pid=ae9704dc-3058-4342-9bbe-b993d3f3c615&itemId=d54286cc-85bd-4ea4-b03e-f52830af2248",
                     "is_public": "No",
                     "path": "assets/plan-data/UCA_VAP_Suite_Modifications_Full_Set_Online_Plans.pdf"
+                },
+                {
+                    "title": "WCS WISE Center MEP Repairs",
+                    "contractor": "Allstate",
+                    "bid_date": "",
+                    "current_set": "100% Submittal",
+                    "tracking": "Yes",
+                    "id": 182,
+                    "newforma": "NA",
+                    "is_public": "No",
+                    "path": "#"
+                },
+                {
+                    "title": "WCS WISE Center Construction Academy",
+                    "contractor": "Allstate",
+                    "bid_date": "",
+                    "current_set": "100% Permit",
+                    "tracking": "Yes",
+                    "id": 183,
+                    "newforma": "NA",
+                    "is_public": "No",
+                    "path": "#"
+                },
+                {
+                    "title": "WCS WISE Center Roof Repairs",
+                    "contractor": "Allstate",
+                    "bid_date": "",
+                    "current_set": "100% Submittal",
+                    "tracking": "Yes",
+                    "id": 184,
+                    "newforma": "NA",
+                    "is_public": "No",
+                    "path": "#"
+                },
+                {
+                    "title": "2nd and 3rd Floor Modifications",
+                    "contractor": "Southern Standard",
+                    "bid_date": "",
+                    "current_set": "100% Construction",
+                    "tracking": "Yes",
+                    "id": 185,
+                    "newforma": "NA",
+                    "is_public": "No",
+                    "path": "#"
+                },
+                {
+                    "title": "8th and 9th Floor Renovation",
+                    "contractor": "Mad Dog Construction",
+                    "bid_date": "",
+                    "current_set": "ASI01",
+                    "tracking": "Yes",
+                    "id": 186,
+                    "newforma": "NA",
+                    "is_public": "No",
+                    "path": "#"
                 }
             ]
         },
@@ -589,28 +457,6 @@
                     "current_set": "80% Submittal",
                     "tracking": "Yes",
                     "id": 83,
-                    "newforma": "NA",
-                    "is_public": "No",
-                    "path": "#"
-                },
-                {
-                    "title": "Animal Services Center",
-                    "contractor": "nan",
-                    "bid_date": "2/20/2024",
-                    "current_set": "Add02",
-                    "tracking": "Yes",
-                    "id": 91,
-                    "newforma": "NA",
-                    "is_public": "No",
-                    "path": "#"
-                },
-                {
-                    "title": "Chattahoochee Southside Senior Services Center",
-                    "contractor": "Oliver Sperry",
-                    "bid_date": "unknown",
-                    "current_set": "100% Construction",
-                    "tracking": "Yes",
-                    "id": 92,
                     "newforma": "NA",
                     "is_public": "No",
                     "path": "#"
@@ -654,8 +500,8 @@
                 },
                 {
                     "title": "Governor's Suite Renovations",
-                    "contractor": "nan",
-                    "bid_date": "unknown",
+                    "contractor": "",
+                    "bid_date": "",
                     "current_set": "100% Construction",
                     "tracking": "Yes",
                     "id": 103,
@@ -664,81 +510,48 @@
                     "path": "#"
                 },
                 {
-                    "title": "Replace MV Cable - Phase 1",
-                    "contractor": "Childers",
-                    "bid_date": "unknown",
-                    "current_set": "100% Construction",
-                    "tracking": "Yes",
-                    "id": 104,
-                    "newforma": "NA",
-                    "is_public": "No",
-                    "path": "#"
-                },
-                {
-                    "title": "CCOC 4055 Bldg Renovation",
-                    "contractor": "Mad Dog",
-                    "bid_date": "unknown",
-                    "current_set": "100% Construction",
-                    "tracking": "Yes",
-                    "id": 105,
-                    "newforma": "NA",
-                    "is_public": "No",
-                    "path": "#"
-                },
-                {
-                    "title": "Mission San Luis Council House",
-                    "contractor": "nan",
-                    "bid_date": "unknown",
-                    "current_set": "nan",
-                    "tracking": "Yes",
-                    "id": 106,
-                    "newforma": "NA",
-                    "is_public": "No",
-                    "path": "#"
-                },
-                {
-                    "title": "Mission San Luis Messer House",
-                    "contractor": "nan",
-                    "bid_date": "unknown",
-                    "current_set": "nan",
-                    "tracking": "Yes",
-                    "id": 107,
-                    "newforma": "NA",
-                    "is_public": "No",
-                    "path": "#"
-                },
-                {
-                    "title": "Governor's Mansion Security Improvements Phase II Guard House",
-                    "contractor": "nan",
-                    "bid_date": "unknown",
-                    "current_set": "ASI01",
-                    "tracking": "Yes",
-                    "id": 108,
-                    "newforma": "NA",
-                    "is_public": "No",
-                    "path": "#"
-                },
-                {
-                    "title": "Governor's Mansion Security Improvements Phase II Gate",
-                    "contractor": "nan",
-                    "bid_date": "unknown",
-                    "current_set": "ASI03",
-                    "tracking": "Yes",
-                    "id": 109,
-                    "newforma": "NA",
-                    "is_public": "No",
-                    "path": "#"
-                },
-                {
                     "title": "Memorial Park",
                     "contractor": "Childers",
-                    "bid_date": "unknown",
+                    "bid_date": "",
                     "current_set": "90% Construction",
                     "tracking": "Yes",
                     "id": 110,
                     "newforma": "NA",
                     "is_public": "No",
                     "path": "#"
+                },
+                {
+                    "title": "East Entry - Security Improvements",
+                    "contractor": "Childers",
+                    "bid_date": "unknown",
+                    "current_set": "100% Construction",
+                    "tracking": "Yes",
+                    "id": 96,
+                    "newforma": "NA",
+                    "is_public": "No",
+                    "path": "#"
+                },
+                {
+                    "title": "Replacement of Major Electrical Sytems Phase 1",
+                    "contractor": "Childers",
+                    "bid_date": "",
+                    "current_set": "100% Construction",
+                    "tracking": "Yes",
+                    "id": 180,
+                    "newforma": "NA",
+                    "is_public": "No",
+                    "path": "#"
+                },
+                {
+                    "title": "Replacement of Major Electrical Systems Phase 2",
+                    "contractor": "Childers",
+                    "bid_date": "",
+                    "current_set": "100% Construction",
+                    "tracking": "Yes",
+                    "id": 181,
+                    "newforma": "NA",
+                    "is_public": "No",
+                    "path": "assets/plan-data/Replacement_of_Major_Electrical_Systems_Phase_2_Full_Set_Online_Plans.pdf"
                 }
             ]
         },
@@ -759,7 +572,7 @@
                     "title": "Pisgah UMC Fellowship",
                     "contractor": "Barkley Consulting Engineers, Inc",
                     "bid_date": "unknown",
-                    "current_set": "nan",
+                    "current_set": "100% Construction",
                     "tracking": "Yes",
                     "id": 116,
                     "newforma": "NA",
@@ -796,17 +609,6 @@
         "7": {
             "plans": [
                 {
-                    "title": "Aero Center Tallahassee",
-                    "contractor": "Sperry & Associates",
-                    "bid_date": "2/14/2024",
-                    "current_set": "",
-                    "tracking": "Yes",
-                    "id": 122,
-                    "newforma": "NA",
-                    "is_public": "No",
-                    "path": "#"
-                },
-                {
                     "title": "TLH Central Plant Upgrades",
                     "contractor": "",
                     "bid_date": "",
@@ -824,54 +626,10 @@
                 {
                     "title": "Family Dentistry Clinic Renovation",
                     "contractor": "RPCC",
-                    "bid_date": "unknown",
+                    "bid_date": "",
                     "current_set": "ASI03",
                     "tracking": "Yes",
                     "id": 157,
-                    "newforma": "NA",
-                    "is_public": "No",
-                    "path": "#"
-                },
-                {
-                    "title": "HCA MRI Equipment Replacement",
-                    "contractor": "Childers",
-                    "bid_date": "8/3/2023",
-                    "current_set": "100% Construction",
-                    "tracking": "Yes",
-                    "id": 158,
-                    "newforma": "NA",
-                    "is_public": "No",
-                    "path": "#"
-                },
-                {
-                    "title": "Pine Village of Perry",
-                    "contractor": "RPCC",
-                    "bid_date": "unknown",
-                    "current_set": "nan",
-                    "tracking": "Yes",
-                    "id": 159,
-                    "newforma": "NA",
-                    "is_public": "No",
-                    "path": "#"
-                },
-                {
-                    "title": "TMH Behavioral Health Clinic Direct Admin Renovation",
-                    "contractor": "Childers",
-                    "bid_date": "10/26/2023",
-                    "current_set": "100% Construction",
-                    "tracking": "Yes",
-                    "id": 160,
-                    "newforma": "NA",
-                    "is_public": "No",
-                    "path": "#"
-                },
-                {
-                    "title": "Wellpack Pharmacy New Construction",
-                    "contractor": "nan",
-                    "bid_date": "unknown",
-                    "current_set": "100% Construction",
-                    "tracking": "Yes",
-                    "id": 161,
                     "newforma": "NA",
                     "is_public": "No",
                     "path": "#"
@@ -883,17 +641,6 @@
                     "current_set": "nan",
                     "tracking": "Yes",
                     "id": 166,
-                    "newforma": "NA",
-                    "is_public": "No",
-                    "path": "#"
-                },
-                {
-                    "title": "Outpatient Center",
-                    "contractor": "nan",
-                    "bid_date": "unknown",
-                    "current_set": "nan",
-                    "tracking": "Yes",
-                    "id": 167,
                     "newforma": "NA",
                     "is_public": "No",
                     "path": "#"
