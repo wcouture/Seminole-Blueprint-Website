@@ -179,6 +179,12 @@ a:focus {
   text-transform: uppercase;
 }
 
+@media (min-width: 768px) {
+  .navbar-brand span {
+    opacity: 0%;
+  }
+}
+
 .custom_nav-container {
   padding: 0;
 }
