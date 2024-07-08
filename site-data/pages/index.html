@@ -1,20 +1,17 @@
     <!-- slider section -->
-    <section class="intro_section">
+    <section id="intro-banner" class="intro_section">
       <div class="slider_section container panel">
             <div class="row">
               <div class="col-md-6 ">
                 <div class="detail-box">
                   <h1>
-                    Commitment and Values
+                    Who are we...
                   </h1>
                   <p>
                     Seminole Blueprint strives to be a leader, not a follower, in the Age of Digital Printing and Information Management through our commitment to World Class customer service and innovation. We want to be a company that our customers request, future employees seek, current employees treasure and our peers admire.
                   </p>
-                  <a style="width: 200px; text-align: center;" href="/contact">
-                    Contact Us
-                  </a>
-                  <a style="width: 200px; text-align: center; margin-left: 50px;" href="https://servius.tech">
-                    Servius
+                  <a style="text-align: center;" href="#other_services">
+                    Other Services
                   </a>
                 </div>
               </div>
@@ -73,7 +70,7 @@
 
   <!-- service section -->
 
-  <section class="service_section layout_padding secondary_color">
+  <section id="other_services" class="service_section layout_padding secondary_color">
     <div class="container service_container ">
       <div class="heading_container heading_center">
         <h2> Other Services </h2>
@@ -154,6 +151,21 @@
             </div>
           </a>
         </div>
+        <div class="service-item">
+          <a href="/services?page=plans" class="box">
+            <div class="img-box">
+              <img src="/images/data_management.png">
+            </div>
+            <div class="detail-box">
+              <h5>
+                Digital Construction Plan Management
+              </h5>
+              <p>
+                Streamline your project needs with our supplies ordering services, featuring a wide variety of plotter paper, engineering bond, and binder strips. Enjoy convenient ordering and top-quality materials tailored to your specifications.
+              </p>
+            </div>
+          </a>
+        </div>
       </div>
       <!--
       <div class="btn-box">
@@ -195,7 +207,6 @@
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <i class="fa fa-star" aria-hidden="true"></i>
                   </div>
-                  <i class="fa fa-quote-left" aria-hidden="true"></i>
                 </div>
               </div>
               <div class="client_text">
@@ -222,7 +233,6 @@
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <i class="fa fa-star" aria-hidden="true"></i>
                   </div>
-                  <i class="fa fa-quote-left" aria-hidden="true"></i>
                 </div>
               </div>
               <div class="client_text">
@@ -249,7 +259,6 @@
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <i class="fa fa-star" aria-hidden="true"></i>
                   </div>
-                  <i class="fa fa-quote-left" aria-hidden="true"></i>
                 </div>
               </div>
               <div class="client_text">
@@ -276,7 +285,6 @@
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <i class="fa fa-star" aria-hidden="true"></i>
                   </div>
-                  <i class="fa fa-quote-left" aria-hidden="true"></i>
                 </div>
               </div>
               <div class="client_text">
@@ -303,7 +311,6 @@
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <i class="fa fa-star" aria-hidden="true"></i>
                   </div>
-                  <i class="fa fa-quote-left" aria-hidden="true"></i>
                 </div>
               </div>
               <div class="client_text">
@@ -321,53 +328,3 @@
     </div>
   </section>
   <!-- end client section -->
-
-  <!-- contact section -->
-
-  <section class="contact_section footer_contact layout_padding">
-    <div class="container">
-      <div class="heading_container">
-        <h2>
-          Contact Us
-        </h2>
-      </div>
-      <div class="row">
-        <div class="col-md-6" id="form-column">
-          <form action="" id="contact-form" method="">
-            <div>
-              <input type="text" id="name" name="name" placeholder="Name" />
-            </div>
-            <div>
-              <input type="number" id="number" name="number" placeholder="Phone Number" />
-            </div>
-            <div>
-              <input type="email" id="email" name="email" placeholder="Email" />
-            </div>
-            <div>
-              <input type="text" id="message" name="message" class="message-box" placeholder="Message" />
-            </div>
-            <div class="d-flex ">
-              <button>SEND</button>
-            </div>
-          </form>
-          <script src="js/form-handler.js"></script>
-        </div>
-        <div class="col-md-6">
-          <script>
-            function on_hover(element) {
-              element.setAttribute('src', '../images/location-zoomed.png')
-            }
-
-            function on_out(element) {
-              element.setAttribute('src', '../images/location.png')
-            }
-
-          </script>
-          <a href="https://maps.app.goo.gl/bhVnHiiYKRf5tpSM8">
-            <img src="../images/location.png" class="map-img" title="Click to open maps" onmouseover="on_hover(this)" onmouseout="on_out(this)">
-            </img>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>

@@ -23,10 +23,10 @@ $(".owl-carousel").owlCarousel({
             items: 1
         },
         768: {
-            items: 2
+            items: 3
         },
         1000: {
-            items: 3
+            items: 4
         }
     }
 });
@@ -37,10 +37,11 @@ var bg_images = [
     "/images/downtown.jpg",
 ];
 
-let banner = document.getElementById("client-banner");
-if (banner) {
+// Google reviews background banner
+let review_banner = document.getElementById("client-banner");
+if (review_banner) {
     var index = Math.floor(Math.random() * 3)
-    banner.style = `background: url(${bg_images[index]});background-position: center; background-size: cover;padding: 80px 0px 80px 0px;`
+    review_banner.style = `background: url(${bg_images[index]});background-position: center; background-size: cover;padding: 80px 0px 80px 0px;`
     /*
     setInterval(() => {
         console.log("Changing background")

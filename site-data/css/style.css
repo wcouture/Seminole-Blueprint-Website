@@ -170,6 +170,8 @@ a:focus {
   font-weight: bold;
   font-size: 24px;
   font-weight: bold;
+  align-items:baseline;
+  display: flex;
 }
 
 .navbar-brand span {
@@ -319,7 +321,7 @@ a:focus {
 .intro_section {
   position: relative;
   padding-top: 1%;
-  /* border-bottom: 2px solid rgba(0,0,0,0.15); */
+  border-bottom: 2px solid rgba(0,0,0,0.15);
 }
 
 .slider_section {
@@ -368,7 +370,7 @@ a:focus {
 
 .slider_section .detail-box p {
   color: #e0dcdc;
-  font-size: 15px;
+  font-size: 12pt;
 }
 
 .slider_section .detail-box a {
@@ -407,7 +409,7 @@ a:focus {
   display: flex;
   -webkit-transform: translateY(0%);
           transform: translateY(0%);
-  margin-bottom: -2%;
+  margin-bottom: -4%;
 }
 
 @media (min-width: 768px) {
@@ -417,7 +419,7 @@ a:focus {
     display: flex;
     -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
-    margin-bottom: -2%;
+    margin-bottom: -10%;
   }
 }
 
@@ -484,11 +486,28 @@ a:focus {
   fill: #ffffff;
 }
 
+.about_section {
+  padding-left: 20%;
+  padding-right: 20%;
+}
+
 .about_section .row {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
+}
+
+.about_section .title {
+  font-size: 28pt;
+  font-weight: bolder;
+  border-bottom: solid 2px rgba(0,0,0,0.3);
+}
+
+.about_section .header {
+  font-size: 18pt;
+  font-weight: bolder;
+  padding-left: 15px;
 }
 
 .about_section h6 {
@@ -691,7 +710,7 @@ select {
           align-items: center;
   background-color: white;
   color: black;
-  min-height: 325px;
+  min-height: 400px;
   transition-duration: 0.3s;
 }
 

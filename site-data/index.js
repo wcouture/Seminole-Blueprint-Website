@@ -211,6 +211,11 @@ app.get("/services", (req, res) => {
     res.send(render_page(`pages/services/${req.query.page}.html`))
 })
 
+// Returns information page about semblueinc and the company values
+app.get("/learn", (req, res) => {
+	res.send(render_page(`pages/learn.html`))
+})
+
 // Returns the contact form page
 app.get("/contact", (req, res) => {
     res.send(render_page("pages/contact.html"))
