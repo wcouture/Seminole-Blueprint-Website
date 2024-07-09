@@ -13,8 +13,8 @@ $(".owl-carousel").owlCarousel({
     nav: true,
     dots: true,
     navText: [
-        '<img src="images/left-arrow-white.png" class="owl-nav-button"/>',
-        '<img src="images/right-arrow-white.png" class="owl-nav-button"/>'
+        '<img src="images/left-arrow-tpt.png" class="owl-nav-button"/>',
+        '<img src="images/right-arrow-tpt.png" class="owl-nav-button"/>'
     ],
     autoplay: true,
     autoplayHoverPause: true,

@@ -797,6 +797,16 @@ select {
 
 .owl-nav-button {
   max-width: 50%;
+  background: white;
+  border: 1px solid rgb(85, 85, 85);
+  border-radius: 10px;
+  box-shadow: 1px 1px 10px 1px rgba(0,0,0, 0.3);
+  transition: 0.2s;
+}
+
+.owl-nav-button:hover {
+  background: #29367e;
+  transition: 0.2s;
 }
 
 .service_section .btn-box a {
