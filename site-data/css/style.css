@@ -1224,8 +1224,8 @@ textarea {
 }
 
 .info_section a {
-  margin: 0 5px;
-  color: #0355cc;
+  margin: 0 10px;
+  color: #FFF;
 }
 
 .info_section a i {
@@ -1233,7 +1233,7 @@ textarea {
 }
 
 .info_section a:hover {
-  color: #29367e;
+  color: #b7c2ff;
 }
 
 .info_items a {
