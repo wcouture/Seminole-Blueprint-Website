@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather+Sans:wght@400;700&display=swap");
 
 body {
-  font-family: 'Lato', sans-serif;
+  font-family: 'Century Gothic';
   color: #040000;
   overflow-x: hidden;
 }
@@ -96,7 +96,6 @@ body {
       -ms-flex-align: center;
           align-items: center;
   text-transform: uppercase;
-  font-family: 'Merriweather Sans', sans-serif;
 }
 
 .heading_container p {
@@ -108,11 +107,6 @@ body {
       -ms-flex-align: center;
           align-items: center;
   text-align: center;
-}
-
-h1,
-h2 {
-  font-family: 'Merriweather Sans', sans-serif;
 }
 
 a,
@@ -370,6 +364,7 @@ a:focus {
 
 .slider_section .detail-box h1 {
   font-weight: bold;
+  margin-top: 50px;
   margin-bottom: 25px;
   color: #f3f3f3;
 }
@@ -379,9 +374,8 @@ a:focus {
   font-size: 12pt;
 }
 
-.slider_section .detail-box a {
+.slider_section .detail-box .button-link {
   display: inline-block;
-  font-family: 'Merriweather Sans', sans-serif;
   text-transform: uppercase;
   padding: 10px 45px;
   background-color: #29367e;
@@ -389,11 +383,20 @@ a:focus {
   border-radius: 5px;
   color: #ffffff;
   margin-top: 15px;
+  margin-bottom: 50px;
+}
+
+.slider_section .detail-box .button-link:hover {
+  background-color: transparent;
+  color: #29367e;
+}
+
+.slider_section .detail-box a {
+  color: #7485e2;
 }
 
 .slider_section .detail-box a:hover {
-  background-color: transparent;
-  color: #29367e;
+  color: #a5b1f7;
 }
 
 .slider_section .img-box img {
@@ -475,7 +478,6 @@ a:focus {
 .feature_section .feature_container .box .name {
   margin-top: 20px;
   text-transform: uppercase;
-  font-family: 'Merriweather Sans', sans-serif;
   margin-bottom: 0;
 }
 
@@ -566,7 +568,6 @@ a:focus {
 .about_section button {
   border: none;
   display: inline-block;
-  font-family: 'Merriweather Sans', sans-serif;
   text-transform: uppercase;
   padding: 10px 55px;
   background-color: #0355cc;
@@ -588,7 +589,6 @@ a:focus {
 .about_section .detail-box a {
   margin-top: 15px;
   display: inline-block;
-  font-family: 'Merriweather Sans', sans-serif;
   text-transform: uppercase;
   padding: 10px 45px;
   background-color: #0355cc;
@@ -605,6 +605,7 @@ a:focus {
 .about_section .img-box img {
   width: 100%;
   box-shadow: 2px 2px 10px 1px rgba(0,0,0,0.4);
+  margin-bottom: 20px;
 }
 
 .custom-select {
@@ -675,7 +676,6 @@ select {
 .professional_section .detail-box a {
   margin-top: 25px;
   display: inline-block;
-  font-family: 'Merriweather Sans', sans-serif;
   text-transform: uppercase;
   padding: 10px 45px;
   background-color: #29367e;
@@ -811,7 +811,6 @@ select {
 
 .service_section .btn-box a {
   display: inline-block;
-  font-family: 'Merriweather Sans', sans-serif;
   text-transform: uppercase;
   padding: 10px 45px;
   background-color: #0355cc;
@@ -1161,7 +1160,6 @@ textarea {
 .contact_section button {
   border: none;
   display: inline-block;
-  font-family: 'Merriweather Sans', sans-serif;
   text-transform: uppercase;
   padding: 10px 55px;
   background-color: #0355cc;
@@ -1341,7 +1339,6 @@ html {
 
 .title-bar {
   width: auto;
-  font-family: 'Merriweather Sans', sans-serif;
   text-transform: uppercase;
   font-weight: bolder;
   color:#4b4b4b;
@@ -1358,7 +1355,6 @@ html {
   text-align: center;
   margin-top: 10px;
   color: #4b4b4b;
-  font-family: 'Merriweather Sans', sans-serif;
   font-size: medium;
 }
 
