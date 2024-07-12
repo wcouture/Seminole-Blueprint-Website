@@ -475,6 +475,13 @@ a:focus {
   fill: #000;
 }
 
+.feature_section .feature_container .box .img-box img {
+  width: 100%;
+  height: auto;
+  color: #000;
+  transition: all 0.3s;
+}
+
 .feature_section .feature_container .box .name {
   margin-top: 20px;
   text-transform: uppercase;
@@ -486,12 +493,24 @@ a:focus {
   color: #ffffff;
 }
 
+.feature_section .feature_container .box:hover .img-box img {
+  color: white;
+}
+
 .feature_section .feature_container .box:hover .img-box svg, .feature_section .feature_container .box.active .img-box svg {
   fill: #ffffff;
 }
 
 .feature_section .feature_container .box:hover .img-box svg path, .feature_section .feature_container .box.active .img-box svg path {
   fill: #ffffff;
+}
+
+.feature_section .feature_container .box .img-box svg polygon {
+  fill: black;
+}
+
+.feature_section .feature_container .box:hover .img-box svg polygon {
+  fill: white;
 }
 
 .about_section {
@@ -741,6 +760,31 @@ select {
 }
 
 .service_section .box .img-box img {
+  color: black;
+  max-height: 100%;
+  max-width: 100%;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+}
+
+.service_section .box:hover .img-box img {
+  color: white;
+  max-height: 100%;
+  max-width: 100%;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+}
+
+.service_section .box .img-box svg {
+  fill: black;
+  max-height: 100%;
+  max-width: 100%;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+}
+
+.service_section .box:hover .img-box svg {
+  fill: white;
   max-height: 100%;
   max-width: 100%;
   -webkit-transition: all .3s;
