@@ -60,9 +60,20 @@
               File Upload
             </h5>
           </a>
-          <a class="box" target="_blank" href="https://viewmyplans.com/plans">
+          <script>
+
+            function feature_hover(element) {
+              document.getElementById("vmp-image").src = "/images/monocle-white.png";
+            }
+
+            function feature_out(element) {
+              document.getElementById("vmp-image").src = "/images/monocle.png";
+            }
+
+          </script>
+          <a class="box" target="_blank" href="https://viewmyplans.com/plans" onmouseover="feature_hover(this)" onmouseout="feature_out(this)">
             <div class="img-box">
-              <img style="color: white;" src="/images/monocle.png">
+              <img id="vmp-image" style="color: white;" src="/images/monocle.png">
             </div>
             <h5 class="name">
               ViewMyPlans
