@@ -236,6 +236,10 @@ app.get("/plan-upload", (req, res) => {
     res.send(render_page("pages/plan-upload.html"))
 })
 
+app.get("/file-upload", (req, res) => {
+    res.send(render_page("pages/file-upload.html"))
+})
+
 // Returns log-in page for admin tools page
 app.get("/admin", (req,res) => {
     res.send(render_page("pages/admin.html"))
@@ -375,6 +379,8 @@ app.post("/design-upload", upload.single("file"), (req, res) => {
 
     res.send(success)
 })
+
+app.get("/file-upload", )
 
 app.post("/file-upload", upload.single('file'), (req, res) => {
 	// File data
