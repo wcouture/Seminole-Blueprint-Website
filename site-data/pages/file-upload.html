@@ -1,0 +1,98 @@
+<section class="contact_section layout_padding">
+    <div class="title-bar">File Upload</div>
+
+    <div class="centered-region" id="center">
+        <form id="plan-form" class="plan-form">
+            <label>Name *</label>
+            <input type="text" id="f_name" placeholder="John Smith" reqiured>
+
+            <label>Email *</label>
+            <input type="email" id="f_email" placeholder="user@mail.com" reqiured>
+            
+            <label>Description</label>
+	        <textarea wrap="soft" id="f_description" class="message-box"></textarea>
+	        
+            <a href="#" id="add-file">
+                <div class="add-file-input">Add File</div>
+            </a>
+            
+            <div id="file-inputs">
+            </div>
+            <button>Upload</button>
+        </form>
+    </div>
+
+    <script>
+	    let working = false;
+        let plan_form = document.getElementById("plan-form");
+        let add_file = document.getElementById("add-file");
+        let f_inputs = [];
+
+        add_file.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            let input = document.createElement("input");
+            input.type = "file";
+            input.name = `file${f_inputs.length}`;
+            input.required = true;
+
+            document.getElementById("file-inputs").appendChild(input);
+
+            f_inputs.push(input);
+        })
+
+        function display_success() {
+            let center = document.getElementById("center");
+            center.className = "centered-region fade-out-quick";
+
+            setTimeout( () => {
+                center.innerHTML = "<p>Plans Submitted</p>"
+                center.className = "centered-region fade-in-quick"; 
+            }, 500)
+        }
+
+
+        plan_form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            if (e.target.id == "add-file") {
+                return;
+            }
+            
+            let email = document.getElementById("f_email").value;
+            let name = document.getElementById("f_name").value;
+	        let description = document.getElementById("f_description").value;
+            
+            let files = []
+            for (let i = 0; i < f_inputs.length; i++) {
+                files.push(f_inputs[i].files[0]);
+            }
+
+            send_file(0, files, name, email, description)
+        })
+
+        function send_file(i, files, name, email, description) {
+            let config = {
+                method: "POST",
+                mode: "same-origin",
+                headers: {}
+            };
+
+            let data = new FormData();
+            data.append("file", files[i]);
+            data.append("name", title);
+            data.append("email", email);
+            data.append("desc", description);
+            
+            config.body = data;
+            
+            fetch("/file-upload", config)
+            .then((response) => response.json())
+            .then((res) => {
+                if (res.status == 'success'){
+                    display_success()
+                }
+            })
+        }
+        
+    </script>
+</section>

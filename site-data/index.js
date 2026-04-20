@@ -376,6 +376,49 @@ app.post("/design-upload", upload.single("file"), (req, res) => {
     res.send(success)
 })
 
+app.post("/file-upload", upload.single('file'), (req, res) => {
+	// File data
+	var file_name = req.file.originalname;
+	file_name = file_name.replaceAll(" ", "_");
+
+	let temp_file_path = req.file.path;
+	let final_path = "data/uploads/" + file_name;
+
+	// Submitter info
+	let email = req.body.email;
+	let description = req.body.desc;
+	let name = req.body.name;
+
+	fs.rename(temp_file_path, final_path, (e) => {
+		if (e) {
+			res.send("Error saving file upload.");
+			return;
+		}
+	})
+
+	let html = `
+	<div>
+		<h2 style='width: 100%; padding: 10px; text-align: left;'>
+			File Upload
+		</h2><br/>
+		<span>
+			<strong>Submitter:</strong>
+			${name}
+		</span><br/>
+		<span>
+			<strong>Email:</strong>
+			${email}
+		</span><br/>
+		<span>
+			<strong>File Description:</strong>
+			${description}
+		</span><br/>
+	</div>
+	`;
+	send_message("wcouture17@gmail.com", "File Upload", html);
+	res.send(JSON.stringify({"status": "success"}));
+})
+
 app.post("/upload", upload.single('file'), (req, res) => {
     let title = req.body.title;
     let email = req.body.email;
@@ -433,8 +476,8 @@ app.post("/upload", upload.single('file'), (req, res) => {
 	    `
         send_message(message_recipient, "Plan Set Upload", html);
 	
-	requests["file"].push(html);
-	save_file('data/requests.json', JSON.stringify(requests, null, 4));
+		requests["file"].push(html);
+		save_file('data/requests.json', JSON.stringify(requests, null, 4));
 	
         res.send(success);
         return;
