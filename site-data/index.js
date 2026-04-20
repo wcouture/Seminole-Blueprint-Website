@@ -380,8 +380,6 @@ app.post("/design-upload", upload.single("file"), (req, res) => {
     res.send(success)
 })
 
-app.get("/file-upload", )
-
 app.post("/file-upload", upload.single('file'), (req, res) => {
 	// File data
 	var file_name = req.file.originalname;
