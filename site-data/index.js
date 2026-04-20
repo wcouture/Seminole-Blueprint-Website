@@ -383,7 +383,8 @@ app.post("/design-upload", upload.single("file"), (req, res) => {
 app.post("/file-upload", upload.single('file'), (req, res) => {
 	// File data
 	var file_name = req.file.originalname;
-	file_name = file_name.replaceAll(" ", "_");
+	while (file_name.indexOf(' ') >= 0)
+		file_name = file_name.replace(" ", "_");
 
 	let temp_file_path = req.file.path;
 	let final_path = "data/uploads/" + file_name;
