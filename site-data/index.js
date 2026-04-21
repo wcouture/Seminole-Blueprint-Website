@@ -386,6 +386,9 @@ app.post("/file-upload", upload.single('file'), (req, res) => {
 	while (file_name.indexOf(' ') >= 0)
 		file_name = file_name.replace(" ", "_");
 
+	while (file_name.indexOf("\'") >= 0)
+		file_name = file_name.replace("\'", "");
+
 	let temp_file_path = req.file.path;
 	let final_path = "data/uploads/" + file_name;
 
