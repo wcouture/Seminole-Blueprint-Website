@@ -49,6 +49,7 @@ const __directories = [
     "plan-data",
 	"storage",
 	"include",
+	"uploads"
 ];
 
 // Temp plan storage
