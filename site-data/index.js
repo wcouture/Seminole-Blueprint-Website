@@ -408,22 +408,22 @@ app.post("/file-upload", upload.single('file'), (req, res) => {
 	let html = `
 	<div>
 		<h2 style='width: 100%; padding: 10px; text-align: left;'>
-			File Upload
+			!# SemBlueInc | File Upload #!
 		</h2><br/>
 		<span>
-			<strong>Submitter:</strong>
+			<strong>Submitter: </strong>
 			${name}
 		</span><br/>
 		<span>
-			<strong>Email:</strong>
+			<strong>Email: </strong>
 			${email}
 		</span><br/>
 		<span>
-			<strong>File Description:</strong>
+			<strong>File Description: </strong>
 			${description}
 		</span><br/>
 		<span>
-			<a href='https://semblueinc.com/${final_path}' target='_blank'>File</a>
+			<strong>Download:</strong><a href='https://semblueinc.com/${final_path}' target='_blank'>${file_name}</a>
 		</span><br/>
 	</div>
 	`;
