@@ -418,6 +418,9 @@ app.post("/file-upload", upload.single('file'), (req, res) => {
 			<strong>File Description:</strong>
 			${description}
 		</span><br/>
+		<span>
+			<a href='https://semblueinc.com/${final_path}' target='_blank'>File</a>
+		</span><br/>
 	</div>
 	`;
 	send_message(message_recipient, "File Upload", html);
