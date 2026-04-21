@@ -427,7 +427,7 @@ app.post("/file-upload", upload.single('file'), (req, res) => {
 		</span><br/>
 	</div>
 	`;
-	send_message("wcouture17@gmail.com", "File Upload", html);
+	send_message(message_recipient, "File Upload", html);
 	res.send(JSON.stringify({"status": "success"}));
 })
 
