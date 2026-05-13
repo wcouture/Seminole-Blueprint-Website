@@ -444,7 +444,8 @@ app.post("/file-upload", upload.array('files', 12), (req, res) => {
 	}
 		
 	html += `</div>`;
-	send_message(message_recipient, "Semblueinc File Upload", html);
+	// message_recipient
+	send_message("wcouture17@gmail.com", "Semblueinc File Upload", html);
 	res.send(JSON.stringify({"status": "success"}));
 })
 
