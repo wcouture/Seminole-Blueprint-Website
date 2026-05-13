@@ -95,12 +95,13 @@
             };
 
             let data = new FormData();
-            data.append("files", files);
             data.append("name", name);
             data.append("email", email);
             data.append("desc", description);
-
-            console.log("Num Files: ", files.length)
+            
+            for (let i = 0; i < files.length; i++) {
+                data.append("files", files[i]);
+            }
             
             config.body = data;
             
