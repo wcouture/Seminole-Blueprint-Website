@@ -48,6 +48,10 @@
                 if (index >= 0)
                     f_inputs.splice(index, 1)
                 file_inputs.removeChild(input_container);
+
+                if (f_inputs.length < 12) {
+                    add_file.removeAttribute("disabled")
+                }
             }
 
             input_container.appendChild(input);
@@ -56,6 +60,10 @@
             file_inputs.appendChild(input_container);
 
             f_inputs.push(input);
+
+            if (f_inputs.length >= 12) {
+                add_file.setAttribute("disabled", true)
+            }
         })
 
         function display_success() {
