@@ -84,9 +84,6 @@
                 files.push(f_inputs[i].files[0]);
             }
 
-            console.log(file_inputs.length)
-            console.log(files.length)
-
             send_files(files, name, email, description)
         })
 
@@ -103,7 +100,7 @@
             data.append("email", email);
             data.append("desc", description);
 
-            console.log(JSON.stringify(data))
+            console.log("Num Files: ", files.length)
             
             config.body = data;
             
