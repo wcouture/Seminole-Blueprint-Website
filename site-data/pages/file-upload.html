@@ -51,6 +51,7 @@
 
                 if (f_inputs.length < 12) {
                     add_file.removeAttribute("disabled")
+                    add_file.style = "";
                 }
             }
 
@@ -63,6 +64,7 @@
 
             if (f_inputs.length >= 12) {
                 add_file.setAttribute("disabled", true)
+                add_file.style = "background-color: gray";
             }
         })
 
