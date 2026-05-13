@@ -1076,11 +1076,13 @@ input[type="file"]::file-selector-button:active {
 
 .contact_section .centered-region {
   min-height: 500px;
-  margin-left: 40%;
-  margin-right: 40%;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   align-content: center;
   align-items: center;
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
 .contact_section .add-file-input {
