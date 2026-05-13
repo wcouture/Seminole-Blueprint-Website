@@ -381,31 +381,43 @@ app.post("/design-upload", upload.single("file"), (req, res) => {
     res.send(success)
 })
 
-app.post("/file-upload", upload.single('file'), (req, res) => {
-	// File data
-	var file_name = req.file.originalname;
-	while (file_name.indexOf(' ') >= 0)
-		file_name = file_name.replace(" ", "_");
-
-	while (file_name.indexOf("\'") >= 0)
-		file_name = file_name.replace("\'", "");
-
-	let temp_file_path = req.file.path;
-	let final_path = "data/uploads/" + file_name;
-
+app.post("/file-upload", upload.array('files', 12), (req, res) => {
 	// Submitter info
 	let email = req.body.email;
 	let description = req.body.desc;
 	let name = req.body.name;
 
-	fs.rename(temp_file_path, final_path, (e) => {
-		if (e) {
-			res.send("Error saving file upload.");
-			return;
-		}
-	})
+	// File data
+	let files = req.files;
+	let file_paths = []
+	let file_names = []
 
-	let html = `
+	// Move each file to server location
+	for (let i = 0; i < files.length; i++) {
+		let curr_file = files[i];
+
+		var file_name = curr_file.originalname;
+		while (file_name.indexOf(' ') >= 0)
+			file_name = file_name.replace(" ", "_");
+	
+		while (file_name.indexOf("\'") >= 0)
+			file_name = file_name.replace("\'", "");
+		file_names.push(file_name)
+	
+		let temp_file_path = curr_file.path;
+		let final_path = "data/uploads/" + file_name;
+		file_paths.push(final_path)
+	
+		fs.rename(temp_file_path, final_path, (e) => {
+			if (e) {
+				res.send("Error saving file upload.");
+				return;
+			}
+		})
+	}
+
+	// Generate email
+	var html = `
 	<div>
 		<h2 style='width: 100%; padding: 10px; text-align: left;'>
 			!# SemBlueInc | File Upload #!
@@ -421,13 +433,18 @@ app.post("/file-upload", upload.single('file'), (req, res) => {
 		<span>
 			<strong>File Description: </strong>
 			${description}
-		</span><br/>
-		<span>
-			<strong>Download:</strong><a href='https://semblueinc.com/${final_path}' target='_blank'>${file_name}</a>
-		</span><br/>
-	</div>
-	`;
-	send_message(message_recipient, "File Upload", html);
+		</span><br/>`;
+			
+	for (let i = 0; i < file_names.length; i++) {
+		let name = file_names[i]
+		let path = file_paths[i]
+		html += `<span>
+				<strong>File ${i + 1} Download:</strong><a href='https://semblueinc.com/${path}' target='_blank'>${name}</a>
+				</span><br/>`;
+	}
+		
+	html += `</div>`;
+	send_message(message_recipient, "Semblueinc File Upload", html);
 	res.send(JSON.stringify({"status": "success"}));
 })
 

@@ -26,17 +26,33 @@
 	    let working = false;
         let plan_form = document.getElementById("plan-form");
         let add_file = document.getElementById("add-file");
+        let file_inputs = document.getElementById("file-inputs");
         let f_inputs = [];
 
         add_file.addEventListener("click", (e) => {
             e.preventDefault();
+
+            let input_container = document.createElement("div");
+            input_container.style = "display: flex; justify-content: space-between;"
 
             let input = document.createElement("input");
             input.type = "file";
             input.name = `file${f_inputs.length}`;
             input.required = true;
 
-            document.getElementById("file-inputs").appendChild(input);
+            let input_delete = document.createElement("button")
+            input_delete.innerText = "delete"
+            input_delete.onclick = () => {
+                var index = f_inputs.indexOf(input)
+                if (index >= 0)
+                    f_inputs.splice(index, 1)
+                file_inputs.removeChild(input_container);
+            }
+
+            input_container.appendChild(input);
+            input_container.appendChild(input_delete);
+
+            file_inputs.appendChild(input_container);
 
             f_inputs.push(input);
         })
@@ -64,13 +80,15 @@
             
             let files = []
             for (let i = 0; i < f_inputs.length; i++) {
-                files.push(f_inputs[i].files[0]);
+                if (f_inputs[i] != null && f_inputs[i].files.length > 0) {
+                    files.push(f_inputs[i].files[0]);
+                }
             }
 
-            send_file(0, files, name, email, description)
+            send_files(files, name, email, description)
         })
 
-        function send_file(i, files, name, email, description) {
+        function send_files(files, name, email, description) {
             let config = {
                 method: "POST",
                 mode: "same-origin",
@@ -78,7 +96,7 @@
             };
 
             let data = new FormData();
-            data.append("file", files[i]);
+            data.append("files", files);
             data.append("name", name);
             data.append("email", email);
             data.append("desc", description);
