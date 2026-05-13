@@ -16,7 +16,7 @@
                 Add File
             </button>
             
-            <div id="file-inputs">
+            <div id="file-inputs" style="display: grid; grid-template-columns: auto auto; column-gap: 30px; row-gap: 10px;margin-top: 15px;">
             </div>
             <button>Upload</button>
         </form>
@@ -43,6 +43,7 @@
             let input_delete = document.createElement("button")
             input_delete.innerText = "delete"
             input_delete.style = "margin: auto 0; max-height: 3em;"
+            input_delete.className += " delete";
             input_delete.onclick = () => {
                 var index = f_inputs.indexOf(input)
                 if (index >= 0)

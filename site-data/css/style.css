@@ -1127,6 +1127,7 @@ input[type="file"]::file-selector-button:active {
   width: auto;
   padding-top: 2%;
   padding-bottom: 2%;
+  margin: auto 0;
   background-color: rgba(255, 255, 255, 0);
   box-shadow: none;
 }
@@ -1215,6 +1216,18 @@ textarea {
   margin-top: 15px;
 }
 
+.contact_section button.delete {
+  border: none;
+  display: inline-block;
+  text-transform: uppercase;
+  padding: 10px 55px;
+  background-color: #b83434;
+  border: 1px solid #b83434;
+  border-radius: 0;
+  color: #ffffff;
+  margin-top: 15px;
+}
+
 .contact_section p {
   text-align: center;
   width: 100%;
@@ -1224,6 +1237,11 @@ textarea {
 .contact_section button:hover {
   background-color: transparent;
   color: #0355cc;
+}
+
+.contact_section button.delete:hover {
+  background-color: transparent;
+  color: #b83434;
 }
 
 .contact_section .map_container {
