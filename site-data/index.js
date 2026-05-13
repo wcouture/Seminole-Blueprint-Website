@@ -433,6 +433,9 @@ app.post("/file-upload", upload.array('files', 12), (req, res) => {
 		<span>
 			<strong>File Description: </strong>
 			${description}
+		</span><br/>
+		<span>
+			<strong>${req.files.length} File(s)</strong>
 		</span><br/>`;
 			
 	for (let i = 0; i < file_names.length; i++) {
