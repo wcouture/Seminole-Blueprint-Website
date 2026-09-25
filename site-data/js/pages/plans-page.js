@@ -86,7 +86,22 @@ if (board && noPlansCard) {
       const projectAccess = plan.is_public === "Yes" ? "Public Project" : "Private Project";
 
       const headerRow = document.createElement("tr");
-      headerRow.innerHTML = `<th style="width: 25%">Project Title</th><th style="width: 20%">Contractor</th><th style="width: 10%">Bid Date</th><th style="width: 20%">Current Set</th><th style="width: 12.5%">Preview</th><th style="width: 12.5%">${projectAccess}</th>`;
+      const headerItems = [
+        { text: "Project Title", width: "25%" },
+        { text: "Contractor", width: "20%" },
+        { text: "Bid Date", width: "10%" },
+        { text: "Current Set", width: "20%" },
+        { text: "Preview", width: "12.5%" },
+        { text: projectAccess, width: "12.5%" },
+      ];
+
+      for (let headerIndex = 0; headerIndex < headerItems.length; headerIndex++) {
+        const th = document.createElement("th");
+        th.style.width = headerItems[headerIndex].width;
+        th.innerText = headerItems[headerIndex].text;
+        headerRow.appendChild(th);
+      }
+
       table.appendChild(headerRow);
 
       const dataRow = document.createElement("tr");

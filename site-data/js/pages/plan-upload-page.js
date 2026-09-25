@@ -3,6 +3,9 @@ const addFile = document.getElementById("add-file");
 
 if (planForm && addFile) {
   const fileInputs = [];
+  const center = document.getElementById("center");
+  let isUploading = false;
+  let uploadComplete = false;
 
   addFile.addEventListener("click", (e) => {
     e.preventDefault();
@@ -17,7 +20,11 @@ if (planForm && addFile) {
   });
 
   function displaySuccess() {
-    const center = document.getElementById("center");
+    if (!center || uploadComplete) {
+      return;
+    }
+
+    uploadComplete = true;
     center.className = "centered-region fade-out-quick";
 
     setTimeout(() => {
@@ -27,7 +34,11 @@ if (planForm && addFile) {
   }
 
   function displayWorking() {
-    const center = document.getElementById("center");
+    if (!center || isUploading) {
+      return;
+    }
+
+    isUploading = true;
     center.className = "centered-region fade-out-quick";
 
     setTimeout(() => {
@@ -95,6 +106,8 @@ if (planForm && addFile) {
       return;
     }
 
+    uploadComplete = false;
+    isUploading = false;
     sendFile(0, plans, title, email, message, bidDate);
   });
 }

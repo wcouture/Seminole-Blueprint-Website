@@ -12,6 +12,7 @@ if (board && requestType) {
     .then((response) => response.json())
     .then((data) => {
       let list = [];
+      const parser = new DOMParser();
 
       switch (requestType) {
         case "contact":
@@ -33,7 +34,7 @@ if (board && requestType) {
       for (let i = 0; i < list.length; i++) {
         const item = document.createElement("div");
         item.className = "request-card";
-        const parsed = new DOMParser().parseFromString(String(list[i] || ""), "text/html");
+        const parsed = parser.parseFromString(String(list[i] || ""), "text/html");
         item.textContent = parsed.body.textContent || "";
         board.appendChild(item);
       }
