@@ -70,7 +70,9 @@ if (planForm && addFile) {
           if (i === 0) {
             displayWorking();
           }
-          sendFile(i + 1, plans, title, email, message, bidDate);
+          if (i + 1 < plans.length) {
+            sendFile(i + 1, plans, title, email, message, bidDate);
+          }
         }
       });
   }

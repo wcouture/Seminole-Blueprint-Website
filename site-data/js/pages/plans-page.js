@@ -48,6 +48,31 @@ if (board && noPlansCard) {
   }
 
   function populateList(data) {
+    function safeText(value) {
+      if (value === undefined || value === null) {
+        return "";
+      }
+      return String(value);
+    }
+
+    function safeLink(rawUrl, label) {
+      const anchor = document.createElement("a");
+      anchor.innerText = label;
+
+      try {
+        const parsedUrl = new URL(rawUrl, window.location.origin);
+        if (parsedUrl.protocol === "http:" || parsedUrl.protocol === "https:") {
+          anchor.href = parsedUrl.href;
+        } else {
+          anchor.href = "/contact";
+        }
+      } catch {
+        anchor.href = "/contact";
+      }
+
+      return anchor;
+    }
+
     for (let i = data.plans.length - 1; i >= 0; i--) {
       const plan = data.plans[i];
 
@@ -64,24 +89,53 @@ if (board && noPlansCard) {
       headerRow.innerHTML = `<th style="width: 25%">Project Title</th><th style="width: 20%">Contractor</th><th style="width: 10%">Bid Date</th><th style="width: 20%">Current Set</th><th style="width: 12.5%">Preview</th><th style="width: 12.5%">${projectAccess}</th>`;
       table.appendChild(headerRow);
 
-      let link = `<a target="_blank" href="${plan.newforma}">NewForma</a>`;
-      if (plan.newforma === undefined || plan.newforma === "NA") {
-        link = `<a href="/contact">Contact Us</a>`;
-      }
-
-      const url = plan.path;
-      let preview = `<a href="${url}">Online Set</a>`;
-      if (url === "#") {
-        preview = "NA";
-      }
-
-      let contractor = plan.contractor.replace(",", "<br>");
-      while (contractor.includes(",")) {
-        contractor = contractor.replace(",", "<br>");
-      }
-
       const dataRow = document.createElement("tr");
-      dataRow.innerHTML = `<td>${plan.title}</td><td>${contractor}</td><td>${plan.bid_date}</td><td>${plan.current_set}</td><td>${preview}</td><td>${link}</td>`;
+
+      const titleCell = document.createElement("td");
+      titleCell.innerText = safeText(plan.title);
+      dataRow.appendChild(titleCell);
+
+      const contractorCell = document.createElement("td");
+      const contractorLines = safeText(plan.contractor).split(",");
+      for (let contractorIndex = 0; contractorIndex < contractorLines.length; contractorIndex++) {
+        if (contractorIndex > 0) {
+          contractorCell.appendChild(document.createElement("br"));
+        }
+        contractorCell.appendChild(document.createTextNode(contractorLines[contractorIndex].trim()));
+      }
+      dataRow.appendChild(contractorCell);
+
+      const bidDateCell = document.createElement("td");
+      bidDateCell.innerText = safeText(plan.bid_date);
+      dataRow.appendChild(bidDateCell);
+
+      const currentSetCell = document.createElement("td");
+      currentSetCell.innerText = safeText(plan.current_set);
+      dataRow.appendChild(currentSetCell);
+
+      const previewCell = document.createElement("td");
+      if (plan.path === "#") {
+        previewCell.innerText = "NA";
+      } else {
+        const previewLink = safeLink(plan.path, "Online Set");
+        previewLink.target = "_blank";
+        previewCell.appendChild(previewLink);
+      }
+      dataRow.appendChild(previewCell);
+
+      const accessCell = document.createElement("td");
+      if (plan.newforma === undefined || plan.newforma === "NA") {
+        const contactLink = document.createElement("a");
+        contactLink.href = "/contact";
+        contactLink.innerText = "Contact Us";
+        accessCell.appendChild(contactLink);
+      } else {
+        const newformaLink = safeLink(plan.newforma, "NewForma");
+        newformaLink.target = "_blank";
+        accessCell.appendChild(newformaLink);
+      }
+      dataRow.appendChild(accessCell);
+
       table.appendChild(dataRow);
     }
 

@@ -33,7 +33,8 @@ if (board && requestType) {
       for (let i = 0; i < list.length; i++) {
         const item = document.createElement("div");
         item.className = "request-card";
-        item.innerHTML = list[i];
+        const parsed = new DOMParser().parseFromString(String(list[i] || ""), "text/html");
+        item.textContent = parsed.body.textContent || "";
         board.appendChild(item);
       }
     });
