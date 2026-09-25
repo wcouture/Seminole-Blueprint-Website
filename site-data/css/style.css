@@ -1485,3 +1485,129 @@ html {
 
 /* end footer section*/
 /*# sourceMappingURL=style.css.map */
+
+
+/* visual refresh + consistency updates */
+body {
+  background: linear-gradient(180deg, #f5f7fb 0%, #eef2fa 100%);
+  color: #1f2b49;
+}
+
+.hero_area {
+  background-image: linear-gradient(180deg, #bcc2d0 0%, #f5f7fb 45%, #eef2fa 100%);
+}
+
+.header_section,
+.panel,
+.feature_section .feature_container .box,
+.service_section .box,
+.client_section .box,
+.request-card,
+.plan-item {
+  border-radius: 14px;
+}
+
+.slider_section .detail-box .button-link,
+.contact_section button,
+.contact_section .add-file-input {
+  border-radius: 8px;
+}
+
+.feature_section .feature_container .box,
+.service_section .box,
+.request-card,
+.plan-item {
+  box-shadow: 0 10px 26px rgba(16, 24, 40, 0.12);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.feature_section .feature_container .box:hover,
+.service_section .box:hover,
+.request-card:hover,
+.plan-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 30px rgba(16, 24, 40, 0.16);
+}
+
+.requests_center {
+  justify-content: center;
+}
+
+#request-board {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.title-bar {
+  margin: 0 auto 24px;
+  max-width: 1100px;
+  padding-bottom: 10px;
+  color: #253366;
+  border-bottom: 3px solid rgba(41, 54, 126, 0.35);
+}
+
+.plan-item {
+  margin: 24px auto 0;
+  max-width: 1100px;
+  border: 1px solid rgba(41, 54, 126, 0.08);
+}
+
+.category-tabs {
+  margin: 0 auto;
+  max-width: 1100px;
+  border-radius: 12px;
+  background: #dfe4ef;
+  border: 1px solid rgba(41, 54, 126, 0.2);
+  flex-wrap: wrap;
+  gap: 2px;
+  overflow: hidden;
+}
+
+.tab {
+  border: 0;
+  border-radius: 0;
+  padding: 12px 10px;
+  min-height: 0;
+  min-width: 160px;
+}
+
+.tab.active {
+  background-color: #29367e;
+  color: #fff;
+}
+
+.contact_section .plan-form,
+.contact_section form {
+  background: #fff;
+  border: 1px solid rgba(41, 54, 126, 0.12);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.contact_section button {
+  width: 100%;
+  margin-left: 0;
+}
+
+.contact_section button.delete {
+  width: auto;
+  margin-left: 0;
+}
+
+@media (max-width: 991px) {
+  .feature_section .feature_container,
+  .category-tabs,
+  .plan-item,
+  .title-bar {
+    margin-left: 16px;
+    margin-right: 16px;
+    max-width: none;
+  }
+
+  .contact_section .centered-region {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}

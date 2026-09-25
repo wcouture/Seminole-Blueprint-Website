@@ -6,44 +6,5 @@
         </div>
     
     </div>
-    <script>
-        let board = document.getElementById("request-board");
-        var type = "";
-        let data = null;
-        let config = {
-                method: "GET",
-                mode: "same-origin",
-                headers: {}
-            };
-        fetch("/data/requests.json", config)
-        .then((response) => response.json())
-        .then((res) => {
-            data = res;
-            populate_list();
-        })
 
-        function set_type() {
-            type = t;
-        }
-
-        function populate_list() {
-            type = t
-            var list = [];
-            switch (type) {
-                case "contact": list = data.contact; break;
-                case "supply":  list = data.supply; break;
-                case "design":  list = data.design; break;
-                case "file":    list = data.file; break;
-            }
-
-            for (let i = 0; i < list.length; i++) {
-                let item = document.createElement("div");
-                item.className = "request-card";
-
-                item.innerHTML = list[i];
-
-                board.appendChild(item);
-            }
-        }
-    </script>
 </section>
