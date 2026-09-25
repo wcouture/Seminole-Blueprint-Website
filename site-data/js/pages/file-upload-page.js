@@ -78,7 +78,13 @@ if (planForm && addFile && fileInputsContainer) {
       .then((res) => {
         if (res.status === "success") {
           displaySuccess();
+          return;
         }
+
+        alert("Upload failed. Please try again or contact support.");
+      })
+      .catch(() => {
+        alert("Upload failed. Please try again or contact support.");
       });
   }
 

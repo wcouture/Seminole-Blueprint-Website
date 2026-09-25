@@ -19,6 +19,16 @@ if (board && noPlansCard) {
       .then((responseData) => {
         callback(responseData);
         return responseData;
+      })
+      .catch(() => {
+        if (route === "/plan-categories") {
+          callback({ cats: [] });
+          return;
+        }
+
+        callback({ plans: [] });
+        noPlansCard.hidden = false;
+        board.className = "plan-board";
       });
   };
 
