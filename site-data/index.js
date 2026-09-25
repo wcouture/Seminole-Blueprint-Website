@@ -154,8 +154,8 @@ function load_page(path) {
 }
 
 // Apply templating
-function render_page(path) {
-    let page_data = load_page(path)
+function render_page(path, context = {}) {
+    let page_data = { ...load_page(path), ...context };
     let page = combyne(page_template)
     return page.render(page_data)
 }
@@ -187,16 +187,9 @@ app.get("/", (req, res) => {
 });
 
 app.get("/requests", (req, res) => {
-	let type = req.query.type;
-	let list_element = `
-		<script>
-			let t = "${type}";
-			set_type(data);
-		</script>
-	`;
-
-	let page_data = render_page('pages/requests.html');
-	res.send(page_data + list_element);
+	const allowed_types = ["contact", "supply", "design", "file"];
+	let type = allowed_types.includes(req.query.type) ? req.query.type : "";
+	res.send(render_page('pages/requests.html', { request_type: type }));
 });
 
 /*

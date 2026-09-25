@@ -28,7 +28,7 @@
   <link rel="icon" type="image/jpg" href="images/sbi_logo_white.png">
 </head>
 
-<body class=" {%if page_name == 'index'%} fade-in {% endif %}">
+<body class=" {%if page_name == 'index'%} fade-in {% endif %}" {%if page_name == 'requests'%}data-request-type="{{request_type}}"{%endif%}>
   <div class="hero_area">
     <!-- header section strats -->
     <header class="header_section">
@@ -184,7 +184,37 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
   <script src="js/bgswitch/jquery.bgswitcher.js"></script>
   <script src="js/custom.js"></script>
-
+  {%if page_name == 'index'%}
+  <script src="js/pages/index-page.js"></script>
+  {%endif%}
+  {%if page_name == 'contact'%}
+  <script src="js/form-handler.js"></script>
+  <script src="js/pages/contact-page.js"></script>
+  {%endif%}
+  {%if page_name == 'forms'%}
+  <script src="js/tax-forms.js"></script>
+  {%endif%}
+  {%if page_name == 'admin'%}
+  <script src="js/admin.js"></script>
+  {%endif%}
+  {%if page_name == 'plans'%}
+  <script src="js/pages/plans-page.js"></script>
+  {%endif%}
+  {%if page_name == 'plan-upload'%}
+  <script src="js/pages/plan-upload-page.js"></script>
+  {%endif%}
+  {%if page_name == 'file-upload'%}
+  <script src="js/pages/file-upload-page.js"></script>
+  {%endif%}
+  {%if page_name == 'requests'%}
+  <script src="js/pages/requests-page.js"></script>
+  {%endif%}
+  {%if page_name == 'signs'%}
+  <script src="js/form-handler.js"></script>
+  {%endif%}
+  {%if page_name == 'supplies'%}
+  <script src="js/form-handler.js"></script>
+  {%endif%}
 
 </body>
 
