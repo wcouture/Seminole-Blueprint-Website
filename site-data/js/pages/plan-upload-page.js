@@ -84,7 +84,10 @@ if (planForm && addFile) {
           if (i + 1 < plans.length) {
             sendFile(i + 1, plans, title, email, message, bidDate);
           }
+          return;
         }
+
+        alert("Upload failed. Please try again or contact support.");
       });
   }
 

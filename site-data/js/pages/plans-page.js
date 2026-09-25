@@ -3,7 +3,7 @@ const board = document.getElementById("plans-board");
 const noPlansCard = document.getElementById("no-plans-card");
 
 if (board && noPlansCard) {
-  function httpRequest(method, route, data, callback) {
+  const httpRequest = (method, route, data, callback) => {
     const config = {
       method,
       mode: "same-origin",
@@ -20,9 +20,9 @@ if (board && noPlansCard) {
         callback(responseData);
         return responseData;
       });
-  }
+  };
 
-  function handleTabClick(e) {
+  const handleTabClick = (e) => {
     e.preventDefault();
 
     e.target.className = "tab active";
@@ -45,9 +45,9 @@ if (board && noPlansCard) {
       const newCategory = e.target.id;
       httpRequest("GET", `/retrieve-plans?id=${newCategory}`, null, populateList);
     }, 500);
-  }
+  };
 
-  function populateList(data) {
+  const populateList = (data) => {
     function safeText(value) {
       if (value === undefined || value === null) {
         return "";
@@ -161,7 +161,7 @@ if (board && noPlansCard) {
     }
 
     board.className = "plan-board";
-  }
+  };
 
   httpRequest("GET", "/plan-categories", null, (data) => {
     const categories = data.cats;
