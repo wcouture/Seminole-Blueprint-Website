@@ -630,20 +630,8 @@ app.delete("/delete-upload", (req, res) => {
         return;
     }
 	try {
-		fs.rmSync(file_path, (err) => {
-			if (err) {
-				if (err.code == "ENOENT") {
-					res.status(404).send(JSON.stringify({ status: "error", message: "File not found." }));
-					return;
-				}
-	
-				console.error("Error deleting uploaded file:", err);
-				res.status(500).send(JSON.stringify({ status: "error", message: "Unable to delete file." }));
-				return;
-			}
-	
-			res.json({ status: "success" });
-		});
+		fs.unlink(file_path);
+		res.json({ status: "success" });
 	} catch (err) {
 		console.error("Error deleting uploaded file:", err);
 		res.status(500).send(JSON.stringify({ status: "error", message: "Unable to delete file(" + file_path + "). " + err.message }));
