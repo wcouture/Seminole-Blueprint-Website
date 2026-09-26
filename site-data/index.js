@@ -9,6 +9,7 @@ const nodemailer = require('nodemailer');
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const combyne = require('combyne');
 const multer = require("multer");
 const upload = multer({dest: "data/temp", limits: { fileSize: MAX_FILE_SIZE }})
@@ -24,7 +25,10 @@ app.use(bodyParser.urlencoded({limit: '5gb', extended: true}));
 const port = "3001"
 
 const success = JSON.stringify({status: "success"})
-const admin_pass = "$emBlue1nc";
+const admin_pass = process.env.ADMIN_PASS || "";
+const upload_pass = process.env.UPLOAD_PASS || admin_pass;
+const upload_directory = path.join(__dirname, "data", "uploads");
+const UPLOAD_AUTH_COOKIE = "uploads_auth";
 
 const message_recipient = "eaststore@semblueinc.com";
 
@@ -65,8 +69,13 @@ const HOUR = 60 * MINUTE;
 const DAY = 24 * HOUR;
 
 const TEMP_STORAGE_CUTOFF = DAY * 30;
+const UPLOAD_AUTH_DURATION = HOUR;
+const UPLOAD_RATE_LIMIT_WINDOW = MINUTE;
+const UPLOAD_RATE_LIMIT_MAX_REQUESTS = 30;
 
 let temp_plan_stored = {"plans": []};
+let upload_sessions = {};
+let upload_rate_limits = {};
 
 let requests = { 
 	contact: [],
@@ -149,6 +158,122 @@ function load_stored_plans() {
     const temp_data = fs.readFileSync("assets/temp/temp_data.json", "utf-8");
     plans = JSON.parse(temp_data)
     temp_plan_stored = plans;
+}
+
+function normalize_uploaded_file_name(file_name) {
+    return path.basename(String(file_name || ""))
+        .replace(/ /g, "_")
+        .replace(/'/g, "")
+        .replace(/[^A-Za-z0-9._-]/g, "_");
+}
+
+function get_uploaded_file_path(file_name) {
+    let safe_file_name = String(file_name || "").trim();
+    if (safe_file_name.length == 0 || safe_file_name !== path.basename(safe_file_name))
+        return null;
+    if (/^[A-Za-z0-9._-]+$/.test(safe_file_name) == false)
+        return null;
+    return path.join(upload_directory, safe_file_name);
+}
+
+function parse_cookies(req) {
+    let raw_cookie = String(req.headers.cookie || "");
+    let pairs = raw_cookie.split(";");
+    let cookies = {};
+
+    for (let i = 0; i < pairs.length; i++) {
+        let pair = pairs[i].trim();
+        if (pair.length == 0 || pair.indexOf("=") < 0)
+            continue;
+
+        let separator = pair.indexOf("=");
+        let key = pair.substring(0, separator);
+        let value = pair.substring(separator + 1);
+        try {
+            cookies[key] = decodeURIComponent(value);
+        }
+        catch {
+            cookies[key] = value;
+        }
+    }
+
+    return cookies;
+}
+
+function create_upload_session(res) {
+    let token = crypto.randomBytes(32).toString("hex");
+    upload_sessions[token] = Date.now() + UPLOAD_AUTH_DURATION;
+    res.setHeader("Set-Cookie", `${UPLOAD_AUTH_COOKIE}=${token}; Max-Age=${Math.floor(UPLOAD_AUTH_DURATION / SECOND)}; HttpOnly; SameSite=Strict; Path=/`);
+}
+
+function is_upload_authenticated(req) {
+    let cookies = parse_cookies(req);
+    let token = cookies[UPLOAD_AUTH_COOKIE];
+
+    if (token == undefined || upload_sessions[token] == undefined)
+        return false;
+
+    if (upload_sessions[token] < Date.now()) {
+        delete upload_sessions[token];
+        return false;
+    }
+
+    return true;
+}
+
+function prune_upload_state() {
+    let now = Date.now();
+
+    for (let token in upload_sessions) {
+        if (upload_sessions[token] < now)
+            delete upload_sessions[token];
+    }
+
+    for (let key in upload_rate_limits) {
+        if (now - upload_rate_limits[key].window_start >= UPLOAD_RATE_LIMIT_WINDOW)
+            delete upload_rate_limits[key];
+    }
+}
+
+function require_upload_auth(req, res, next) {
+    if (is_upload_authenticated(req) == false) {
+        res.status(401).send(JSON.stringify({ status: "error", message: "Authentication required." }));
+        return;
+    }
+
+    next();
+}
+
+function check_upload_rate_limit(req, res) {
+    prune_upload_state();
+    let now = Date.now();
+    let key = `${req.ip}:${req.path}`;
+    let rate_limit = upload_rate_limits[key];
+
+    if (rate_limit == undefined || now - rate_limit.window_start >= UPLOAD_RATE_LIMIT_WINDOW) {
+        upload_rate_limits[key] = { count: 1, window_start: now };
+        return false;
+    }
+
+    if (rate_limit.count >= UPLOAD_RATE_LIMIT_MAX_REQUESTS) {
+        res.status(429).send(JSON.stringify({ status: "error", message: "Too many requests." }));
+        return true;
+    }
+
+    rate_limit.count++;
+    return false;
+}
+
+function passwords_match(expected_pass, input_pass) {
+    let expected = String(expected_pass || "");
+    let input = String(input_pass || "");
+
+    if (expected.length == 0)
+        return false;
+
+    let expected_hash = crypto.createHash("sha256").update(expected).digest();
+    let input_hash = crypto.createHash("sha256").update(input).digest();
+    return crypto.timingSafeEqual(expected_hash, input_hash);
 }
 
 // Read raw html data
@@ -240,6 +365,10 @@ app.get("/file-upload", (req, res) => {
     res.send(render_page("pages/file-upload.html"))
 })
 
+app.get("/uploads", (req, res) => {
+    res.send(render_page("pages/uploads.html"))
+})
+
 // Returns log-in page for admin tools page
 app.get("/admin", (req,res) => {
     res.send(render_page("pages/admin.html"))
@@ -271,12 +400,27 @@ app.post("/authenticate", (req, res) => {
     let pass = req.body.key;
     let result = { result: "failed" }
 
-    if (pass == admin_pass) {
+    if (passwords_match(admin_pass, pass)) {
         result.result = "success"
         result.data = load_page("pages/admin-secure.html").page
     }
 
     res.send(JSON.stringify(result))
+})
+
+app.post("/uploads-authenticate", (req, res) => {
+    if (check_upload_rate_limit(req, res))
+        return;
+
+    let pass = req.body.key;
+    let result = { result: "failed" }
+
+    if (passwords_match(upload_pass, pass)) {
+        result.result = "success";
+        create_upload_session(res);
+    }
+
+    res.send(JSON.stringify(result));
 })
 
 // Uploads contact form information submitted from contact page.
@@ -394,17 +538,12 @@ app.post("/file-upload", upload.array('files', 12), (req, res) => {
 	// Move each file to server location
 	for (let i = 0; i < files.length; i++) {
 		let curr_file = files[i];
-
-		var file_name = curr_file.originalname;
-		while (file_name.indexOf(' ') >= 0)
-			file_name = file_name.replace(" ", "_");
-	
-		while (file_name.indexOf("\'") >= 0)
-			file_name = file_name.replace("\'", "");
+ 
+		var file_name = normalize_uploaded_file_name(curr_file.originalname);
 		file_names.push(file_name)
 	
 		let temp_file_path = curr_file.path;
-		let final_path = "data/uploads/" + file_name;
+		let final_path = path.join("data", "uploads", file_name);
 		file_paths.push(final_path)
 	
 		fs.rename(temp_file_path, final_path, (e) => {
@@ -448,6 +587,63 @@ app.post("/file-upload", upload.array('files', 12), (req, res) => {
 	html += `</div>`;
 	send_message(message_recipient, "Semblueinc File Upload", html);
 	res.send(JSON.stringify({"status": "success"}));
+})
+
+app.get("/uploads-data", (req, res) => {
+    if (check_upload_rate_limit(req, res))
+        return;
+    if (is_upload_authenticated(req) == false) {
+        res.status(401).send(JSON.stringify({ status: "error", message: "Authentication required." }));
+        return;
+    }
+
+    fs.readdir(upload_directory, { withFileTypes: true }, (err, entries) => {
+        if (err) {
+            console.error("Error reading uploads directory:", err);
+            res.status(500).send(JSON.stringify({ status: "error" }));
+            return;
+        }
+
+        let files = entries
+            .filter((entry) => entry.isFile())
+            .map((entry) => entry.name)
+            .filter((entry) => /^[A-Za-z0-9._-]+$/.test(entry))
+            .sort((a, b) => a.localeCompare(b));
+
+        res.json({ files: files });
+    });
+})
+
+app.delete("/delete-upload", (req, res) => {
+    if (check_upload_rate_limit(req, res))
+        return;
+    if (is_upload_authenticated(req) == false) {
+        res.status(401).send(JSON.stringify({ status: "error", message: "Authentication required." }));
+        return;
+    }
+
+    let file_name = String(req.body.file_name || "");
+    let file_path = get_uploaded_file_path(file_name);
+
+    if (file_path == null) {
+        res.status(400).send(JSON.stringify({ status: "error", message: "Invalid file name." }));
+        return;
+    }
+
+    fs.rm(file_path, (err) => {
+        if (err) {
+            if (err.code == "ENOENT") {
+                res.status(404).send(JSON.stringify({ status: "error", message: "File not found." }));
+                return;
+            }
+
+            console.error("Error deleting uploaded file:", err);
+            res.status(500).send(JSON.stringify({ status: "error", message: "Unable to delete file." }));
+            return;
+        }
+
+        res.json({ status: "success" });
+    });
 })
 
 app.post("/upload", upload.single('file'), (req, res) => {
@@ -668,6 +864,8 @@ app.listen(port, () => {
     load_stored_plans();
 });
 
+setInterval(prune_upload_state, UPLOAD_RATE_LIMIT_WINDOW);
+
 // Ensure the data directory exists
 if (fs.existsSync("data") == false) {
     console.log("Creating data directory...")
@@ -683,4 +881,14 @@ if (fs.existsSync("data/contact") == false) {
 }
 if (fs.existsSync("data/supplies") == false) {
     fs.mkdirSync("data/supplies")
+}
+if (fs.existsSync("data/uploads") == false) {
+    fs.mkdirSync("data/uploads")
+}
+
+if (admin_pass.length == 0) {
+    console.warn("ADMIN_PASS is not set; admin pages will reject all authentication attempts.");
+}
+if (upload_pass.length == 0) {
+    console.warn("UPLOAD_PASS is not set; the uploads dashboard will reject all authentication attempts.");
 }
