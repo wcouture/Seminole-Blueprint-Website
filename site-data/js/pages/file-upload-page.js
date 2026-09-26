@@ -73,7 +73,7 @@ if (planForm && addFile && fileInputsContainer) {
 
     config.body = data;
 
-    fadeMessage("Uploading files...");
+    fadeMessage("<span class='spinner'></span>Uploading files...");
 
     fetch("/file-upload", config)
       .then((response) => response.json())

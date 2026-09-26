@@ -1611,3 +1611,23 @@ body {
     padding-right: 16px;
   }
 }
+
+
+span.spinner {
+  border-top: 4px solid #29367e;
+  border-right: 4px solid transparent;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
