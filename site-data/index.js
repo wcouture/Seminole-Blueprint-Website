@@ -617,7 +617,7 @@ app.get("/uploads-data", (req, res) => {
             .sort((a, b) => a.localeCompare(b));
 
         for (let i = 0; i < fileNames.length; i++) {
-            let filename = filesNames[i];
+            let filename = fileNames[i];
             let path = path.join(upload_directory, filename);
             let fileState = fs.statSync(path);
             let fileData = { name: filename, birthtime: fileState.birthtime };
