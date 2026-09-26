@@ -74,7 +74,7 @@ if (uploadsBoard && uploadsStatus && noUploadsCard && noSearchResultsCard && upl
       link.className = "upload-link";
       nameCell.appendChild(link);
 
-      const birthtimeDate = Date.parse(allFileData[i].birthtime);
+      const birthtimeDate = new Date(Date.parse(allFileData[i].birthtime));
       const options = {
         weekday: "long",
         year: "numeric",
