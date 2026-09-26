@@ -189,7 +189,12 @@ function parse_cookies(req) {
         let separator = pair.indexOf("=");
         let key = pair.substring(0, separator);
         let value = pair.substring(separator + 1);
-        cookies[key] = decodeURIComponent(value);
+        try {
+            cookies[key] = decodeURIComponent(value);
+        }
+        catch {
+            cookies[key] = value;
+        }
     }
 
     return cookies;
@@ -257,6 +262,16 @@ function check_upload_rate_limit(req, res) {
 
     rate_limit.count++;
     return false;
+}
+
+function passwords_match(expected_pass, input_pass) {
+    let expected = String(expected_pass || "");
+    let input = String(input_pass || "");
+
+    if (expected.length == 0 || expected.length !== input.length)
+        return false;
+
+    return crypto.timingSafeEqual(Buffer.from(expected), Buffer.from(input));
 }
 
 // Read raw html data
@@ -383,7 +398,7 @@ app.post("/authenticate", (req, res) => {
     let pass = req.body.key;
     let result = { result: "failed" }
 
-    if (admin_pass.length > 0 && pass === admin_pass) {
+    if (passwords_match(admin_pass, pass)) {
         result.result = "success"
         result.data = load_page("pages/admin-secure.html").page
     }
@@ -398,7 +413,7 @@ app.post("/uploads-authenticate", (req, res) => {
     let pass = req.body.key;
     let result = { result: "failed" }
 
-    if (upload_pass.length > 0 && pass === upload_pass) {
+    if (passwords_match(upload_pass, pass)) {
         result.result = "success";
         create_upload_session(res);
     }
@@ -593,7 +608,7 @@ app.get("/uploads-data", (req, res) => {
             .filter((entry) => /^[A-Za-z0-9._-]+$/.test(entry))
             .sort((a, b) => a.localeCompare(b));
 
-        res.send(JSON.stringify({ files: files }));
+        res.json({ files: files });
     });
 })
 
@@ -625,7 +640,7 @@ app.delete("/delete-upload", (req, res) => {
             return;
         }
 
-        res.send(JSON.stringify({ status: "success" }));
+        res.json({ status: "success" });
     });
 })
 
@@ -867,4 +882,11 @@ if (fs.existsSync("data/supplies") == false) {
 }
 if (fs.existsSync("data/uploads") == false) {
     fs.mkdirSync("data/uploads")
+}
+
+if (admin_pass.length == 0) {
+    console.warn("ADMIN_PASS is not set; admin authentication is disabled.");
+}
+if (upload_pass.length == 0) {
+    console.warn("UPLOAD_PASS is not set; uploads authentication is disabled.");
 }

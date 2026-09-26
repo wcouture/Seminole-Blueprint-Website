@@ -131,7 +131,11 @@ if (uploadsBoard && uploadsStatus && noUploadsCard) {
       .catch(() => {
         passwordAttempts += 1;
         uploadsStatus.innerText = "Unable to verify password.";
-        window.setTimeout(promptForPassword, 1000);
+        window.setTimeout(() => {
+          if (passwordAttempts < MAX_PASSWORD_ATTEMPTS) {
+            promptForPassword();
+          }
+        }, 1000);
       });
   };
 
