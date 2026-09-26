@@ -74,8 +74,15 @@ if (uploadsBoard && uploadsStatus && noUploadsCard && noSearchResultsCard && upl
       link.className = "upload-link";
       nameCell.appendChild(link);
 
+      const birthtimeDate = Date.parse(files[i].birthtime);
+      const options = {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      };
       const birthtimeCell = document.createElement("td");
-      birthtimeCell.innerText = files[i].birthtime;
+      birthtimeCell.innerText = birthtimeDate.toLocaleDateString(undefined, options);
       birthtimeCell.className = "birthtime-label";
 
       const actionCell = document.createElement("td");

@@ -1720,3 +1720,7 @@ span.spinner {
     transform: rotate(360deg);
   }
 }
+
+td.birthtime-label {
+  text-wrap: none;
+}
