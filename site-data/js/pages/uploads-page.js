@@ -77,7 +77,6 @@ if (uploadsBoard && uploadsStatus && noUploadsCard && noSearchResultsCard && upl
       const birthtimeCell = document.createElement("td");
       birthtimeCell.innerText = files[i].birthtime;
       birthtimeCell.className = "birthtime-label";
-      row.appendChild(birthtimeCell);
 
       const actionCell = document.createElement("td");
       actionCell.className = "uploads-td-action";
@@ -103,6 +102,7 @@ if (uploadsBoard && uploadsStatus && noUploadsCard && noSearchResultsCard && upl
       actionCell.appendChild(deleteButton);
 
       row.appendChild(nameCell);
+      row.appendChild(birthtimeCell);
       row.appendChild(actionCell);
       uploadsBoard.appendChild(row);
     }
