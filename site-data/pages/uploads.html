@@ -6,10 +6,28 @@
     <div class="centered-region">
         <div class="uploads-panel">
             <p id="uploads-status">Checking access...</p>
-            <div id="uploads-board" class="uploads-board" hidden="true"></div>
+            <div id="uploads-controls" class="uploads-controls" hidden="true">
+                <input type="text" id="uploads-search" class="uploads-search" placeholder="Search files..." autocomplete="off" />
+            </div>
+            <div id="uploads-table-wrap" class="uploads-table-wrap" hidden="true">
+                <table class="uploads-table">
+                    <thead>
+                        <tr>
+                            <th>File Name</th>
+                            <th class="uploads-th-action">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="uploads-board"></tbody>
+                </table>
+            </div>
             <div class="box solid-card plan-item" id="no-uploads-card" hidden="true">
                 <div class="row">
                     <h3>No uploaded files found.</h3>
+                </div>
+            </div>
+            <div class="box solid-card plan-item" id="no-search-results-card" hidden="true">
+                <div class="row">
+                    <h3>No files match your search.</h3>
                 </div>
             </div>
         </div>

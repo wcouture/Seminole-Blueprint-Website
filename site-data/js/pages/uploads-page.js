@@ -1,15 +1,21 @@
 const uploadsBoard = document.getElementById("uploads-board");
 const uploadsStatus = document.getElementById("uploads-status");
 const noUploadsCard = document.getElementById("no-uploads-card");
+const noSearchResultsCard = document.getElementById("no-search-results-card");
+const uploadsControls = document.getElementById("uploads-controls");
+const uploadsTableWrap = document.getElementById("uploads-table-wrap");
+const uploadsSearch = document.getElementById("uploads-search");
 
-if (uploadsBoard && uploadsStatus && noUploadsCard) {
+if (uploadsBoard && uploadsStatus && noUploadsCard && noSearchResultsCard && uploadsControls && uploadsTableWrap && uploadsSearch) {
   const MAX_PASSWORD_ATTEMPTS = 5;
   let passwordAttempts = 0;
+  let allFiles = [];
 
   const httpRequest = (method, route, data) => {
     const config = {
       method,
       mode: "same-origin",
+      credentials: "same-origin",
       headers: {
         "Content-Type": "application/json",
       },
@@ -36,71 +42,104 @@ if (uploadsBoard && uploadsStatus && noUploadsCard) {
     }
   };
 
-  const renderUploads = (data) => {
-    const files = Array.isArray(data.files) ? data.files : [];
+  const renderRows = (files) => {
     clearBoard();
 
     if (files.length === 0) {
-      uploadsBoard.hidden = true;
-      noUploadsCard.hidden = false;
+      uploadsTableWrap.hidden = true;
+      if (allFiles.length === 0) {
+        uploadsControls.hidden = true;
+        noUploadsCard.hidden = false;
+        noSearchResultsCard.hidden = true;
+      } else {
+        uploadsControls.hidden = false;
+        noUploadsCard.hidden = true;
+        noSearchResultsCard.hidden = false;
+      }
       uploadsStatus.innerText = "";
       return;
     }
 
     for (let i = 0; i < files.length; i++) {
-      const item = document.createElement("div");
-      item.className = "box solid-card plan-item upload-item";
+      const row = document.createElement("tr");
 
+      const nameCell = document.createElement("td");
       const link = document.createElement("a");
       link.href = `/data/uploads/${encodeURIComponent(files[i])}`;
       link.innerText = files[i];
       link.target = "_blank";
       link.rel = "noopener noreferrer";
       link.className = "upload-link";
+      nameCell.appendChild(link);
 
+      const actionCell = document.createElement("td");
+      actionCell.className = "uploads-td-action";
       const deleteButton = document.createElement("button");
       deleteButton.type = "button";
       deleteButton.className = "delete";
       deleteButton.innerText = "Delete";
+      const fileName = files[i];
       deleteButton.addEventListener("click", () => {
-        const confirmed = window.confirm(`Delete ${files[i]}?`);
+        const confirmed = window.confirm(`Delete ${fileName}?`);
         if (!confirmed) {
           return;
         }
 
         deleteButton.disabled = true;
-        httpRequest("DELETE", "/delete-upload", { file_name: files[i] })
+        httpRequest("DELETE", "/delete-upload", { file_name: fileName })
           .then(() => loadUploads("File deleted."))
           .catch((error) => {
             deleteButton.disabled = false;
             alert(error.message || "Unable to delete file.");
           });
       });
+      actionCell.appendChild(deleteButton);
 
-      item.appendChild(link);
-      item.appendChild(deleteButton);
-      uploadsBoard.appendChild(item);
+      row.appendChild(nameCell);
+      row.appendChild(actionCell);
+      uploadsBoard.appendChild(row);
     }
 
     uploadsStatus.innerText = "";
     noUploadsCard.hidden = true;
-    uploadsBoard.hidden = false;
+    noSearchResultsCard.hidden = true;
+    uploadsControls.hidden = false;
+    uploadsTableWrap.hidden = false;
+  };
+
+  const applySearch = () => {
+    const query = uploadsSearch.value.trim().toLowerCase();
+    const filtered = query
+      ? allFiles.filter((f) => f.toLowerCase().includes(query))
+      : allFiles;
+    renderRows(filtered);
+  };
+
+  const renderUploads = (data) => {
+    allFiles = Array.isArray(data.files) ? data.files : [];
+    uploadsSearch.value = "";
+    applySearch();
   };
 
   const loadUploads = (message) => {
     uploadsStatus.innerText = message || "Loading uploaded files...";
     noUploadsCard.hidden = true;
-    uploadsBoard.hidden = true;
+    noSearchResultsCard.hidden = true;
+    uploadsTableWrap.hidden = true;
+    uploadsControls.hidden = true;
 
     httpRequest("GET", "/uploads-data")
       .then(renderUploads)
       .catch(() => {
         clearBoard();
-        uploadsBoard.hidden = true;
+        uploadsTableWrap.hidden = true;
+        uploadsControls.hidden = true;
         uploadsStatus.innerText = "Unable to load uploaded files.";
         noUploadsCard.hidden = true;
       });
   };
+
+  uploadsSearch.addEventListener("input", applySearch);
 
   const promptForPassword = () => {
     if (passwordAttempts >= MAX_PASSWORD_ATTEMPTS) {
