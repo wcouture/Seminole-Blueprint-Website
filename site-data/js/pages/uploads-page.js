@@ -47,7 +47,7 @@ if (uploadsBoard && uploadsStatus && noUploadsCard && noSearchResultsCard && upl
   const renderRows = () => {
     clearBoard();
 
-    if (allfileData.length === 0) {
+    if (allFileData.length === 0) {
       uploadsTableWrap.hidden = true;
       if (allFileData.length === 0) {
         uploadsControls.hidden = true;
