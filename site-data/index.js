@@ -604,6 +604,11 @@ app.get("/uploads-data", (req, res) => {
             return;
         }
         
+        for (let i = 0; i < entries.length; i++) {
+            let entry = entries[i];
+            console.log(JSON.stringify(entry));
+        }
+
         let files = entries 
             .filter((entry) => entry.isFile())
             .map((entry) => entry.name)
