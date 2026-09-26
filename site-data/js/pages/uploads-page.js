@@ -10,6 +10,8 @@ if (uploadsBoard && uploadsStatus && noUploadsCard && noSearchResultsCard && upl
   const MAX_PASSWORD_ATTEMPTS = 5;
   let passwordAttempts = 0;
   let allFiles = [];
+  let allBirthtimes = [];
+  let allFileData = [];
 
   const httpRequest = (method, route, data) => {
     const config = {
@@ -42,7 +44,7 @@ if (uploadsBoard && uploadsStatus && noUploadsCard && noSearchResultsCard && upl
     }
   };
 
-  const renderRows = (files) => {
+  const renderRows = (files, birthtimes) => {
     clearBoard();
 
     if (files.length === 0) {
@@ -115,13 +117,21 @@ if (uploadsBoard && uploadsStatus && noUploadsCard && noSearchResultsCard && upl
   const applySearch = () => {
     const query = uploadsSearch.value.trim().toLowerCase();
     const filtered = query
-      ? allFiles.filter((f) => f.name.toLowerCase().includes(query))
-      : allFiles;
+      ? allFileData.filter((f) => f.name.toLowerCase().includes(query))
+      : allFileData;
     renderRows(filtered);
   };
 
   const renderUploads = (data) => {
     allFiles = Array.isArray(data.files) ? data.files : [];
+    allBirthtimes = Array.isArray(data.birthtimes) ? data.birthtimes : [];
+
+    allFileData = [];
+    for (let i = 0; i < allFiles.length; i++) {
+      let fileData = { name: allFiles[i], birthtime: allBirthtimes[i] };
+      allFileData.push(fileData);
+    }
+
     uploadsSearch.value = "";
     applySearch();
   };
