@@ -9,6 +9,7 @@ const nodemailer = require('nodemailer');
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const combyne = require('combyne');
 const multer = require("multer");
 const upload = multer({dest: "data/temp", limits: { fileSize: MAX_FILE_SIZE }})
@@ -26,6 +27,7 @@ const port = "3001"
 const success = JSON.stringify({status: "success"})
 const admin_pass = "$emBlue1nc";
 const upload_directory = path.join(__dirname, "data", "uploads");
+const UPLOAD_AUTH_COOKIE = "uploads_auth";
 
 const message_recipient = "eaststore@semblueinc.com";
 
@@ -66,8 +68,13 @@ const HOUR = 60 * MINUTE;
 const DAY = 24 * HOUR;
 
 const TEMP_STORAGE_CUTOFF = DAY * 30;
+const UPLOAD_AUTH_DURATION = HOUR;
+const UPLOAD_RATE_LIMIT_WINDOW = MINUTE;
+const UPLOAD_RATE_LIMIT_MAX_REQUESTS = 30;
 
 let temp_plan_stored = {"plans": []};
+let upload_sessions = {};
+let upload_rate_limits = {};
 
 let requests = { 
 	contact: [],
@@ -153,12 +160,7 @@ function load_stored_plans() {
 }
 
 function normalize_uploaded_file_name(file_name) {
-    let normalized_name = path.basename(String(file_name || ""));
-    while (normalized_name.indexOf(" ") >= 0)
-        normalized_name = normalized_name.replace(" ", "_");
-    while (normalized_name.indexOf("\'") >= 0)
-        normalized_name = normalized_name.replace("\'", "");
-    return normalized_name;
+    return path.basename(String(file_name || "")).replace(/ /g, "_").replace(/'/g, "");
 }
 
 function get_uploaded_file_path(file_name) {
@@ -166,6 +168,75 @@ function get_uploaded_file_path(file_name) {
     if (safe_file_name.length == 0 || safe_file_name != file_name)
         return null;
     return path.join(upload_directory, safe_file_name);
+}
+
+function parse_cookies(req) {
+    let raw_cookie = String(req.headers.cookie || "");
+    let pairs = raw_cookie.split(";");
+    let cookies = {};
+
+    for (let i = 0; i < pairs.length; i++) {
+        let pair = pairs[i].trim();
+        if (pair.length == 0 || pair.indexOf("=") < 0)
+            continue;
+
+        let separator = pair.indexOf("=");
+        let key = pair.substring(0, separator);
+        let value = pair.substring(separator + 1);
+        cookies[key] = decodeURIComponent(value);
+    }
+
+    return cookies;
+}
+
+function create_upload_session(res) {
+    let token = crypto.randomBytes(32).toString("hex");
+    upload_sessions[token] = Date.now() + UPLOAD_AUTH_DURATION;
+    res.setHeader("Set-Cookie", `${UPLOAD_AUTH_COOKIE}=${token}; Max-Age=${Math.floor(UPLOAD_AUTH_DURATION / SECOND)}; HttpOnly; SameSite=Strict; Path=/`);
+}
+
+function is_upload_authenticated(req) {
+    let cookies = parse_cookies(req);
+    let token = cookies[UPLOAD_AUTH_COOKIE];
+
+    if (token == undefined || upload_sessions[token] == undefined)
+        return false;
+
+    if (upload_sessions[token] < Date.now()) {
+        delete upload_sessions[token];
+        return false;
+    }
+
+    return true;
+}
+
+function require_upload_auth(req, res, next) {
+    if (is_upload_authenticated(req) == false) {
+        res.status(401).send(JSON.stringify({ status: "error", message: "Authentication required." }));
+        return;
+    }
+
+    next();
+}
+
+function enforce_upload_rate_limit(req, res, next) {
+    let now = Date.now();
+    let key = `${req.ip}:${req.route.path}`;
+    let rate_limit = upload_rate_limits[key];
+
+    if (rate_limit == undefined || now - rate_limit.window_start >= UPLOAD_RATE_LIMIT_WINDOW) {
+        upload_rate_limits[key] = { count: 1, window_start: now };
+        next();
+        return;
+    }
+
+    if (rate_limit.count >= UPLOAD_RATE_LIMIT_MAX_REQUESTS) {
+        res.status(429).send(JSON.stringify({ status: "error", message: "Too many requests." }));
+        return;
+    }
+
+    rate_limit.count++;
+    next();
 }
 
 // Read raw html data
@@ -295,6 +366,7 @@ app.post("/authenticate", (req, res) => {
     if (pass == admin_pass) {
         result.result = "success"
         result.data = load_page("pages/admin-secure.html").page
+        create_upload_session(res);
     }
 
     res.send(JSON.stringify(result))
@@ -466,7 +538,7 @@ app.post("/file-upload", upload.array('files', 12), (req, res) => {
 	res.send(JSON.stringify({"status": "success"}));
 })
 
-app.get("/uploads-data", (req, res) => {
+app.get("/uploads-data", require_upload_auth, enforce_upload_rate_limit, (req, res) => {
     fs.readdir(upload_directory, { withFileTypes: true }, (err, entries) => {
         if (err) {
             console.error("Error reading uploads directory:", err);
@@ -483,7 +555,7 @@ app.get("/uploads-data", (req, res) => {
     });
 })
 
-app.delete("/delete-upload", (req, res) => {
+app.delete("/delete-upload", require_upload_auth, enforce_upload_rate_limit, (req, res) => {
     let file_name = String(req.body.file_name || "");
     let file_path = get_uploaded_file_path(file_name);
 
