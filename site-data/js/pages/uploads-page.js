@@ -3,6 +3,9 @@ const uploadsStatus = document.getElementById("uploads-status");
 const noUploadsCard = document.getElementById("no-uploads-card");
 
 if (uploadsBoard && uploadsStatus && noUploadsCard) {
+  const MAX_PASSWORD_ATTEMPTS = 5;
+  let passwordAttempts = 0;
+
   const httpRequest = (method, route, data) => {
     const config = {
       method,
@@ -100,6 +103,12 @@ if (uploadsBoard && uploadsStatus && noUploadsCard) {
   };
 
   const promptForPassword = () => {
+    if (passwordAttempts >= MAX_PASSWORD_ATTEMPTS) {
+      alert("Too many incorrect password attempts.");
+      window.location.href = "/";
+      return;
+    }
+
     const password = window.prompt("Enter the uploads password.");
 
     if (password === null) {
@@ -107,15 +116,17 @@ if (uploadsBoard && uploadsStatus && noUploadsCard) {
       return;
     }
 
-    httpRequest("POST", "/authenticate", { key: password })
+    httpRequest("POST", "/uploads-authenticate", { key: password })
       .then((response) => {
         if (response.result === "success") {
+          passwordAttempts = 0;
           loadUploads();
           return;
         }
 
+        passwordAttempts += 1;
         alert("Incorrect password.");
-        promptForPassword();
+        window.setTimeout(promptForPassword, 250);
       })
       .catch(() => {
         uploadsStatus.innerText = "Unable to verify password.";

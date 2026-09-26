@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({limit: '5gb', extended: true}));
 const port = "3001"
 
 const success = JSON.stringify({status: "success"})
-const admin_pass = "$emBlue1nc";
+const admin_pass = process.env.ADMIN_PASS || "";
 const upload_directory = path.join(__dirname, "data", "uploads");
 const UPLOAD_AUTH_COOKIE = "uploads_auth";
 
@@ -160,12 +160,17 @@ function load_stored_plans() {
 }
 
 function normalize_uploaded_file_name(file_name) {
-    return path.basename(String(file_name || "")).replace(/ /g, "_").replace(/'/g, "");
+    return path.basename(String(file_name || ""))
+        .replace(/ /g, "_")
+        .replace(/'/g, "")
+        .replace(/[^A-Za-z0-9._-]/g, "_");
 }
 
 function get_uploaded_file_path(file_name) {
-    let safe_file_name = path.basename(String(file_name || ""));
-    if (safe_file_name.length == 0 || safe_file_name != file_name)
+    let safe_file_name = String(file_name || "").trim();
+    if (safe_file_name.length == 0 || safe_file_name !== path.basename(safe_file_name))
+        return null;
+    if (/^[A-Za-z0-9._-]+$/.test(safe_file_name) == false)
         return null;
     return path.join(upload_directory, safe_file_name);
 }
@@ -210,6 +215,20 @@ function is_upload_authenticated(req) {
     return true;
 }
 
+function prune_upload_state() {
+    let now = Date.now();
+
+    for (let token in upload_sessions) {
+        if (upload_sessions[token] < now)
+            delete upload_sessions[token];
+    }
+
+    for (let key in upload_rate_limits) {
+        if (now - upload_rate_limits[key].window_start >= UPLOAD_RATE_LIMIT_WINDOW)
+            delete upload_rate_limits[key];
+    }
+}
+
 function require_upload_auth(req, res, next) {
     if (is_upload_authenticated(req) == false) {
         res.status(401).send(JSON.stringify({ status: "error", message: "Authentication required." }));
@@ -220,6 +239,7 @@ function require_upload_auth(req, res, next) {
 }
 
 function enforce_upload_rate_limit(req, res, next) {
+    prune_upload_state();
     let now = Date.now();
     let key = `${req.ip}:${req.route.path}`;
     let rate_limit = upload_rate_limits[key];
@@ -363,13 +383,24 @@ app.post("/authenticate", (req, res) => {
     let pass = req.body.key;
     let result = { result: "failed" }
 
-    if (pass == admin_pass) {
+    if (admin_pass.length > 0 && pass === admin_pass) {
         result.result = "success"
         result.data = load_page("pages/admin-secure.html").page
-        create_upload_session(res);
     }
 
     res.send(JSON.stringify(result))
+})
+
+app.post("/uploads-authenticate", enforce_upload_rate_limit, (req, res) => {
+    let pass = req.body.key;
+    let result = { result: "failed" }
+
+    if (admin_pass.length > 0 && pass === admin_pass) {
+        result.result = "success";
+        create_upload_session(res);
+    }
+
+    res.send(JSON.stringify(result));
 })
 
 // Uploads contact form information submitted from contact page.
@@ -538,7 +569,7 @@ app.post("/file-upload", upload.array('files', 12), (req, res) => {
 	res.send(JSON.stringify({"status": "success"}));
 })
 
-app.get("/uploads-data", require_upload_auth, enforce_upload_rate_limit, (req, res) => {
+app.get("/uploads-data", enforce_upload_rate_limit, require_upload_auth, (req, res) => {
     fs.readdir(upload_directory, { withFileTypes: true }, (err, entries) => {
         if (err) {
             console.error("Error reading uploads directory:", err);
@@ -555,7 +586,7 @@ app.get("/uploads-data", require_upload_auth, enforce_upload_rate_limit, (req, r
     });
 })
 
-app.delete("/delete-upload", require_upload_auth, enforce_upload_rate_limit, (req, res) => {
+app.delete("/delete-upload", enforce_upload_rate_limit, require_upload_auth, (req, res) => {
     let file_name = String(req.body.file_name || "");
     let file_path = get_uploaded_file_path(file_name);
 
@@ -797,6 +828,8 @@ app.listen(port, () => {
     console.log(`Semblueinc listening on port ${port}`)
     load_stored_plans();
 });
+
+setInterval(prune_upload_state, UPLOAD_RATE_LIMIT_WINDOW);
 
 // Ensure the data directory exists
 if (fs.existsSync("data") == false) {
