@@ -46,7 +46,9 @@ if (uploadsBoard && uploadsStatus && noUploadsCard) {
 
     if (files.length === 0) {
       uploadsTableWrap.hidden = true;
-      uploadsControls.hidden = true;
+      if (allFiles.length === 0) {
+        uploadsControls.hidden = true;
+      }
       noUploadsCard.hidden = false;
       uploadsStatus.innerText = "";
       return;
