@@ -618,8 +618,8 @@ app.get("/uploads-data", (req, res) => {
 
         for (let i = 0; i < fileNames.length; i++) {
             let filename = fileNames[i];
-            let path = path.join(upload_directory, filename);
-            let fileState = fs.statSync(path);
+            let filePath = path.join(upload_directory, filename);
+            let fileState = fs.statSync(filePath);
             let fileData = { name: filename, birthtime: fileState.birthtime };
             files.push(fileData);
         }
