@@ -630,7 +630,7 @@ app.delete("/delete-upload", (req, res) => {
         return;
     }
 	try {
-		fs.rm(file_path, (err) => {
+		fs.rmSync(file_path, (err) => {
 			if (err) {
 				if (err.code == "ENOENT") {
 					res.status(404).send(JSON.stringify({ status: "error", message: "File not found." }));
