@@ -2,7 +2,7 @@
 const kilo = 1024;
 const mega = kilo * kilo;
 const giga = kilo * mega; 
-const MAX_FILE_SIZE = 5 * giga;
+const MAX_FILE_SIZE = 100 * giga;
 
 const http = require('http');
 const nodemailer = require('nodemailer');
@@ -19,8 +19,8 @@ const bodyParser = require('body-parser');
 const app = express();
 
 // Sets the upload size limit for json blobs
-app.use(bodyParser.json({limit: '5gb'}));
-app.use(bodyParser.urlencoded({limit: '5gb', extended: true}));
+app.use(bodyParser.json({limit: '100gb'}));
+app.use(bodyParser.urlencoded({limit: '100gb', extended: true}));
 
 const port = "3001"
 
