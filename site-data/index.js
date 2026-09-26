@@ -609,19 +609,22 @@ app.get("/uploads-data", (req, res) => {
             console.log(JSON.stringify(entry));
         }
 
-        let files = entries 
+        let files = [];
+        let fileNames = entries 
             .filter((entry) => entry.isFile())
             .map((entry) => entry.name)
             .filter((entry) => /^[A-Za-z0-9._-]+$/.test(entry))
             .sort((a, b) => a.localeCompare(b));
-        
-        let birthtimes = entries
-            .filter((entry) => entry.isFile())
-            .filter((entry) => /^[A-Za-z0-9._-]+$/.test(entry.name))
-            .map((entry) => entry.birthtime)
-            .sort((a, b) => a.localeCompare(b));
 
-        res.json({ files: files, birthtimes: birthtimes });
+        for (let i = 0; i < fileNames.length; i++) {
+            let filename = filesNames[i];
+            let path = path.join(upload_directory, filename);
+            let fileState = fs.statSync(path);
+            let fileData = { name: filename, birthtime: fileState.birthtime };
+            files.push(fileData);
+        }
+
+        res.json({ files: files });
     });
 });
 

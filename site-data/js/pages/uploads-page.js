@@ -123,15 +123,7 @@ if (uploadsBoard && uploadsStatus && noUploadsCard && noSearchResultsCard && upl
   };
 
   const renderUploads = (data) => {
-    allFiles = Array.isArray(data.files) ? data.files : [];
-    allBirthtimes = Array.isArray(data.birthtimes) ? data.birthtimes : [];
-
-    allFileData = [];
-    for (let i = 0; i < allFiles.length; i++) {
-      let fileData = { name: allFiles[i], birthtime: allBirthtimes[i] };
-      allFileData.push(fileData);
-    }
-
+    allFileData = Array.isArray(data.files) ? data.files : [];
     uploadsSearch.value = "";
     applySearch();
   };
