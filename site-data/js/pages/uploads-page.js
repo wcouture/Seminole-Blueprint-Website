@@ -6,7 +6,7 @@ const uploadsControls = document.getElementById("uploads-controls");
 const uploadsTableWrap = document.getElementById("uploads-table-wrap");
 const uploadsSearch = document.getElementById("uploads-search");
 
-if (uploadsBoard && uploadsStatus && noUploadsCard) {
+if (uploadsBoard && uploadsStatus && noUploadsCard && uploadsControls && uploadsTableWrap) {
   const MAX_PASSWORD_ATTEMPTS = 5;
   let passwordAttempts = 0;
   let allFiles = [];
