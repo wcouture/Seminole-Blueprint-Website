@@ -18,8 +18,8 @@ const bodyParser = require('body-parser');
 const app = express();
 
 // Sets the upload size limit for json blobs
-app.use(bodyParser.json({limit: '200mb'}));
-app.use(bodyParser.urlencoded({limit: '100mb', extended: true}));
+app.use(bodyParser.json({limit: '800mb'}));
+app.use(bodyParser.urlencoded({limit: '800mb', extended: true}));
 
 const port = "3001"
 
