@@ -65,12 +65,17 @@ if (uploadsBoard && uploadsStatus && noUploadsCard && noSearchResultsCard && upl
 
       const nameCell = document.createElement("td");
       const link = document.createElement("a");
-      link.href = `/data/uploads/${encodeURIComponent(files[i])}`;
-      link.innerText = files[i];
+      link.href = `/data/uploads/${encodeURIComponent(files[i].name)}`;
+      link.innerText = files[i].name;
       link.target = "_blank";
       link.rel = "noopener noreferrer";
       link.className = "upload-link";
       nameCell.appendChild(link);
+
+      const birthtime = document.createElement("td");
+      birthtime.innerText = files[i].birthtime;
+      birthtime.className = "birthtime-label";
+      nameCell.appendChild(birthtime);
 
       const actionCell = document.createElement("td");
       actionCell.className = "uploads-td-action";
@@ -78,7 +83,7 @@ if (uploadsBoard && uploadsStatus && noUploadsCard && noSearchResultsCard && upl
       deleteButton.type = "button";
       deleteButton.className = "delete";
       deleteButton.innerText = "Delete";
-      const fileName = files[i];
+      const fileName = files[i].name;
       deleteButton.addEventListener("click", () => {
         const confirmed = window.confirm(`Delete ${fileName}?`);
         if (!confirmed) {
@@ -110,7 +115,7 @@ if (uploadsBoard && uploadsStatus && noUploadsCard && noSearchResultsCard && upl
   const applySearch = () => {
     const query = uploadsSearch.value.trim().toLowerCase();
     const filtered = query
-      ? allFiles.filter((f) => f.toLowerCase().includes(query))
+      ? allFiles.filter((f) => f.name.toLowerCase().includes(query))
       : allFiles;
     renderRows(filtered);
   };

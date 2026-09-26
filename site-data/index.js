@@ -606,9 +606,9 @@ app.get("/uploads-data", (req, res) => {
 
         let files = entries
             .filter((entry) => entry.isFile())
-            .map((entry) => entry.name)
-            .filter((entry) => /^[A-Za-z0-9._-]+$/.test(entry))
-            .sort((a, b) => a.localeCompare(b));
+            .map((entry) => { name: entry.name, birthtime: entry.birthtime })
+            .filter((entry) => /^[A-Za-z0-9._-]+$/.test(entry.name))
+            .sort((a, b) => a.name.localeCompare(b.name));
 
         res.json({ files: files });
     });
