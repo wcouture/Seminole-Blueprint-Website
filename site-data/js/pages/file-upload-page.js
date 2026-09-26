@@ -45,12 +45,12 @@ if (planForm && addFile && fileInputsContainer) {
     }
   });
 
-  function displaySuccess() {
+  function fadeMessage(message) {
     const center = document.getElementById("center");
     center.className = "centered-region fade-out-quick";
 
     setTimeout(() => {
-      center.innerHTML = "<p>File Uploaded.</p>";
+      center.innerHTML = `<p>${message}</p>`;
       center.className = "centered-region fade-in-quick";
     }, 500);
   }
@@ -73,11 +73,13 @@ if (planForm && addFile && fileInputsContainer) {
 
     config.body = data;
 
+    fadeMessage("Uploading files...");
+
     fetch("/file-upload", config)
       .then((response) => response.json())
       .then((res) => {
         if (res.status === "success") {
-          displaySuccess();
+          fadeMessage("File Uploaded.");
           return;
         }
 
