@@ -1,3 +1,9 @@
+// Define file size constants and maximum file size for uploads
+const kilo = 1024;
+const mega = kilo * kilo;
+const giga = kilo * mega; 
+const MAX_FILE_SIZE = 5 * giga;
+
 const http = require('http');
 const nodemailer = require('nodemailer');
 const express = require('express');
@@ -5,7 +11,7 @@ const fs = require('fs');
 const path = require('path');
 const combyne = require('combyne');
 const multer = require("multer");
-const upload = multer({dest: "data/temp"})
+const upload = multer({dest: "data/temp", limits: { fileSize: MAX_FILE_SIZE }})
 const exec = require('child_process').exec;
 
 const bodyParser = require('body-parser');
