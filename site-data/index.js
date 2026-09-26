@@ -606,7 +606,9 @@ app.get("/uploads-data", (req, res) => {
 
         let files = [];
         for (let entry in entries) {
-            files.push({"name": entry.name, "birthtime": entry.birthtime})
+            const data = {"name": entry.name, "birthtime": entry.birthtime};
+            console.log(JSON.stringify(data))
+            files.push(data)
         }
 
         res.json({ files: files });
