@@ -44,12 +44,12 @@ if (uploadsBoard && uploadsStatus && noUploadsCard && noSearchResultsCard && upl
     }
   };
 
-  const renderRows = (files, birthtimes) => {
+  const renderRows = () => {
     clearBoard();
 
-    if (files.length === 0) {
+    if (allfileData.length === 0) {
       uploadsTableWrap.hidden = true;
-      if (allFiles.length === 0) {
+      if (allFileData.length === 0) {
         uploadsControls.hidden = true;
         noUploadsCard.hidden = false;
         noSearchResultsCard.hidden = true;
@@ -62,19 +62,19 @@ if (uploadsBoard && uploadsStatus && noUploadsCard && noSearchResultsCard && upl
       return;
     }
 
-    for (let i = 0; i < files.length; i++) {
+    for (let i = 0; i < allFileData.length; i++) {
       const row = document.createElement("tr");
 
       const nameCell = document.createElement("td");
       const link = document.createElement("a");
-      link.href = `/data/uploads/${encodeURIComponent(files[i].name)}`;
-      link.innerText = files[i].name;
+      link.href = `/data/uploads/${encodeURIComponent(allFileData[i].name)}`;
+      link.innerText = allFileData[i].name;
       link.target = "_blank";
       link.rel = "noopener noreferrer";
       link.className = "upload-link";
       nameCell.appendChild(link);
 
-      const birthtimeDate = Date.parse(files[i].birthtime);
+      const birthtimeDate = Date.parse(allFileData[i].birthtime);
       const options = {
         weekday: "long",
         year: "numeric",
@@ -91,7 +91,7 @@ if (uploadsBoard && uploadsStatus && noUploadsCard && noSearchResultsCard && upl
       deleteButton.type = "button";
       deleteButton.className = "delete";
       deleteButton.innerText = "Delete";
-      const fileName = files[i].name;
+      const fileName = allFileData[i].name;
       deleteButton.addEventListener("click", () => {
         const confirmed = window.confirm(`Delete ${fileName}?`);
         if (!confirmed) {
