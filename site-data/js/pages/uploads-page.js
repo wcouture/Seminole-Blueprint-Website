@@ -6,7 +6,7 @@ const uploadsControls = document.getElementById("uploads-controls");
 const uploadsTableWrap = document.getElementById("uploads-table-wrap");
 const uploadsSearch = document.getElementById("uploads-search");
 
-if (uploadsBoard && uploadsStatus && noUploadsCard && uploadsControls && uploadsTableWrap && uploadsSearch) {
+if (uploadsBoard && uploadsStatus && noUploadsCard && noSearchResultsCard && uploadsControls && uploadsTableWrap && uploadsSearch) {
   const MAX_PASSWORD_ATTEMPTS = 5;
   let passwordAttempts = 0;
   let allFiles = [];
@@ -50,11 +50,11 @@ if (uploadsBoard && uploadsStatus && noUploadsCard && uploadsControls && uploads
       if (allFiles.length === 0) {
         uploadsControls.hidden = true;
         noUploadsCard.hidden = false;
-        if (noSearchResultsCard) noSearchResultsCard.hidden = true;
+        noSearchResultsCard.hidden = true;
       } else {
         uploadsControls.hidden = false;
         noUploadsCard.hidden = true;
-        if (noSearchResultsCard) noSearchResultsCard.hidden = false;
+        noSearchResultsCard.hidden = false;
       }
       uploadsStatus.innerText = "";
       return;
@@ -102,7 +102,7 @@ if (uploadsBoard && uploadsStatus && noUploadsCard && uploadsControls && uploads
 
     uploadsStatus.innerText = "";
     noUploadsCard.hidden = true;
-    if (noSearchResultsCard) noSearchResultsCard.hidden = true;
+    noSearchResultsCard.hidden = true;
     uploadsControls.hidden = false;
     uploadsTableWrap.hidden = false;
   };
@@ -124,7 +124,7 @@ if (uploadsBoard && uploadsStatus && noUploadsCard && uploadsControls && uploads
   const loadUploads = (message) => {
     uploadsStatus.innerText = message || "Loading uploaded files...";
     noUploadsCard.hidden = true;
-    if (noSearchResultsCard) noSearchResultsCard.hidden = true;
+    noSearchResultsCard.hidden = true;
     uploadsTableWrap.hidden = true;
     uploadsControls.hidden = true;
 
