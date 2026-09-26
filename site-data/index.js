@@ -25,6 +25,7 @@ const port = "3001"
 
 const success = JSON.stringify({status: "success"})
 const admin_pass = "$emBlue1nc";
+const upload_directory = path.join(__dirname, "data", "uploads");
 
 const message_recipient = "eaststore@semblueinc.com";
 
@@ -151,6 +152,22 @@ function load_stored_plans() {
     temp_plan_stored = plans;
 }
 
+function normalize_uploaded_file_name(file_name) {
+    let normalized_name = path.basename(String(file_name || ""));
+    while (normalized_name.indexOf(" ") >= 0)
+        normalized_name = normalized_name.replace(" ", "_");
+    while (normalized_name.indexOf("\'") >= 0)
+        normalized_name = normalized_name.replace("\'", "");
+    return normalized_name;
+}
+
+function get_uploaded_file_path(file_name) {
+    let safe_file_name = path.basename(String(file_name || ""));
+    if (safe_file_name.length == 0 || safe_file_name != file_name)
+        return null;
+    return path.join(upload_directory, safe_file_name);
+}
+
 // Read raw html data
 function load_page(path) {
     const data = fs.readFileSync(path, 'utf-8')
@@ -238,6 +255,10 @@ app.get("/plan-upload", (req, res) => {
 
 app.get("/file-upload", (req, res) => {
     res.send(render_page("pages/file-upload.html"))
+})
+
+app.get("/uploads", (req, res) => {
+    res.send(render_page("pages/uploads.html"))
 })
 
 // Returns log-in page for admin tools page
@@ -394,17 +415,12 @@ app.post("/file-upload", upload.array('files', 12), (req, res) => {
 	// Move each file to server location
 	for (let i = 0; i < files.length; i++) {
 		let curr_file = files[i];
-
-		var file_name = curr_file.originalname;
-		while (file_name.indexOf(' ') >= 0)
-			file_name = file_name.replace(" ", "_");
-	
-		while (file_name.indexOf("\'") >= 0)
-			file_name = file_name.replace("\'", "");
+ 
+		var file_name = normalize_uploaded_file_name(curr_file.originalname);
 		file_names.push(file_name)
 	
 		let temp_file_path = curr_file.path;
-		let final_path = "data/uploads/" + file_name;
+		let final_path = path.join("data", "uploads", file_name);
 		file_paths.push(final_path)
 	
 		fs.rename(temp_file_path, final_path, (e) => {
@@ -448,6 +464,48 @@ app.post("/file-upload", upload.array('files', 12), (req, res) => {
 	html += `</div>`;
 	send_message(message_recipient, "Semblueinc File Upload", html);
 	res.send(JSON.stringify({"status": "success"}));
+})
+
+app.get("/uploads-data", (req, res) => {
+    fs.readdir(upload_directory, { withFileTypes: true }, (err, entries) => {
+        if (err) {
+            console.error("Error reading uploads directory:", err);
+            res.status(500).send(JSON.stringify({ status: "error" }));
+            return;
+        }
+
+        let files = entries
+            .filter((entry) => entry.isFile())
+            .map((entry) => entry.name)
+            .sort((a, b) => a.localeCompare(b));
+
+        res.send(JSON.stringify({ files: files }));
+    });
+})
+
+app.delete("/delete-upload", (req, res) => {
+    let file_name = String(req.body.file_name || "");
+    let file_path = get_uploaded_file_path(file_name);
+
+    if (file_path == null) {
+        res.status(400).send(JSON.stringify({ status: "error", message: "Invalid file name." }));
+        return;
+    }
+
+    fs.rm(file_path, (err) => {
+        if (err) {
+            if (err.code == "ENOENT") {
+                res.status(404).send(JSON.stringify({ status: "error", message: "File not found." }));
+                return;
+            }
+
+            console.error("Error deleting uploaded file:", err);
+            res.status(500).send(JSON.stringify({ status: "error", message: "Unable to delete file." }));
+            return;
+        }
+
+        res.send(JSON.stringify({ status: "success" }));
+    });
 })
 
 app.post("/upload", upload.single('file'), (req, res) => {
@@ -683,4 +741,7 @@ if (fs.existsSync("data/contact") == false) {
 }
 if (fs.existsSync("data/supplies") == false) {
     fs.mkdirSync("data/supplies")
+}
+if (fs.existsSync("data/uploads") == false) {
+    fs.mkdirSync("data/uploads")
 }
