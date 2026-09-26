@@ -604,11 +604,16 @@ app.get("/uploads-data", (req, res) => {
             return;
         }
 
-        let files = entries
-            .filter((entry) => entry.isFile())
-            .map((entry) => { "name": entry.name, "birthtime": entry.birthtime })
-            .filter((entry) => /^[A-Za-z0-9._-]+$/.test(entry.name))
-            .sort((a, b) => a.name.localeCompare(b.name));
+        let files = [];
+        for (let entry in entries) {
+            let file = {
+                "name": "",
+                "birthtime": ""
+            };
+
+            file.name = entry.name;
+            file.birthtime = entry.birthtime;
+        }
 
         res.json({ files: files });
     });
