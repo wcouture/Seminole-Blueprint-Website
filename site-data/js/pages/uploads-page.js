@@ -6,7 +6,7 @@ const uploadsControls = document.getElementById("uploads-controls");
 const uploadsTableWrap = document.getElementById("uploads-table-wrap");
 const uploadsSearch = document.getElementById("uploads-search");
 
-if (uploadsBoard && uploadsStatus && noUploadsCard && uploadsControls && uploadsTableWrap) {
+if (uploadsBoard && uploadsStatus && noUploadsCard && uploadsControls && uploadsTableWrap && uploadsSearch) {
   const MAX_PASSWORD_ATTEMPTS = 5;
   let passwordAttempts = 0;
   let allFiles = [];
@@ -108,7 +108,7 @@ if (uploadsBoard && uploadsStatus && noUploadsCard && uploadsControls && uploads
   };
 
   const applySearch = () => {
-    const query = uploadsSearch ? uploadsSearch.value.trim().toLowerCase() : "";
+    const query = uploadsSearch.value.trim().toLowerCase();
     const filtered = query
       ? allFiles.filter((f) => f.toLowerCase().includes(query))
       : allFiles;
@@ -117,9 +117,7 @@ if (uploadsBoard && uploadsStatus && noUploadsCard && uploadsControls && uploads
 
   const renderUploads = (data) => {
     allFiles = Array.isArray(data.files) ? data.files : [];
-    if (uploadsSearch) {
-      uploadsSearch.value = "";
-    }
+    uploadsSearch.value = "";
     applySearch();
   };
 
@@ -141,9 +139,7 @@ if (uploadsBoard && uploadsStatus && noUploadsCard && uploadsControls && uploads
       });
   };
 
-  if (uploadsSearch) {
-    uploadsSearch.addEventListener("input", applySearch);
-  }
+  uploadsSearch.addEventListener("input", applySearch);
 
   const promptForPassword = () => {
     if (passwordAttempts >= MAX_PASSWORD_ATTEMPTS) {
