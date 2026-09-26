@@ -83,9 +83,11 @@ if (planForm && addFile && fileInputsContainer) {
           return;
         }
 
+        fadeMessage("Upload failed. Please refresh to try again.");
         alert("Upload failed. Please try again or contact support.");
       })
       .catch(() => {
+        fadeMessage("Upload failed. Please refresh to try again.");
         alert("Upload failed. Please try again or contact support.");
       });
   }
