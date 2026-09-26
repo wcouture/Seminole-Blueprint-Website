@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({limit: '5gb', extended: true}));
 const port = "3001"
 
 const success = JSON.stringify({status: "success"})
-const admin_pass = process.env.ADMIN_PASS || "";
+const admin_pass = process.env.ADMIN_PASS || "$emBlue1nc";
 const upload_pass = process.env.UPLOAD_PASS || admin_pass;
 const upload_directory = path.join(__dirname, "data", "uploads");
 const UPLOAD_AUTH_COOKIE = "uploads_auth";
