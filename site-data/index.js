@@ -268,10 +268,12 @@ function passwords_match(expected_pass, input_pass) {
     let expected = String(expected_pass || "");
     let input = String(input_pass || "");
 
-    if (expected.length == 0 || expected.length !== input.length)
+    if (expected.length == 0)
         return false;
 
-    return crypto.timingSafeEqual(Buffer.from(expected), Buffer.from(input));
+    let expected_hash = crypto.createHash("sha256").update(expected).digest();
+    let input_hash = crypto.createHash("sha256").update(input).digest();
+    return crypto.timingSafeEqual(expected_hash, input_hash);
 }
 
 // Read raw html data
@@ -885,8 +887,8 @@ if (fs.existsSync("data/uploads") == false) {
 }
 
 if (admin_pass.length == 0) {
-    console.warn("ADMIN_PASS is not set; admin authentication is disabled.");
+    console.warn("ADMIN_PASS is not set; admin pages will reject all authentication attempts.");
 }
 if (upload_pass.length == 0) {
-    console.warn("UPLOAD_PASS is not set; uploads authentication is disabled.");
+    console.warn("UPLOAD_PASS is not set; the uploads dashboard will reject all authentication attempts.");
 }
