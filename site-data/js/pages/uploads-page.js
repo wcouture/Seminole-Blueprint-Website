@@ -72,10 +72,10 @@ if (uploadsBoard && uploadsStatus && noUploadsCard && noSearchResultsCard && upl
       link.className = "upload-link";
       nameCell.appendChild(link);
 
-      const birthtime = document.createElement("td");
-      birthtime.innerText = files[i].birthtime;
-      birthtime.className = "birthtime-label";
-      nameCell.appendChild(birthtime);
+      const birthtimeCell = document.createElement("td");
+      birthtimeCell.innerText = files[i].birthtime;
+      birthtimeCell.className = "birthtime-label";
+      row.appendChild(birthtimeCell);
 
       const actionCell = document.createElement("td");
       actionCell.className = "uploads-td-action";
