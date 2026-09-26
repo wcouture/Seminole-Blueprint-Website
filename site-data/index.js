@@ -613,6 +613,7 @@ app.get("/uploads-data", (req, res) => {
 
             file.name = entry.name;
             file.birthtime = entry.birthtime;
+            files.push(file)
         }
 
         res.json({ files: files });
