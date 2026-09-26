@@ -603,17 +603,22 @@ app.get("/uploads-data", (req, res) => {
             res.status(500).send(JSON.stringify({ status: "error" }));
             return;
         }
+        
+        let files = entries 
+            .filter((entry) => entry.isFile())
+            .map((entry) => entry.name)
+            .filter((entry) => /^[A-Za-z0-9._-]+$/.test(entry))
+            .sort((a, b) => a.localeCompare(b));
+        
+        let birthtimes = entries
+            .filter((entry) => entry.isFile())
+            .filter((entry) => /^[A-Za-z0-9._-]+$/.test(entry.name))
+            .map((entry) => entry.birthtime)
+            .sort((a, b) => a.localeCompare(b));
 
-        let files = [];
-        for (let entry in entries) {
-            const data = {"name": entry.name, "birthtime": entry.birthtime};
-            console.log(JSON.stringify(data))
-            files.push(data)
-        }
-
-        res.json({ files: files });
+        res.json({ files: files, birthtimes: birthtimes });
     });
-})
+});
 
 app.delete("/delete-upload", (req, res) => {
     if (check_upload_rate_limit(req, res))
