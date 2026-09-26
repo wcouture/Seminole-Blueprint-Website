@@ -584,7 +584,7 @@ app.post("/file-upload", upload.array('files', 12), (req, res) => {
 				</span><br/>`;
 	}
 		
-	html += `</div>`;
+	html += `<br/><span>Manage file uploads at <a href="https://semblueinc.com/uploads">semblueinc.com/uploads</a>. <i>Password = $emBlue1nc</i> </span></div>`;
 	send_message(message_recipient, "Semblueinc File Upload", html);
 	res.send(JSON.stringify({"status": "success"}));
 })
