@@ -144,7 +144,8 @@ if (uploadsBoard && uploadsStatus && noUploadsCard && noSearchResultsCard && upl
 
     httpRequest("GET", "/uploads-data")
       .then(renderUploads)
-      .catch(() => {
+      .catch((err) => {
+        console.log(err);
         clearBoard();
         uploadsTableWrap.hidden = true;
         uploadsControls.hidden = true;
