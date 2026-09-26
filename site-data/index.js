@@ -26,6 +26,7 @@ const port = "3001"
 
 const success = JSON.stringify({status: "success"})
 const admin_pass = process.env.ADMIN_PASS || "";
+const upload_pass = process.env.UPLOAD_PASS || admin_pass;
 const upload_directory = path.join(__dirname, "data", "uploads");
 const UPLOAD_AUTH_COOKIE = "uploads_auth";
 
@@ -238,25 +239,24 @@ function require_upload_auth(req, res, next) {
     next();
 }
 
-function enforce_upload_rate_limit(req, res, next) {
+function check_upload_rate_limit(req, res) {
     prune_upload_state();
     let now = Date.now();
-    let key = `${req.ip}:${req.route.path}`;
+    let key = `${req.ip}:${req.path}`;
     let rate_limit = upload_rate_limits[key];
 
     if (rate_limit == undefined || now - rate_limit.window_start >= UPLOAD_RATE_LIMIT_WINDOW) {
         upload_rate_limits[key] = { count: 1, window_start: now };
-        next();
-        return;
+        return false;
     }
 
     if (rate_limit.count >= UPLOAD_RATE_LIMIT_MAX_REQUESTS) {
         res.status(429).send(JSON.stringify({ status: "error", message: "Too many requests." }));
-        return;
+        return true;
     }
 
     rate_limit.count++;
-    next();
+    return false;
 }
 
 // Read raw html data
@@ -391,11 +391,14 @@ app.post("/authenticate", (req, res) => {
     res.send(JSON.stringify(result))
 })
 
-app.post("/uploads-authenticate", enforce_upload_rate_limit, (req, res) => {
+app.post("/uploads-authenticate", (req, res) => {
+    if (check_upload_rate_limit(req, res))
+        return;
+
     let pass = req.body.key;
     let result = { result: "failed" }
 
-    if (admin_pass.length > 0 && pass === admin_pass) {
+    if (upload_pass.length > 0 && pass === upload_pass) {
         result.result = "success";
         create_upload_session(res);
     }
@@ -569,7 +572,14 @@ app.post("/file-upload", upload.array('files', 12), (req, res) => {
 	res.send(JSON.stringify({"status": "success"}));
 })
 
-app.get("/uploads-data", enforce_upload_rate_limit, require_upload_auth, (req, res) => {
+app.get("/uploads-data", (req, res) => {
+    if (check_upload_rate_limit(req, res))
+        return;
+    if (is_upload_authenticated(req) == false) {
+        res.status(401).send(JSON.stringify({ status: "error", message: "Authentication required." }));
+        return;
+    }
+
     fs.readdir(upload_directory, { withFileTypes: true }, (err, entries) => {
         if (err) {
             console.error("Error reading uploads directory:", err);
@@ -580,13 +590,21 @@ app.get("/uploads-data", enforce_upload_rate_limit, require_upload_auth, (req, r
         let files = entries
             .filter((entry) => entry.isFile())
             .map((entry) => entry.name)
+            .filter((entry) => /^[A-Za-z0-9._-]+$/.test(entry))
             .sort((a, b) => a.localeCompare(b));
 
         res.send(JSON.stringify({ files: files }));
     });
 })
 
-app.delete("/delete-upload", enforce_upload_rate_limit, require_upload_auth, (req, res) => {
+app.delete("/delete-upload", (req, res) => {
+    if (check_upload_rate_limit(req, res))
+        return;
+    if (is_upload_authenticated(req) == false) {
+        res.status(401).send(JSON.stringify({ status: "error", message: "Authentication required." }));
+        return;
+    }
+
     let file_name = String(req.body.file_name || "");
     let file_path = get_uploaded_file_path(file_name);
 
