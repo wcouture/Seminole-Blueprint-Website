@@ -76,7 +76,6 @@ if (uploadsBoard && uploadsStatus && noUploadsCard && noSearchResultsCard && upl
 
       const birthtimeDate = new Date(Date.parse(allFileData[i].birthtime));
       const options = {
-        weekday: "long",
         year: "numeric",
         month: "long",
         day: "numeric",
