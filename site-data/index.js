@@ -606,7 +606,7 @@ app.get("/uploads-data", (req, res) => {
 
         let files = entries
             .filter((entry) => entry.isFile())
-            .map((entry) => { name: entry.name, birthtime: entry.birthtime })
+            .map((entry) => { "name": entry.name, "birthtime": entry.birthtime })
             .filter((entry) => /^[A-Za-z0-9._-]+$/.test(entry.name))
             .sort((a, b) => a.name.localeCompare(b.name));
 
